@@ -38,7 +38,7 @@ struct block{
 struct set{
   block * blocks;
   unsigned int assoc;
-  linkedlist LRU;
+  int * LRU;
 };
 
 class cache{
@@ -58,6 +58,6 @@ class cache{
   bool read(unsigned long long int address, unsigned int bytesize);
   bool write(unsigned long long int address, unsigned int bytesize);
   void flush();
-}
+};
 
 #endif
