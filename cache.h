@@ -1,5 +1,6 @@
 #ifndef CACHE_H
 #define CACHE_H
+
 struct stats{
   unsigned long long int exec_time;
   unsigned long long int flush_time;
