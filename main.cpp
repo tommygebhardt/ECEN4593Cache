@@ -15,12 +15,12 @@ int mem_chunksize = 8;
 
 int main(int argc, char ** argv)
 {
-	//Cache variables
+        //Cache variables
 	unsigned int csize, ways, bsize;
 	int htime,  mtime, trantime, bwidth;
 	unsigned int csizeL2, waysL2, bsizeL2;
 	int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
-
+	
 	// Take command line input
 	if (argc == 2) {
 		string line;
