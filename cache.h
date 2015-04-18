@@ -58,6 +58,7 @@ class cache{
   bool read(unsigned long long int address, unsigned int bytesize);
   bool write(unsigned long long int address, unsigned int bytesize);
   void flush();
+  void printInfo();
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include "cache.h"
+#include <iostream>
+using namespace std;
 
 cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htime, int mtime, int trantime, int bwidth){
   cache_size = csize;
@@ -22,4 +24,13 @@ cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htim
       table[i].blocks[j].block_size = block_size;
       }*/
   }
+}
+
+void cache::printInfo(){
+  cout << "Cache Size: " << cache_size << endl;
+  cout << "Block Size: " << block_size << " Associativity: " << assoc << endl;
+  cout << "Table Size: " << table_size << endl;
+  cout << "Timing== " ;
+  cout << "Hit: " << hit_time << "   Miss: " << miss_time << endl;
+  cout << "Transfer Time: " << transfer_time << "   Bus Width: " << bus_width << endl;
 }

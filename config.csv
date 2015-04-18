@@ -1,0 +1,18 @@
+# Cache Configuration File
+# Keep order the same. All comments must be at beginning of file,
+# preceeded by a '#' sign. The order should be: (##) = number, (';') is new line
+# L1_block_size,##;L1_cache_size,##;L1_assoc, ##;L1_hit_time,##;
+# L1_miss_time,##;L2_block_size,##;L2_cache_size,##;L2_assoc,##;
+# L2_hit_time,##;L2_miss_time,##;L2_transfer_time,##;L2_bus_width,##;
+L1_block_size,32
+L1_cache_size,8192
+L1_assoc,1
+L1_hit_time,1
+L1_miss_time,1
+L2_block_size,64
+L2_cache_size,32768
+L2_assoc,1
+L2_hit_time,5
+L2_miss_time,7
+L2_transfer_time,5
+L2_bus_width,16
