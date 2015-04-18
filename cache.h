@@ -20,6 +20,23 @@ struct stats{
   unsigned long long int read_count;
   unsigned long long int write_count;
   unsigned long long int total_count;
+  stats(){
+    exec_time = 0;
+    flush_time = 0;
+    L1I_hit_count = 0;
+    L1D_hit_count = 0;
+    L1I_miss_count = 0;
+    L1D_miss_count = 0;
+    L2_hit_count = 0;
+    L2_miss_count = 0;
+    kickouts = 0;
+    dirty_kickouts = 0;
+    transfers = 0;
+    inst_count = 0;
+    read_count = 0;
+    write_count = 0;
+    total_count = 0;
+  }
 };
 
 struct block{

@@ -13,7 +13,7 @@ cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htim
   table_size = (cache_size/block_size)/assoc;
   table = new set[table_size];
   //Initialize all sets
-  for (int i = 0; i < table_size; i++){
+  for (unsigned int i = 0; i < table_size; i++){
     table[i].assoc = assoc;
     table[i].blocks = new block[assoc];
 
