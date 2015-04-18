@@ -1,13 +1,13 @@
 #ifndef LRU_STACK_H
 #define LRU_STACK_H
 
-typedef struct _llnode
+struct llnode
 {
 	// The way number in the set (indexed from 0)
 	unsigned long long way_number;
-	struct _llnode * prev;
-	struct _llnode * next;
-} llnode;
+	llnode * prev;
+	llnode * next;
+};
 
 class LRU_stack
 {

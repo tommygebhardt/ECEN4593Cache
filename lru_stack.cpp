@@ -30,24 +30,24 @@ LRU_stack::LRU_stack(unsigned int assoc)
 {
 	llnode * lead_p;
 	llnode * lag_p;
-	
+
 	ways = assoc;
 	head = new llnode; // Create the head node
 	head->way_number = 0;
 	head->prev = NULL;
 	lead_p = head;
 	lag_p = head;
-	
+
 	// Create as many nodes as there are ways
 	for(unsigned int i = 1; i < ways; ++i)
 	{
-		 lead_p->next = new llnode;
-		 lead_p = lead_p->next;
-		 lead_p->prev = lag_p;
-		 lead_p->way_number = i;
-		 lag_p = lead_p;
+		lead_p->next = new llnode;
+		lead_p = lead_p->next;
+		lead_p->prev = lag_p;
+		lead_p->way_number = i;
+		lag_p = lead_p;
 	}
-	
+
 	// Terminate the linked list
 	lead_p->next = NULL;
 	tail = lead_p;
@@ -67,7 +67,7 @@ LRU_stack::~LRU_stack()
 		delete node_p;
 		node_p = head;
 	}
-	
+
 	// Make sure the LRU stack is not used again
 	head = NULL;
 	tail = NULL;
@@ -86,7 +86,7 @@ void LRU_stack::update_stack_on_hit(unsigned long long ref_way_num)
 	cout << "Updating stack on hit" << endl;
 #endif
 	llnode * node_p = head;
-	
+
 	if(ref_way_num >= ways)
 	{
 #if LRU_DEBUG
@@ -101,7 +101,7 @@ void LRU_stack::update_stack_on_hit(unsigned long long ref_way_num)
 #endif
 		return;
 	}
-	
+
 	while(node_p != tail)
 	{
 		node_p = node_p->next;
@@ -151,19 +151,19 @@ void LRU_stack::update_stack_on_hit(unsigned long long ref_way_num)
 unsigned long long LRU_stack::update_stack_on_miss()
 {
 	llnode * node_p = tail;
-	
+
 	if(head == tail)
 	{
 		return head->way_number;
 	}
-	
+
 	node_p->prev->next = NULL;
 	tail = node_p->prev;
 	head->prev = node_p;
 	node_p->next = head;
 	node_p->prev = NULL;
 	head = node_p;
-	
+
 	return head->way_number;
 }
 
@@ -175,13 +175,13 @@ unsigned long long LRU_stack::update_stack_on_miss()
 void LRU_stack::print_stack()
 {
 	llnode * node_p = head;
-	
+
 	for(unsigned int i = 0; i < ways; ++i)
 	{
 		cout << node_p->way_number << endl;
 		node_p = node_p->next;
 	}
-	
+
 	return;
 }
 

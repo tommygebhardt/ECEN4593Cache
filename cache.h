@@ -23,7 +23,7 @@ struct stats{
 	unsigned long long int read_count;
 	unsigned long long int write_count;
 	unsigned long long int total_count;
-	
+
 	stats(){
 		exec_time = 0;
 		flush_time = 0;
