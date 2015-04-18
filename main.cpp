@@ -1,6 +1,8 @@
 #include <iostream>
 #include "cache.h"
 #include <fstream>
+
+#define DEBUG 1
 using namespace std;
 
 stats ececution; //Stats for ececution
@@ -13,24 +15,14 @@ int mem_chunksize = 8;
 
 int main(int argc, char ** argv)
 {
+  //Cache variables
   unsigned int csize, ways, bsize;
   int htime,  mtime, trantime, bwidth;
   unsigned int csizeL2, waysL2, bsizeL2;
   int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
-  if (argc == 1) {
-    csize = 8192;
-    bsize = 32;
-    ways = 1;
-    htime = 1;
-    mtime = 1;
-    trantime = 2; //L1 to L2
-    bwidth = 16; //L1 to L2
-    csizeL2 = 32768;
-    bsizeL2 = 64;
-    waysL2 = 1;
-    htimeL2 = 5;
-    mtimeL2 = 7;
-  } else if (argc == 2) {
+
+  // Take command line input
+  if (argc == 2) {
     string line;
     ifstream file(argv[1]);
     size_t position;
@@ -98,6 +90,20 @@ int main(int argc, char ** argv)
     position = line.find(',');
     bwidth = stoi(line.substr(position+1));
 
+  } else if (argc == 1) {
+    //Default values
+    csize = 8192;
+    bsize = 32;
+    ways = 1;
+    htime = 1;
+    mtime = 1;
+    trantime = 2; //L1 to L2
+    bwidth = 16; //L1 to L2
+    csizeL2 = 32768;
+    bsizeL2 = 64;
+    waysL2 = 1;
+    htimeL2 = 5;
+    mtimeL2 = 7;
   } else {
     cout << "Incorrect usage: Only zero or one command line argument accepted" << endl;
     return -1;
@@ -109,11 +115,14 @@ int main(int argc, char ** argv)
   cache L1D(csize, ways, bsize, htime, mtime, trantime, bwidth);
   cache L1I(csize, ways, bsize, htime, mtime, trantime, bwidth);
   cache L2(csizeL2, waysL2, bsizeL2, htimeL2, mtimeL2, trantimeL2, bwidthL2);
+
+#if (DEBUG == 1)
   cout << "L1 Data Cache" << endl;
   L1D.printInfo();
   cout << "L1 Instruction Cache" << endl;
   L1I.printInfo();
   cout << "L2 Cache" << endl;
   L2.printInfo();
+#endif
   return 0;
 }
