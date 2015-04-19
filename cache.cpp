@@ -37,3 +37,12 @@ void cache::printInfo(){
 }
 
 
+void cache::printCounts(){
+    cout << "Hit count," << hit_count << endl;
+    cout << "Miss count," << miss_count << endl;
+    cout << "Requests," << requests << endl;
+    cout << "Kickouts," << kickouts << endl;
+    cout << "Dirty kickouts," << dirty_kickouts << endl;
+    cout << "Transfers," << transfers << endl;
+    cout << "Flush Kickouts" << flush_kickouts << endl;
+}

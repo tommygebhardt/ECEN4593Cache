@@ -7,17 +7,17 @@ struct stats{
     unsigned long long int exec_time;
     unsigned long long int flush_time;
 
-    unsigned long long int L1I_hit_count;
-    unsigned long long int L1D_hit_count;
-    unsigned long long int L1I_miss_count;
-    unsigned long long int L1D_miss_count;
-    unsigned long long int L2_hit_count;
-    unsigned long long int L2_miss_count;
+    //unsigned long long int L1I_hit_count;
+    //unsigned long long int L1D_hit_count;
+    //unsigned long long int L1I_miss_count;
+    //unsigned long long int L1D_miss_count;
+    //unsigned long long int L2_hit_count;
+    //unsigned long long int L2_miss_count;
 
-    unsigned long long int kickouts;
-    unsigned long long int dirty_kickouts;
+    //    unsigned long long int kickouts;
+    //    unsigned long long int dirty_kickouts;
 
-    unsigned long long int transfers;
+    //    unsigned long long int transfers;
 
     unsigned long long int inst_count;
     unsigned long long int read_count;
@@ -27,7 +27,7 @@ struct stats{
     stats(){
 	exec_time = 0;
 	flush_time = 0;
-	L1I_hit_count = 0;
+	/*	L1I_hit_count = 0;
 	L1D_hit_count = 0;
 	L1I_miss_count = 0;
 	L1D_miss_count = 0;
@@ -35,7 +35,7 @@ struct stats{
 	L2_miss_count = 0;
 	kickouts = 0;
 	dirty_kickouts = 0;
-	transfers = 0;
+	transfers = 0;*/
 	inst_count = 0;
 	read_count = 0;
 	write_count = 0;
@@ -74,12 +74,20 @@ class cache{
     int bus_width;
     set * table;
 
+    unsigned long long int hit_count;
+    unsigned long long int miss_count;
+    unsigned long long int requests;
+    unsigned long long int kickouts;
+    unsigned long long int dirty_kickouts;
+    unsigned long long int transfers;
+    unsigned long long int flush_kickouts;
  public:
     cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htime, int mtime, int trantime, int bwidth);
     bool read(unsigned long long int address, unsigned int bytesize);
     bool write(unsigned long long int address, unsigned int bytesize);
     void flush();
     void printInfo();
+    void printCounts();
 };
 
 #endif
