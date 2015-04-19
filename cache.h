@@ -1,7 +1,13 @@
 #ifndef CACHE_H
 #define CACHE_H
 
+#include <cstring>
 #include "lru_stack.h"
+
+extern int mem_sendaddr;
+extern int mem_ready;
+extern int mem_chunktime;
+extern int mem_chunksize;
 
 struct stats{
     unsigned long long int exec_time;
@@ -25,34 +31,34 @@ struct stats{
     unsigned long long int total_count;
 
     stats(){
-	exec_time = 0;
-	flush_time = 0;
-	/*	L1I_hit_count = 0;
-	L1D_hit_count = 0;
-	L1I_miss_count = 0;
-	L1D_miss_count = 0;
-	L2_hit_count = 0;
-	L2_miss_count = 0;
-	kickouts = 0;
-	dirty_kickouts = 0;
-	transfers = 0;*/
-	inst_count = 0;
-	read_count = 0;
-	write_count = 0;
-	total_count = 0;
+		exec_time = 0;
+		flush_time = 0;
+		/*	L1I_hit_count = 0;
+		L1D_hit_count = 0;
+		L1I_miss_count = 0;
+		L1D_miss_count = 0;
+		L2_hit_count = 0;
+		L2_miss_count = 0;
+		kickouts = 0;
+		dirty_kickouts = 0;
+		transfers = 0;*/
+		inst_count = 0;
+		read_count = 0;
+		write_count = 0;
+		total_count = 0;
     }
 };
+
+extern stats execution;
 
 struct block{
     bool dirty;
     bool valid;
     unsigned long long tag;
-    unsigned int block_size;
     block(){
-	dirty = false;
-	valid = false;
-	tag = 0;
-	block_size = 0;
+		dirty = false;
+		valid = false;
+		tag = 0;
     }
 };
 
@@ -72,11 +78,13 @@ class cache{
     unsigned int index_offset;
     
     unsigned int assoc;
-    int hit_time;
-    int miss_time;
-    int transfer_time;
-    int bus_width;
+    unsigned int hit_time;
+    unsigned int miss_time;
+    unsigned int transfer_time;
+    unsigned int bus_width;
     set * table;
+    cache * lower_level;
+    unsigned int transfers_per_block;
 
     unsigned long long int hit_count;
     unsigned long long int miss_count;
@@ -88,9 +96,10 @@ class cache{
 
     unsigned int log2(unsigned int x);
  public:
-    cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htime, int mtime, int trantime, int bwidth);
-    bool read(unsigned long long int address, unsigned int bytesize);
-    bool write(unsigned long long int address, unsigned int bytesize);
+    cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned int htime,
+     unsigned int mtime, unsigned int trantime, unsigned int bwidth, cache * lower = NULL);
+    void read(unsigned long long int address);
+    void write(unsigned long long int address);
     void flush();
     void printInfo();
     void printCounts();

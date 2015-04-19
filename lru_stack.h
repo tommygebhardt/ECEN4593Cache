@@ -11,12 +11,12 @@ struct llnode
 
 class LRU_stack
 {
- private:
+private:
     llnode * head; // Most recently used
     llnode * tail; // Least recently used
     unsigned int ways;
 
- public:
+public:
     LRU_stack();
     LRU_stack(unsigned int assoc);	
     ~LRU_stack();

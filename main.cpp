@@ -18,15 +18,17 @@ int main(int argc, char ** argv)
 {
     // Cache variables
     unsigned int csize, ways, bsize;
-    int htime,  mtime, trantime, bwidth;
+    unsigned int htime,  mtime, trantime, bwidth;
     unsigned int csizeL2, waysL2, bsizeL2;
-    int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
+    unsigned int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
     // Trace file variables
     char op;
     unsigned long long int address;
     unsigned int bytesize;
     // Flush counter
-    unsigned int flush_counter = 0;
+    //unsigned int flush_counter = 0;
+    unsigned long long int eff_address; // effective address for request
+    unsigned int num_requests;
 
     // Take command line input
     if (argc == 2) {
@@ -119,9 +121,10 @@ int main(int argc, char ** argv)
     trantimeL2 = mem_chunktime; // L2 to main memory 
     bwidthL2 = mem_chunksize; // L2 to main memory
 
-    cache L1D(csize, ways, bsize, htime, mtime, trantime, bwidth);
-    cache L1I(csize, ways, bsize, htime, mtime, trantime, bwidth);
     cache L2(csizeL2, waysL2, bsizeL2, htimeL2, mtimeL2, trantimeL2, bwidthL2);
+    cache L1D(csize, ways, bsize, htime, mtime, trantime, bwidth, &L2);
+    cache L1I(csize, ways, bsize, htime, mtime, trantime, bwidth, &L2);
+    
 
 #if (DEBUG == 1)
     cout << "L1 Data Cache" << endl;
@@ -132,66 +135,55 @@ int main(int argc, char ** argv)
     L2.printInfo();
     op = 'R';
     cout << op << endl;
-    address = 0x815857077087;
-    bytesize = 4;
-    L1D.read(address, bytesize);
+    address = 0x815857077080;
+    bytesize = 5;
+    L1D.read(address);
+    L1D.read(address);
+    cout << "L1 I:" << endl;
+    L1I.printCounts();
+    cout << "L1 D:" << endl;
+    L1D.printCounts();
+    cout << "L2:" << endl;
+    L2.printCounts();
 #endif
     // Main loop to read trace data and start tracking statistics
+
     while(scanf("%c %Lx %d\n", &op, &address, &bytesize) == 3)
     {
         execution.total_count++; // Add to total number of references
-        
+        /*
         if(flush_counter == 380000)
         {
             // flush the caches
         }
+        */
         
         switch(op)
         {
             case 'I':
                 execution.inst_count++;
-                // Read from L1 instruction cache
-                if(!L1I.read(address, bytesize))
-                {
-                    // Miss, so read from L2 unified cache
-                    if(!L2.read(address, bytesize))
-                    {
-                        // Miss, so access memory
-                        execution.exec_time += mem_sendaddr + mem_ready;
-                    }
-                }
+                
                 break;
             case 'R':
                 execution.read_count++;
-                // Read from L1 data cache
-                if(!L1D.read(address, bytesize))
-                {
-                    // Miss, so read from L2 unified cache
-                    if(!L2.read(address, bytesize))
-                    {
-                        // Miss, so access memory
-                        execution.exec_time += mem_sendaddr + mem_ready;
-                    }
-                }
+                // compute the number of effective requests
+				num_requests = 1 + (address%4 + bytesize - 1)/4;
+                for(unsigned int i = 0; i < num_requests; i++){
+					// (Address + 4*i)
+					eff_address = (address + ((unsigned long long int)i<<2));
+					L1D.read(eff_address);
+				}
                 break;
             case 'W':
                 execution.write_count++;
-                // Write to L1 data cache
-                if(!L1D.write(address, bytesize))
-                {
-                    // Miss, so read from L2 unified cache
-                    if(!L2.read(address, bytesize))
-                    {
-                        // Miss, so access memory
-                        execution.exec_time += mem_sendaddr + mem_ready;
-                    }
-                }
+                
                 break;
             default:
                 break;
         }
         
-        flush_counter++;
+        //flush_counter++;
     }
+    
     return 0;
 }
