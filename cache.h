@@ -66,8 +66,12 @@ class cache{
  private:
     unsigned int cache_size;
     unsigned int table_size;
-    unsigned int assoc;
     unsigned int block_size;
+    
+    unsigned int block_offset;
+    unsigned int index_offset;
+    
+    unsigned int assoc;
     int hit_time;
     int miss_time;
     int transfer_time;
@@ -81,6 +85,8 @@ class cache{
     unsigned long long int dirty_kickouts;
     unsigned long long int transfers;
     unsigned long long int flush_kickouts;
+
+    unsigned int log2(unsigned int x);
  public:
     cache(unsigned int csize, unsigned int ways, unsigned int bsize, int htime, int mtime, int trantime, int bwidth);
     bool read(unsigned long long int address, unsigned int bytesize);

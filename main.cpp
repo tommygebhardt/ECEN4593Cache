@@ -128,13 +128,18 @@ int main(int argc, char ** argv)
     L1I.printInfo();
     cout << "L2 Cache" << endl;
     L2.printInfo();
+    op = 'R';
+    cout << op << endl;
+    address = 0x815857077087;
+    bytesize = 4;
+    L1D.read(address, bytesize);
 #endif
-
+    /*
     // Main loop to read trace data and start tracking statistics
     while(scanf("%c %Lx %d\n", &op, &address, &bytesize) == 3)
     {
 
     }
-
+    */
     return 0;
 }
