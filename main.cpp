@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
     char op;
     unsigned long long int address;
     unsigned int bytesize;
-    
+
     unsigned int flush_counter = 0; // Flush counter
     unsigned long long int eff_address; // effective address for request
     unsigned int num_requests; // number of requests for a single reference
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
 #endif
 
     // Take command line input
-    if (argc == 2) 
+    if (argc == 2)
     {
         string line;
         ifstream file(argv[1]);
@@ -112,8 +112,8 @@ int main(int argc, char ** argv)
         position = line.find(',');
         bwidth = stoi(line.substr(position+1));
 
-    } 
-    else if (argc == 1) 
+    }
+    else if (argc == 1)
     {
         // Default values
         bsize = 32;
@@ -128,21 +128,21 @@ int main(int argc, char ** argv)
         mtimeL2 = 7;
         trantime = 5; // L1 to L2
         bwidth = 16; // L1 to L2
-    } 
-    else 
+    }
+    else
     {
         cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
         return -1;
     }
 
-    trantimeL2 = mem_chunktime; // L2 to main memory 
+    trantimeL2 = mem_chunktime; // L2 to main memory
     bwidthL2 = mem_chunksize; // L2 to main memory
 
-	// Instantiate caches (starting from lowest level)
+    // Instantiate caches (starting from lowest level)
     cache L2(csizeL2, waysL2, bsizeL2, htimeL2, mtimeL2, trantimeL2, bwidthL2);
     cache L1D(csize, ways, bsize, htime, mtime, trantime, bwidth, &L2);
     cache L1I(csize, ways, bsize, htime, mtime, trantime, bwidth, &L2);
-    
+
 
 #if (DEBUG == 1)
     cout << "L1 Instruction Cache" << endl;
@@ -173,9 +173,9 @@ int main(int argc, char ** argv)
     cout << "L2:" << endl;
     L2.printCounts();
 #endif
-    
 
-    cout << "Starting trace file..." << endl;    
+
+    cout << "Starting trace file..." << endl;
     // Main loop to read trace data and start tracking statistics
     while(scanf("%c %Lx %d%*c", &op, &address, &bytesize) == 3)
     {
@@ -183,93 +183,93 @@ int main(int argc, char ** argv)
         cout << "Reading next line from trace file" << endl;
 #endif
         execution.total_count++; // Increment total number of references
-        
+
         if(flush_counter == 380000)
         {
             // flush each cache (must be in order)
             L1I.flush();
             L1D.flush();
             L2.flush();
-            
+
             // Keep track of number of flushes
             execution.flushes++;
-            
+
             // Reset the flush counter
             flush_counter = 0;
         }
-        
-        
+
+
         switch(op)
         {
             case 'I':
 #if DEBUG
-                cout << "Handling instruction reference: " << 
-                    op << " " << hex << address << " " << dec << bytesize << endl; 
+                cout << "Handling instruction reference: " <<
+                    op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
                 execution.inst_count++;
                 // compute the number of effective requests
                 num_requests = 1 + (address%4 + bytesize - 1)/4;
                 // For each request, generate the "effective address" i.e.
-				// the address at the beginning of the L1 cache block, and
-				// perform a read.
+                // the address at the beginning of the L1 cache block, and
+                // perform a read.
                 for(unsigned int i = 0; i < num_requests; i++)
                 {
-					eff_address = (address + ((unsigned long long int)i<<2));
-					L1I.read(eff_address);
-				}
+                    eff_address = (address + ((unsigned long long int)i<<2));
+                    L1I.read(eff_address);
+                }
                 break;
             case 'R':
 #if DEBUG
-                cout << "Handling data read reference: " << 
-                    op << " " << hex << address << " " << dec << bytesize << endl; 
+                cout << "Handling data read reference: " <<
+                    op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
                 execution.read_count++;
                 // compute the number of effective requests
-				num_requests = 1 + (address%4 + bytesize - 1)/4;
-				// For each request, generate the "effective address" i.e.
-				// the address at the beginning of the L1 cache block, and
-				// perform a read.
+                num_requests = 1 + (address%4 + bytesize - 1)/4;
+                // For each request, generate the "effective address" i.e.
+                // the address at the beginning of the L1 cache block, and
+                // perform a read.
                 for(unsigned int i = 0; i < num_requests; i++)
                 {
-					eff_address = (address + ((unsigned long long int)i<<2));
-					L1D.read(eff_address);
-				}
+                    eff_address = (address + ((unsigned long long int)i<<2));
+                    L1D.read(eff_address);
+                }
                 break;
             case 'W':
 #if DEBUG
-                cout << "Handling data write reference: " << 
-                    op << " " << hex << address << " " << dec << bytesize << endl; 
+                cout << "Handling data write reference: " <<
+                    op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
                 // compute the number of effective requests
-				num_requests = 1 + (address%4 + bytesize - 1)/4;
-				// For each request, generate the "effective address" i.e.
-				// the address at the beginning of the L1 cache block, and
-				// perform a write.
+                num_requests = 1 + (address%4 + bytesize - 1)/4;
+                // For each request, generate the "effective address" i.e.
+                // the address at the beginning of the L1 cache block, and
+                // perform a write.
                 for(unsigned int i = 0; i < num_requests; i++)
                 {
-					eff_address = (address + ((unsigned long long int)i<<2));
-					L1D.write(eff_address);
-				}
+                    eff_address = (address + ((unsigned long long int)i<<2));
+                    L1D.write(eff_address);
+                }
                 execution.write_count++;
-                
+
                 break;
             default:
-                cout << "Undefined op reference type: " << 
-                    op << " " << hex << address << " " << dec << bytesize << endl; 
+                cout << "Undefined op reference type: " <<
+                    op << " " << hex << address << " " << dec << bytesize << endl;
                 break;
         }
-        
+
         flush_counter++;
     }
-    
+
 #if PRINT_FORMATTED_STATS
     print_all_stats(L1I, L1D, L2);
-#endif    
-    
+#endif
+
 #if (DEBUG == 1)
     cout << "Exiting cache simulation..." << endl;
 #endif
-    
+
     return 0;
 }
 
@@ -280,10 +280,10 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     // TODO: Acquire the trace file name and process config file to determine these
     string tracefile = "sjeng";
     string cacheconfig = "Default";
-    
+
     // Make all decimals round to the tenths place
     cout << fixed << setprecision(1);
-    
+
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "      " << tracefile << ", " << cacheconfig << "          " <<
         "Simulation Results" << endl;
@@ -305,11 +305,11 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Inst.  = " << execution.inst_count << "     [" << 100.0*(float)(execution.inst_count)/(float)(execution.total_count) << "%]" << endl;
     cout << "   Total  = " << execution.total_count << endl;
     cout << endl;
-    
+
     // Total cycles information
-    
+
     // Average cycles information
-    
+
     cout << " Memory Level:  L1i" << endl;
     cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
     cout << "   Total Requests = " << L1I.requests << endl;
@@ -317,15 +317,15 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Kickouts = " << L1I.kickouts << "; Dirty kickouts = " << L1I.dirty_kickouts << "; Transfers = " << L1I.transfers << endl;
     cout << "   Flush Kickouts = " << L1I.flush_kickouts << endl;
     cout << endl;
-    
+
     cout << " Memory Level:  L1d" << endl;
     cout << "   Hit Count = " << L1D.hit_count << "  Miss Count = " << L1D.miss_count << endl;
     cout << "   Total Requests = " << L1D.requests << endl;
     cout << "   Hit Rate = " << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << endl;
     cout << "   Kickouts = " << L1D.kickouts << "; Dirty kickouts = " << L1D.dirty_kickouts << "; Transfers = " << L1D.transfers << endl;
     cout << "   Flush Kickouts = " << L1D.flush_kickouts << endl;
-    cout << endl; 
-    
+    cout << endl;
+
     cout << " Memory Level:  L2" << endl;
     cout << "   Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
     cout << "   Total Requests = " << L2.requests << endl;
@@ -333,10 +333,10 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
     cout << "   Flush Kickouts = " << L2.flush_kickouts << endl;
     cout << endl;
-    
+
     // Cache costs
-    
+
     cout << " Flushes = " << execution.flushes << " : Invalidated = " << execution.flushes << endl;
-    
+
     return;
 }
