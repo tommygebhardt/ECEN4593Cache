@@ -30,18 +30,21 @@ struct stats{
 
 extern stats execution;
 
-struct block{
+struct block
+{
     bool dirty;
     bool valid;
-    unsigned long long tag;
-    block(){
+    unsigned long long int tag;
+    block()
+    {
 		dirty = false;
 		valid = false;
 		tag = 0;
     }
 };
 
-struct set{
+struct set
+{
     block * blocks;
     unsigned int assoc;
     LRU_stack * LRU;

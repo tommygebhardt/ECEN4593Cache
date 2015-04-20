@@ -183,7 +183,13 @@ int main(int argc, char ** argv)
         
         if(flush_counter == 380000)
         {
-            // flush the caches
+            // flush each cache (must be in order)
+            L1I.flush();
+            L1D.flush();
+            L2.flush();
+            
+            // Reset the flush counter
+            flush_counter = 0;
         }
         
         
@@ -195,7 +201,16 @@ int main(int argc, char ** argv)
                     op << " " << hex << address << " " << dec << bytesize << endl; 
 #endif
                 execution.inst_count++;
-                
+                // compute the number of effective requests
+                num_requests = 1 + (address%4 + bytesize - 1)/4;
+                // For each request, generate the "effective address" i.e.
+				// the address at the beginning of the L1 cache block, and
+				// perform a read.
+                for(unsigned int i = 0; i < num_requests; i++)
+                {
+					eff_address = (address + ((unsigned long long int)i<<2));
+					L1I.read(eff_address);
+				}
                 break;
             case 'R':
 #if DEBUG
@@ -219,6 +234,16 @@ int main(int argc, char ** argv)
                 cout << "Handling data write reference: " << 
                     op << " " << hex << address << " " << dec << bytesize << endl; 
 #endif
+                // compute the number of effective requests
+				num_requests = 1 + (address%4 + bytesize - 1)/4;
+				// For each request, generate the "effective address" i.e.
+				// the address at the beginning of the L1 cache block, and
+				// perform a write.
+                for(unsigned int i = 0; i < num_requests; i++)
+                {
+					eff_address = (address + ((unsigned long long int)i<<2));
+					L1D.write(eff_address);
+				}
                 execution.write_count++;
                 
                 break;
