@@ -6,6 +6,17 @@
 
 #define DEBUG 1
 #define PRINT_FORMATTED_STATS 1
+
+// Memory system cost parameters
+#define L1_COST_PER_4KB 100
+#define L1_COST_OF_DOUBLE_WAYS 100
+#define L2_COST_PER_64KB 50
+#define L2_COST_OF_DOUBLE_WAYS 50
+#define MM_COST_TO_HALVE_LATENCY 200
+#define MM_COST_TO_DOUBLE_BANDWIDTH 100
+#define MM_COST_OF_LATENCY50 50
+#define MM_COST_OF_BANDWIDTH16 25
+
 using namespace std;
 
 stats execution; // Global statistics
@@ -36,104 +47,104 @@ int main(int argc, char ** argv)
 #if DEBUG
     cout << "argc = " << argc << endl;
     for(int i = 0; i < argc; ++i)
-	{
-	    cout << "argv[" << i << "] = " << argv[i] << endl;
-	}
+    {
+        cout << "argv[" << i << "] = " << argv[i] << endl;
+    }
 #endif
 
     // Take command line input
     if (argc == 2)
-	{
-	    string line;
-	    ifstream file(argv[1]);
-	    size_t position;
-	    getline(file, line);
-	    // Go to end of comments
-	    while(line[0] == '#')
-		{
-		    getline(file, line);
-		}
-	    // First line is L1 block size
-	    position = line.find(',');
-	    bsize = stoi(line.substr(position+1));
+    {
+        string line;
+        ifstream file(argv[1]);
+        size_t position;
+        getline(file, line);
+        // Go to end of comments
+        while(line[0] == '#')
+        {
+            getline(file, line);
+        }
+        // First line is L1 block size
+        position = line.find(',');
+        bsize = stoi(line.substr(position+1));
 
-	    // Second line is L1 cache size
-	    getline(file,line);
-	    position = line.find(',');
-	    csize = stoi(line.substr(position+1));
+        // Second line is L1 cache size
+        getline(file,line);
+        position = line.find(',');
+        csize = stoi(line.substr(position+1));
 
-	    // Third line is L1 associativity
-	    getline(file,line);
-	    position = line.find(',');
-	    ways = stoi(line.substr(position+1));
+        // Third line is L1 associativity
+        getline(file,line);
+        position = line.find(',');
+        ways = stoi(line.substr(position+1));
 
-	    // Fourth line is L1 hit time
-	    getline(file,line);
-	    position = line.find(',');
-	    htime = stoi(line.substr(position+1));
+        // Fourth line is L1 hit time
+        getline(file,line);
+        position = line.find(',');
+        htime = stoi(line.substr(position+1));
 
-	    // Fifth line is L1 miss time
-	    getline(file,line);
-	    position = line.find(',');
-	    mtime = stoi(line.substr(position+1));
+        // Fifth line is L1 miss time
+        getline(file,line);
+        position = line.find(',');
+        mtime = stoi(line.substr(position+1));
 
-	    // Sixth line is L2 block size
-	    getline(file,line);
-	    position = line.find(',');
-	    bsizeL2 = stoi(line.substr(position+1));
+        // Sixth line is L2 block size
+        getline(file,line);
+        position = line.find(',');
+        bsizeL2 = stoi(line.substr(position+1));
 
-	    // Seventh line is L2 cache size
-	    getline(file,line);
-	    position = line.find(',');
-	    csizeL2 = stoi(line.substr(position+1));
+        // Seventh line is L2 cache size
+        getline(file,line);
+        position = line.find(',');
+        csizeL2 = stoi(line.substr(position+1));
 
-	    // Eighth line is L2 associativity
-	    getline(file,line);
-	    position = line.find(',');
-	    waysL2 = stoi(line.substr(position+1));
+        // Eighth line is L2 associativity
+        getline(file,line);
+        position = line.find(',');
+        waysL2 = stoi(line.substr(position+1));
 
-	    // Ninth line is L2 hit time
-	    getline(file,line);
-	    position = line.find(',');
-	    htimeL2 = stoi(line.substr(position+1));
+        // Ninth line is L2 hit time
+        getline(file,line);
+        position = line.find(',');
+        htimeL2 = stoi(line.substr(position+1));
 
-	    // Tenth line is L2 miss time
-	    getline(file,line);
-	    position = line.find(',');
-	    mtimeL2 = stoi(line.substr(position+1));
+        // Tenth line is L2 miss time
+        getline(file,line);
+        position = line.find(',');
+        mtimeL2 = stoi(line.substr(position+1));
 
-	    // Eleventh line is L2/L1 transfer time (stored as L1 cache member)
-	    getline(file,line);
-	    position = line.find(',');
-	    trantime = stoi(line.substr(position+1));
+        // Eleventh line is L2/L1 transfer time (stored as L1 cache member)
+        getline(file,line);
+        position = line.find(',');
+        trantime = stoi(line.substr(position+1));
 
-	    // Twelfth line is L2/L1 bus width (stored as L1 cache member)
-	    getline(file,line);
-	    position = line.find(',');
-	    bwidth = stoi(line.substr(position+1));
+        // Twelfth line is L2/L1 bus width (stored as L1 cache member)
+        getline(file,line);
+        position = line.find(',');
+        bwidth = stoi(line.substr(position+1));
 
-	}
+    }
     else if (argc == 1)
-	{
-	    // Default values
-	    bsize = 32;
-	    csize = 8192;
-	    ways = 1;
-	    htime = 1;
-	    mtime = 1;
-	    bsizeL2 = 64;
-	    csizeL2 = 32768;
-	    waysL2 = 1;
-	    htimeL2 = 5;
-	    mtimeL2 = 7;
-	    trantime = 5; // L1 to L2
-	    bwidth = 16; // L1 to L2
-	}
+    {
+        // Default values
+        bsize = 32;
+        csize = 8192;
+        ways = 1;
+        htime = 1;
+        mtime = 1;
+        bsizeL2 = 64;
+        csizeL2 = 32768;
+        waysL2 = 1;
+        htimeL2 = 5;
+        mtimeL2 = 7;
+        trantime = 5; // L1 to L2
+        bwidth = 16; // L1 to L2
+    }
     else
-	{
-	    cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
-	    return -1;
-	}
+    {
+        cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
+        return -1;
+    }
 
     trantimeL2 = mem_chunktime; // L2 to main memory
     bwidthL2 = mem_chunksize; // L2 to main memory
@@ -155,6 +166,7 @@ int main(int argc, char ** argv)
     cout << op << endl;
     address = 0x815857077080;
     bytesize = 5;
+    /*
     L1D.read(address);
     L1D.read(address);
     L1D.read(address + 0x04);
@@ -166,6 +178,7 @@ int main(int argc, char ** argv)
     L1D.read(address + 0x1C);
     L1D.read(address + 0x20);
     L1D.read(address + 0x24);
+    */
     cout << "L1 I:" << endl;
     L1I.printCounts();
     cout << "L1 D:" << endl;
@@ -178,89 +191,89 @@ int main(int argc, char ** argv)
     cout << "Starting trace file..." << endl;
     // Main loop to read trace data and start tracking statistics
     while(scanf("%c %Lx %d%*c", &op, &address, &bytesize) == 3)
-	{
+    {
 #if DEBUG
-	    cout << "Reading next line from trace file" << endl;
+        cout << "Reading next line from trace file" << endl;
 #endif
-	    execution.total_count++; // Increment total number of references
+        execution.total_count++; // Increment total number of references
 
-	    if(flush_counter == 380000)
-		{
-		    // flush each cache (must be in order)
-		    execution.flush_time += L1I.flush();
-		    execution.flush_time += L1D.flush();
-		    execution.flush_time += L2.flush();
+        if(flush_counter == 380000)
+        {
+            // flush each cache (must be in order)
+            execution.flush_time += L1I.flush();
+            execution.flush_time += L1D.flush();
+            execution.flush_time += L2.flush();
 
-		    // Keep track of number of flushes
-		    execution.flushes++;
+            // Keep track of number of flushes
+            execution.flushes++;
 
-		    // Reset the flush counter
-		    flush_counter = 0;
-		}
+            // Reset the flush counter
+            flush_counter = 0;
+        }
 
 
-	    switch(op)
-		{
-		case 'I':
+        switch(op)
+        {
+        case 'I':
 #if DEBUG
-		    cout << "Handling instruction reference: " <<
-			op << " " << hex << address << " " << dec << bytesize << endl;
+            cout << "Handling instruction reference: " <<
+            op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-		    execution.inst_count++;
-		    // compute the number of effective requests
-		    num_requests = 1 + (address%4 + bytesize - 1)/4;
-		    // For each request, generate the "effective address" i.e.
-		    // the address at the beginning of the L1 cache block, and
-		    // perform a read.
-		    for(unsigned int i = 0; i < num_requests; i++)
-			{
-			    eff_address = (address + ((unsigned long long int)i<<2));
-			    execution.inst_time += L1I.read(eff_address);
-			}
-		    break;
-		case 'R':
+            execution.inst_count++;
+            // compute the number of effective requests
+            num_requests = 1 + (address%4 + bytesize - 1)/4;
+            // For each request, generate the "effective address" i.e.
+            // the address at the beginning of the L1 cache block, and
+            // perform a read.
+            for(unsigned int i = 0; i < num_requests; i++)
+            {
+                eff_address = (address + ((unsigned long long int)i<<2));
+                execution.inst_time += L1I.read(eff_address);
+            }
+            break;
+        case 'R':
 #if DEBUG
-		    cout << "Handling data read reference: " <<
-			op << " " << hex << address << " " << dec << bytesize << endl;
+            cout << "Handling data read reference: " <<
+            op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-		    execution.read_count++;
-		    // compute the number of effective requests
-		    num_requests = 1 + (address%4 + bytesize - 1)/4;
-		    // For each request, generate the "effective address" i.e.
-		    // the address at the beginning of the L1 cache block, and
-		    // perform a read.
-		    for(unsigned int i = 0; i < num_requests; i++)
-			{
-			    eff_address = (address + ((unsigned long long int)i<<2));
-			    execution.read_time += L1D.read(eff_address);
-			}
-		    break;
-		case 'W':
+            execution.read_count++;
+            // compute the number of effective requests
+            num_requests = 1 + (address%4 + bytesize - 1)/4;
+            // For each request, generate the "effective address" i.e.
+            // the address at the beginning of the L1 cache block, and
+            // perform a read.
+            for(unsigned int i = 0; i < num_requests; i++)
+            {
+                eff_address = (address + ((unsigned long long int)i<<2));
+                execution.read_time += L1D.read(eff_address);
+            }
+            break;
+        case 'W':
 #if DEBUG
-		    cout << "Handling data write reference: " <<
-			op << " " << hex << address << " " << dec << bytesize << endl;
+            cout << "Handling data write reference: " <<
+            op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-		    // compute the number of effective requests
-		    num_requests = 1 + (address%4 + bytesize - 1)/4;
-		    // For each request, generate the "effective address" i.e.
-		    // the address at the beginning of the L1 cache block, and
-		    // perform a write.
-		    for(unsigned int i = 0; i < num_requests; i++)
-			{
-			    eff_address = (address + ((unsigned long long int)i<<2));
-			    execution.write_time += L1D.write(eff_address);
-			}
-		    execution.write_count++;
+            // compute the number of effective requests
+            num_requests = 1 + (address%4 + bytesize - 1)/4;
+            // For each request, generate the "effective address" i.e.
+            // the address at the beginning of the L1 cache block, and
+            // perform a write.
+            for(unsigned int i = 0; i < num_requests; i++)
+            {
+                eff_address = (address + ((unsigned long long int)i<<2));
+                execution.write_time += L1D.write(eff_address);
+            }
+            execution.write_count++;
 
-		    break;
-		default:
-		    cout << "Undefined op reference type: " <<
-			op << " " << hex << address << " " << dec << bytesize << endl;
-		    break;
-		}
+            break;
+        default:
+            cout << "Undefined op reference type: " <<
+            op << " " << hex << address << " " << dec << bytesize << endl;
+            break;
+        }
 
-	    flush_counter++;
-	}
+        flush_counter++;
+    }
 
 #if PRINT_FORMATTED_STATS
     print_all_stats(L1I, L1D, L2);
@@ -289,16 +302,19 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
         "Simulation Results" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << endl;
+
     cout << " Memory system:" << endl;
     cout << "   Dcache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
     cout << "   Icache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
     cout << "   L2-cache size = " << csizeL2 << " : ways = " << waysL2 << " : block size = " << bsizeL2 << endl;
     cout << "   Memory ready time = " << mem_ready << " : chunksize = " << mem_chunksize << " : chunktime = " << mem_chunktime << endl;
     cout << endl;
+
     cout << " Execute time = " << execution.exec_time << ";  Total refs = " << execution.total_count << endl;
     cout << " Flush time = " << execution.flush_time << endl;
     cout << " Inst refs = " << execution.inst_count << ";  " << "Data refs = " << (execution.read_count + execution.write_count) << endl;
     cout << endl;
+
     cout << " Number of reference types:  [Percentage]" << endl;
     cout << "   Reads  = " << execution.read_count << "     [" << 100.0*(float)(execution.read_count)/(float)(execution.total_count) << "%]" << endl;
     cout << "   Writes = " << execution.write_count << "     [" << 100.0*(float)(execution.write_count)/(float)(execution.total_count) << "%]" << endl;
@@ -306,9 +322,18 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Total  = " << execution.total_count << endl;
     cout << endl;
 
-    // Total cycles information
+    cout << " Total cycles for activities:  [Percentage]" << endl;
+    cout << "   Reads  = " << execution.read_time << "    [" << (float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Writes = " << execution.write_time << "    [" << (float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Inst.  = " << execution.inst_time << "    [" << (float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Total = " << execution.exec_time << endl;
+    cout << endl;
 
-    // Average cycles information
+    cout << " Average cycles per activity:" << endl;
+    cout << "   Read =  " << (float)(execution.read_time)/(float)(execution.read_count) << "; Write = " <<
+        (float)(execution.write_time)/(float)(execution.write_count) << "; Inst. = " << (float)(execution.inst_time)/(float)(execution.inst_count) << endl;
+    cout << " Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << (float)(execution.exec_time)/(float)(execution.total_count) << endl;
+    // cout << " Ideal mis-aligned: Exec. Time = " <<  << "; CPI = " << (float)()/(float)() << endl;
 
     cout << " Memory Level:  L1i" << endl;
     cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
@@ -321,7 +346,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << " Memory Level:  L1d" << endl;
     cout << "   Hit Count = " << L1D.hit_count << "  Miss Count = " << L1D.miss_count << endl;
     cout << "   Total Requests = " << L1D.requests << endl;
-    cout << "   Hit Rate = " << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << endl;
+    cout << "   Hit Rate = " << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << "%" << endl;
     cout << "   Kickouts = " << L1D.kickouts << "; Dirty kickouts = " << L1D.dirty_kickouts << "; Transfers = " << L1D.transfers << endl;
     cout << "   Flush Kickouts = " << L1D.flush_kickouts << endl;
     cout << endl;
@@ -329,14 +354,16 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << " Memory Level:  L2" << endl;
     cout << "   Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
     cout << "   Total Requests = " << L2.requests << endl;
-    cout << "   Hit Rate = " << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << endl;
+    cout << "   Hit Rate = " << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << "%" << endl;
     cout << "   Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
     cout << "   Flush Kickouts = " << L2.flush_kickouts << endl;
     cout << endl;
 
-    // Cache costs
+    // compute cache costs
 
-    cout << " Flushes = " << execution.flushes << " : Invalidated = " << execution.flushes << endl;
+    cout << " L1 cache cost (Icache $" <<
+
+    cout << " Flushes = " << execution.flushes << " : Invalidates = " << execution.flushes << endl;
 
     return;
 }
