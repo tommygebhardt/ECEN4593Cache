@@ -40,13 +40,13 @@ LRU_stack::LRU_stack(unsigned int assoc)
     
     // Create as many nodes as there are ways
     for(unsigned int i = 1; i < ways; ++i)
-	{
-		lead_p->next = new llnode;
-		lead_p = lead_p->next;
-		lead_p->prev = lag_p;
-		lead_p->way_number = i;
-		lag_p = lead_p;
-	}
+    {
+        lead_p->next = new llnode;
+        lead_p = lead_p->next;
+        lead_p->prev = lag_p;
+        lead_p->way_number = i;
+        lag_p = lead_p;
+    }
     
     // Terminate the linked list
     lead_p->next = NULL;
