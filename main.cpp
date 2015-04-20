@@ -36,104 +36,104 @@ int main(int argc, char ** argv)
 #if DEBUG
     cout << "argc = " << argc << endl;
     for(int i = 0; i < argc; ++i)
-    {
-        cout << "argv[" << i << "] = " << argv[i] << endl;
-    }
+	{
+	    cout << "argv[" << i << "] = " << argv[i] << endl;
+	}
 #endif
 
     // Take command line input
     if (argc == 2)
-    {
-        string line;
-        ifstream file(argv[1]);
-        size_t position;
-        getline(file, line);
-        // Go to end of comments
-        while(line[0] == '#')
-        {
-            getline(file, line);
-        }
-        // First line is L1 block size
-        position = line.find(',');
-        bsize = stoi(line.substr(position+1));
+	{
+	    string line;
+	    ifstream file(argv[1]);
+	    size_t position;
+	    getline(file, line);
+	    // Go to end of comments
+	    while(line[0] == '#')
+		{
+		    getline(file, line);
+		}
+	    // First line is L1 block size
+	    position = line.find(',');
+	    bsize = stoi(line.substr(position+1));
 
-        // Second line is L1 cache size
-        getline(file,line);
-        position = line.find(',');
-        csize = stoi(line.substr(position+1));
+	    // Second line is L1 cache size
+	    getline(file,line);
+	    position = line.find(',');
+	    csize = stoi(line.substr(position+1));
 
-        // Third line is L1 associativity
-        getline(file,line);
-        position = line.find(',');
-        ways = stoi(line.substr(position+1));
+	    // Third line is L1 associativity
+	    getline(file,line);
+	    position = line.find(',');
+	    ways = stoi(line.substr(position+1));
 
-        // Fourth line is L1 hit time
-        getline(file,line);
-        position = line.find(',');
-        htime = stoi(line.substr(position+1));
+	    // Fourth line is L1 hit time
+	    getline(file,line);
+	    position = line.find(',');
+	    htime = stoi(line.substr(position+1));
 
-        // Fifth line is L1 miss time
-        getline(file,line);
-        position = line.find(',');
-        mtime = stoi(line.substr(position+1));
+	    // Fifth line is L1 miss time
+	    getline(file,line);
+	    position = line.find(',');
+	    mtime = stoi(line.substr(position+1));
 
-        // Sixth line is L2 block size
-        getline(file,line);
-        position = line.find(',');
-        bsizeL2 = stoi(line.substr(position+1));
+	    // Sixth line is L2 block size
+	    getline(file,line);
+	    position = line.find(',');
+	    bsizeL2 = stoi(line.substr(position+1));
 
-        // Seventh line is L2 cache size
-        getline(file,line);
-        position = line.find(',');
-        csizeL2 = stoi(line.substr(position+1));
+	    // Seventh line is L2 cache size
+	    getline(file,line);
+	    position = line.find(',');
+	    csizeL2 = stoi(line.substr(position+1));
 
-        // Eighth line is L2 associativity
-        getline(file,line);
-        position = line.find(',');
-        waysL2 = stoi(line.substr(position+1));
+	    // Eighth line is L2 associativity
+	    getline(file,line);
+	    position = line.find(',');
+	    waysL2 = stoi(line.substr(position+1));
 
-        // Ninth line is L2 hit time
-        getline(file,line);
-        position = line.find(',');
-        htimeL2 = stoi(line.substr(position+1));
+	    // Ninth line is L2 hit time
+	    getline(file,line);
+	    position = line.find(',');
+	    htimeL2 = stoi(line.substr(position+1));
 
-        // Tenth line is L2 miss time
-        getline(file,line);
-        position = line.find(',');
-        mtimeL2 = stoi(line.substr(position+1));
+	    // Tenth line is L2 miss time
+	    getline(file,line);
+	    position = line.find(',');
+	    mtimeL2 = stoi(line.substr(position+1));
 
-        // Eleventh line is L2/L1 transfer time (stored as L1 cache member)
-        getline(file,line);
-        position = line.find(',');
-        trantime = stoi(line.substr(position+1));
+	    // Eleventh line is L2/L1 transfer time (stored as L1 cache member)
+	    getline(file,line);
+	    position = line.find(',');
+	    trantime = stoi(line.substr(position+1));
 
-        // Twelfth line is L2/L1 bus width (stored as L1 cache member)
-        getline(file,line);
-        position = line.find(',');
-        bwidth = stoi(line.substr(position+1));
+	    // Twelfth line is L2/L1 bus width (stored as L1 cache member)
+	    getline(file,line);
+	    position = line.find(',');
+	    bwidth = stoi(line.substr(position+1));
 
-    }
+	}
     else if (argc == 1)
-    {
-        // Default values
-        bsize = 32;
-        csize = 8192;
-        ways = 1;
-        htime = 1;
-        mtime = 1;
-        bsizeL2 = 64;
-        csizeL2 = 32768;
-        waysL2 = 1;
-        htimeL2 = 5;
-        mtimeL2 = 7;
-        trantime = 5; // L1 to L2
-        bwidth = 16; // L1 to L2
-    }
+	{
+	    // Default values
+	    bsize = 32;
+	    csize = 8192;
+	    ways = 1;
+	    htime = 1;
+	    mtime = 1;
+	    bsizeL2 = 64;
+	    csizeL2 = 32768;
+	    waysL2 = 1;
+	    htimeL2 = 5;
+	    mtimeL2 = 7;
+	    trantime = 5; // L1 to L2
+	    bwidth = 16; // L1 to L2
+	}
     else
-    {
-        cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
-        return -1;
-    }
+	{
+	    cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
+	    return -1;
+	}
 
     trantimeL2 = mem_chunktime; // L2 to main memory
     bwidthL2 = mem_chunksize; // L2 to main memory
@@ -178,89 +178,89 @@ int main(int argc, char ** argv)
     cout << "Starting trace file..." << endl;
     // Main loop to read trace data and start tracking statistics
     while(scanf("%c %Lx %d%*c", &op, &address, &bytesize) == 3)
-    {
+	{
 #if DEBUG
-        cout << "Reading next line from trace file" << endl;
+	    cout << "Reading next line from trace file" << endl;
 #endif
-        execution.total_count++; // Increment total number of references
+	    execution.total_count++; // Increment total number of references
 
-        if(flush_counter == 380000)
-        {
-            // flush each cache (must be in order)
-            L1I.flush();
-            L1D.flush();
-            L2.flush();
+	    if(flush_counter == 380000)
+		{
+		    // flush each cache (must be in order)
+		    execution.flush_time += L1I.flush();
+		    execution.flush_time += L1D.flush();
+		    execution.flush_time += L2.flush();
 
-            // Keep track of number of flushes
-            execution.flushes++;
+		    // Keep track of number of flushes
+		    execution.flushes++;
 
-            // Reset the flush counter
-            flush_counter = 0;
-        }
+		    // Reset the flush counter
+		    flush_counter = 0;
+		}
 
 
-        switch(op)
-        {
-            case 'I':
+	    switch(op)
+		{
+		case 'I':
 #if DEBUG
-                cout << "Handling instruction reference: " <<
-                    op << " " << hex << address << " " << dec << bytesize << endl;
+		    cout << "Handling instruction reference: " <<
+			op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-                execution.inst_count++;
-                // compute the number of effective requests
-                num_requests = 1 + (address%4 + bytesize - 1)/4;
-                // For each request, generate the "effective address" i.e.
-                // the address at the beginning of the L1 cache block, and
-                // perform a read.
-                for(unsigned int i = 0; i < num_requests; i++)
-                {
-                    eff_address = (address + ((unsigned long long int)i<<2));
-                    L1I.read(eff_address);
-                }
-                break;
-            case 'R':
+		    execution.inst_count++;
+		    // compute the number of effective requests
+		    num_requests = 1 + (address%4 + bytesize - 1)/4;
+		    // For each request, generate the "effective address" i.e.
+		    // the address at the beginning of the L1 cache block, and
+		    // perform a read.
+		    for(unsigned int i = 0; i < num_requests; i++)
+			{
+			    eff_address = (address + ((unsigned long long int)i<<2));
+			    execution.inst_time += L1I.read(eff_address);
+			}
+		    break;
+		case 'R':
 #if DEBUG
-                cout << "Handling data read reference: " <<
-                    op << " " << hex << address << " " << dec << bytesize << endl;
+		    cout << "Handling data read reference: " <<
+			op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-                execution.read_count++;
-                // compute the number of effective requests
-                num_requests = 1 + (address%4 + bytesize - 1)/4;
-                // For each request, generate the "effective address" i.e.
-                // the address at the beginning of the L1 cache block, and
-                // perform a read.
-                for(unsigned int i = 0; i < num_requests; i++)
-                {
-                    eff_address = (address + ((unsigned long long int)i<<2));
-                    L1D.read(eff_address);
-                }
-                break;
-            case 'W':
+		    execution.read_count++;
+		    // compute the number of effective requests
+		    num_requests = 1 + (address%4 + bytesize - 1)/4;
+		    // For each request, generate the "effective address" i.e.
+		    // the address at the beginning of the L1 cache block, and
+		    // perform a read.
+		    for(unsigned int i = 0; i < num_requests; i++)
+			{
+			    eff_address = (address + ((unsigned long long int)i<<2));
+			    execution.read_time += L1D.read(eff_address);
+			}
+		    break;
+		case 'W':
 #if DEBUG
-                cout << "Handling data write reference: " <<
-                    op << " " << hex << address << " " << dec << bytesize << endl;
+		    cout << "Handling data write reference: " <<
+			op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
-                // compute the number of effective requests
-                num_requests = 1 + (address%4 + bytesize - 1)/4;
-                // For each request, generate the "effective address" i.e.
-                // the address at the beginning of the L1 cache block, and
-                // perform a write.
-                for(unsigned int i = 0; i < num_requests; i++)
-                {
-                    eff_address = (address + ((unsigned long long int)i<<2));
-                    L1D.write(eff_address);
-                }
-                execution.write_count++;
+		    // compute the number of effective requests
+		    num_requests = 1 + (address%4 + bytesize - 1)/4;
+		    // For each request, generate the "effective address" i.e.
+		    // the address at the beginning of the L1 cache block, and
+		    // perform a write.
+		    for(unsigned int i = 0; i < num_requests; i++)
+			{
+			    eff_address = (address + ((unsigned long long int)i<<2));
+			    execution.write_time += L1D.write(eff_address);
+			}
+		    execution.write_count++;
 
-                break;
-            default:
-                cout << "Undefined op reference type: " <<
-                    op << " " << hex << address << " " << dec << bytesize << endl;
-                break;
-        }
+		    break;
+		default:
+		    cout << "Undefined op reference type: " <<
+			op << " " << hex << address << " " << dec << bytesize << endl;
+		    break;
+		}
 
-        flush_counter++;
-    }
+	    flush_counter++;
+	}
 
 #if PRINT_FORMATTED_STATS
     print_all_stats(L1I, L1D, L2);

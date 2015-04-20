@@ -17,16 +17,21 @@ struct stats{
     unsigned long long int write_count;
     unsigned long long int total_count;
     unsigned int flushes;
-
+    unsigned long long int read_time;
+    unsigned long long int write_time;
+    unsigned long long int inst_time;
     stats()
     {
-		exec_time = 0;
-		flush_time = 0;
-		inst_count = 0;
-		read_count = 0;
-		write_count = 0;
-		total_count = 0;
-		flushes = 0;
+	exec_time = 0;
+	flush_time = 0;
+	inst_count = 0;
+	read_count = 0;
+	write_count = 0;
+	total_count = 0;
+	flushes = 0;
+	read_time = 0;
+	write_time = 0;
+	inst_time = 0;
     }
 };
 
@@ -39,9 +44,9 @@ struct block
     unsigned long long int tag;
     block()
     {
-		dirty = false;
-		valid = false;
-		tag = 0;
+	dirty = false;
+	valid = false;
+	tag = 0;
     }
 };
 
@@ -54,7 +59,7 @@ struct set
 
 class cache
 {
-private:
+ private:
     unsigned int cache_size;
     unsigned int table_size;
     unsigned int block_size;
@@ -81,12 +86,12 @@ private:
 
     unsigned int log2(unsigned int x);
 
-public:
-	cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned int htime,
-    unsigned int mtime, unsigned int trantime, unsigned int bwidth, cache * lower = NULL);
-    void read(unsigned long long int address);
-    void write(unsigned long long int address);
-    void flush();
+ public:
+    cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned int htime,
+	  unsigned int mtime, unsigned int trantime, unsigned int bwidth, cache * lower = NULL);
+    unsigned long long int read(unsigned long long int address);
+    unsigned long long int write(unsigned long long int address);
+    unsigned long long int flush();
     void printInfo();
     void printCounts();
     // Function to print formatted summary of all statistics
