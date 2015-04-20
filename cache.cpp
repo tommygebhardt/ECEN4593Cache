@@ -283,7 +283,10 @@ void cache::flush()
 						
 						// Add time for transfer from L1 to L2
 						execution.exec_time += transfer_time * transfers_per_block;
-						transfers++;						
+						transfers++;
+						
+						// Also add to flush time
+						execution.flush_time += transfer_time * transfers_per_block;						
 					}
 					else
 					{
@@ -291,6 +294,10 @@ void cache::flush()
 						execution.exec_time += mem_sendaddr + mem_ready + 
 							(mem_chunktime * transfers_per_block);
 						transfers++;
+						
+						// Also add to flush time
+						execution.flush_time += mem_sendaddr + mem_ready + 
+							(mem_chunktime * transfers_per_block);
 					}
 				}
 				

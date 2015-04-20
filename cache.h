@@ -16,6 +16,7 @@ struct stats{
     unsigned long long int read_count;
     unsigned long long int write_count;
     unsigned long long int total_count;
+    unsigned int flushes;
 
     stats()
     {
@@ -25,6 +26,7 @@ struct stats{
 		read_count = 0;
 		write_count = 0;
 		total_count = 0;
+		flushes = 0;
     }
 };
 
@@ -87,6 +89,9 @@ public:
     void flush();
     void printInfo();
     void printCounts();
+    // Function to print formatted summary of all statistics
+    friend void print_all_stats(cache& L1I, cache& L1D, cache& L2);
 };
+ 
 
 #endif

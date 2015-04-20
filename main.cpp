@@ -1,9 +1,11 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <cstdio>
 #include "cache.h"
 
 #define DEBUG 1
+#define PRINT_FORMATTED_STATS 1
 using namespace std;
 
 stats execution; // Global statistics
@@ -14,13 +16,14 @@ int mem_ready = 30;
 int mem_chunktime = 15;
 int mem_chunksize = 8;
 
+// Cache variables
+unsigned int csize, ways, bsize;
+unsigned int htime,  mtime, trantime, bwidth;
+unsigned int csizeL2, waysL2, bsizeL2;
+unsigned int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
+
 int main(int argc, char ** argv)
 {
-    // Cache variables
-    unsigned int csize, ways, bsize;
-    unsigned int htime,  mtime, trantime, bwidth;
-    unsigned int csizeL2, waysL2, bsizeL2;
-    unsigned int htimeL2,  mtimeL2, trantimeL2, bwidthL2;
     // Trace file variables
     char op;
     unsigned long long int address;
@@ -123,12 +126,12 @@ int main(int argc, char ** argv)
         waysL2 = 1;
         htimeL2 = 5;
         mtimeL2 = 7;
-        trantime = 2; // L1 to L2
+        trantime = 5; // L1 to L2
         bwidth = 16; // L1 to L2
     } 
     else 
     {
-        cout << "Incorrect usage: Only zero or one command line argument accepted" << endl;
+        cout << "Incorrect usage: Only zero or one command line arguments accepted" << endl;
         return -1;
     }
 
@@ -187,6 +190,9 @@ int main(int argc, char ** argv)
             L1I.flush();
             L1D.flush();
             L2.flush();
+            
+            // Keep track of number of flushes
+            execution.flushes++;
             
             // Reset the flush counter
             flush_counter = 0;
@@ -256,9 +262,81 @@ int main(int argc, char ** argv)
         flush_counter++;
     }
     
+#if PRINT_FORMATTED_STATS
+    print_all_stats(L1I, L1D, L2);
+#endif    
+    
 #if (DEBUG == 1)
     cout << "Exiting cache simulation..." << endl;
 #endif
     
     return 0;
+}
+
+
+// Function to print formatted summary of all statistics
+void print_all_stats(cache& L1I, cache& L1D, cache& L2)
+{
+    // TODO: Acquire the trace file name and process config file to determine these
+    string tracefile = "sjeng";
+    string cacheconfig = "Default";
+    
+    // Make all decimals round to the tenths place
+    cout << fixed << setprecision(1);
+    
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "      " << tracefile << ", " << cacheconfig << "          " <<
+        "Simulation Results" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << endl;
+    cout << " Memory system:" << endl;
+    cout << "   Dcache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
+    cout << "   Icache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
+    cout << "   L2-cache size = " << csizeL2 << " : ways = " << waysL2 << " : block size = " << bsizeL2 << endl;
+    cout << "   Memory ready time = " << mem_ready << " : chunksize = " << mem_chunksize << " : chunktime = " << mem_chunktime << endl;
+    cout << endl;
+    cout << " Execute time = " << execution.exec_time << ";  Total refs = " << execution.total_count << endl;
+    cout << " Flush time = " << execution.flush_time << endl;
+    cout << " Inst refs = " << execution.inst_count << ";  " << "Data refs = " << (execution.read_count + execution.write_count) << endl;
+    cout << endl;
+    cout << " Number of reference types:  [Percentage]" << endl;
+    cout << "   Reads  = " << execution.read_count << "     [" << 100.0*(float)(execution.read_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "   Writes = " << execution.write_count << "     [" << 100.0*(float)(execution.write_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "   Inst.  = " << execution.inst_count << "     [" << 100.0*(float)(execution.inst_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "   Total  = " << execution.total_count << endl;
+    cout << endl;
+    
+    // Total cycles information
+    
+    // Average cycles information
+    
+    cout << " Memory Level:  L1i" << endl;
+    cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
+    cout << "   Total Requests = " << L1I.requests << endl;
+    cout << "   Hit Rate = " << 100.0*(float)(L1I.hit_count)/(float)(L1I.requests) << "%   Miss Rate = " << 100.0*(float)(L1I.miss_count)/(float)(L1I.requests) << "%" << endl;
+    cout << "   Kickouts = " << L1I.kickouts << "; Dirty kickouts = " << L1I.dirty_kickouts << "; Transfers = " << L1I.transfers << endl;
+    cout << "   Flush Kickouts = " << L1I.flush_kickouts << endl;
+    cout << endl;
+    
+    cout << " Memory Level:  L1d" << endl;
+    cout << "   Hit Count = " << L1D.hit_count << "  Miss Count = " << L1D.miss_count << endl;
+    cout << "   Total Requests = " << L1D.requests << endl;
+    cout << "   Hit Rate = " << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << endl;
+    cout << "   Kickouts = " << L1D.kickouts << "; Dirty kickouts = " << L1D.dirty_kickouts << "; Transfers = " << L1D.transfers << endl;
+    cout << "   Flush Kickouts = " << L1D.flush_kickouts << endl;
+    cout << endl; 
+    
+    cout << " Memory Level:  L2" << endl;
+    cout << "   Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
+    cout << "   Total Requests = " << L2.requests << endl;
+    cout << "   Hit Rate = " << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << endl;
+    cout << "   Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
+    cout << "   Flush Kickouts = " << L2.flush_kickouts << endl;
+    cout << endl;
+    
+    // Cache costs
+    
+    cout << " Flushes = " << execution.flushes << " : Invalidated = " << execution.flushes << endl;
+    
+    return;
 }
