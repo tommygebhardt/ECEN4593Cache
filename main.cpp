@@ -253,6 +253,7 @@ int main(int argc, char ** argv)
             cout << "Handling data write reference: " <<
             op << " " << hex << address << " " << dec << bytesize << endl;
 #endif
+
             // compute the number of effective requests
             num_requests = 1 + (address%4 + bytesize - 1)/4;
             // For each request, generate the "effective address" i.e.
@@ -271,7 +272,7 @@ int main(int argc, char ** argv)
             op << " " << hex << address << " " << dec << bytesize << endl;
             break;
         }
-
+        req_count += num_requests;
         flush_counter++;
     }
 

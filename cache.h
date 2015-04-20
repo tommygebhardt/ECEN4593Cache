@@ -16,6 +16,7 @@ struct stats{
     unsigned long long int read_count;
     unsigned long long int write_count;
     unsigned long long int total_count;
+    unsigned long long int req_count;
     unsigned int flushes;
     unsigned long long int read_time;
     unsigned long long int write_time;
@@ -28,6 +29,7 @@ struct stats{
 	read_count = 0;
 	write_count = 0;
 	total_count = 0;
+	req_count = 0;
 	flushes = 0;
 	read_time = 0;
 	write_time = 0;
