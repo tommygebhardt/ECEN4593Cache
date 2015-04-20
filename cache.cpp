@@ -152,20 +152,19 @@ void cache::write(unsigned long long int address){
 
 void cache::printInfo(){
     cout << "Cache Size: " << cache_size << endl;
-    cout << "Block Size: " << block_size << " Associativity: " << assoc << endl;
+    cout << "Block Size: " << block_size << "   Associativity: " << assoc << endl;
     cout << "Table Size: " << table_size << endl;
-    cout << "Timing== " ;
-    cout << "Hit: " << hit_time << "   Miss: " << miss_time << endl;
+    cout << "Hit Time: " << hit_time << "   Miss Time: " << miss_time << endl;
     cout << "Transfer Time: " << transfer_time << "   Bus Width: " << bus_width << endl;
 }
 
 
 void cache::printCounts(){
-    cout << "Hit count," << hit_count << endl;
-    cout << "Miss count," << miss_count << endl;
-    cout << "Requests," << requests << endl;
-    cout << "Kickouts," << kickouts << endl;
-    cout << "Dirty kickouts," << dirty_kickouts << endl;
-    cout << "Transfers," << transfers << endl;
-    cout << "Flush Kickouts" << flush_kickouts << endl;
+    cout << "Hit count: " << hit_count << endl;
+    cout << "Miss count: " << miss_count << endl;
+    cout << "Requests: " << requests << endl;
+    cout << "Kickouts: " << kickouts << endl;
+    cout << "Dirty kickouts: " << dirty_kickouts << endl;
+    cout << "Transfers: " << transfers << endl;
+    cout << "Flush Kickouts: " << flush_kickouts << endl;
 }
