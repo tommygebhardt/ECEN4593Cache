@@ -53,6 +53,7 @@ unsigned int cache::log2(unsigned int x)
     }
     return log2x;
 }
+
 void cache::read(unsigned long long int address)
 {
     // Going to adjust the tag by shifting out low order bits by
@@ -72,55 +73,64 @@ void cache::read(unsigned long long int address)
     // Increment counter for requests
     requests++;
 
-    // Check if valid at the effective index
-    if(table[index].blocks[0].valid)
+    // Check if valid at the effective index for any block in the set
+    for(unsigned long long b = 0; b < table[index].assoc; ++b)
     {
-        // Valid, so check the tag
-        if(table[index].blocks[0].tag == tag)
+        if(table[index].blocks[b].valid)
         {
-            // Tag matches, so we have a hit
-            hit_count++;
-
-            // Update the execution time by adding on the hit time
-            execution.exec_time += hit_time;
-
-            return;
-        }
-        else
-        {
-            // Tag did not match, so evict the block
-            kickouts++;
-
-            // Check if the block that we are evicting is dirty
-            if(table[index].blocks[0].dirty)
+            // Valid, so check the tag
+            if(table[index].blocks[b].tag == tag)
             {
-                // We are performing a dirty kickout
-                dirty_kickouts++;
+                // Tag matches, so we have a hit
+                hit_count++;
 
-                // Write the dirty block to a lower level in the hierarchy
-                if(lower_level != NULL)
-                {
-                    // write to cache, not main memory, but also need to
-                    // handle transfer time from L1 to L2
-                    lower_level->write(address);
-                    execution.exec_time += transfer_time * transfers_per_block;
-                    transfers++;
-                }
-                else
-                {
-                    // write to main memory
-                    execution.exec_time += mem_sendaddr + mem_ready +
-                        (mem_chunktime * transfers_per_block);
-                    transfers++;
-                }
+                // Update the LRU stack
+                table[index].LRU->update_stack_on_hit(b);
+
+                // Update the execution time by adding on the hit time
+                execution.exec_time += hit_time;
+
+                return;
             }
-        }
 
+        }
     }
 
     // Miss
     miss_count++;
     execution.exec_time += miss_time;
+
+    // None of the blocks in the set were a match, so determine which block to evict
+    unsigned long long way_number = table[index].LRU->update_stack_on_miss();
+    if(table[index].blocks[way_number].valid)
+    {
+        // Block that we are evicting is valid, so record a kickout
+        kickouts++;
+
+        // Check if the block that we are evicting is dirty
+        if(table[index].blocks[0].dirty)
+        {
+            // We are performing a dirty kickout
+            dirty_kickouts++;
+
+            // Write the dirty block to a lower level in the hierarchy
+            if(lower_level != NULL)
+            {
+                // write to cache, not main memory, but also need to
+                // handle transfer time from L1 to L2
+                lower_level->write(address);
+                execution.exec_time += transfer_time * transfers_per_block;
+                transfers++;
+            }
+            else
+            {
+                // write to main memory
+                execution.exec_time += mem_sendaddr + mem_ready +
+                    (mem_chunktime * transfers_per_block);
+                transfers++;
+            }
+        }
+    }
 
     // Generate a read to the next lower level
     if(lower_level != NULL)
@@ -169,59 +179,68 @@ void cache::write(unsigned long long int address)
     // Increment counter for requests
     requests++;
 
-    // Check if valid at the effective index
-    if(table[index].blocks[0].valid)
+    // Check if valid at the effective index for any block in the set
+    for(unsigned long long b = 0; b < table[index].assoc; ++b)
     {
-        // Valid, so check the tag
-        if(table[index].blocks[0].tag == tag)
+        if(table[index].blocks[b].valid)
         {
-            // Tag matches, so we have a hit
-            hit_count++;
-
-            // Update the execution time by adding on the hit time
-            execution.exec_time += hit_time;
-
-            // Difference between read and write: on a write hit, we need
-            // to set the dirty bit
-            table[index].blocks[0].dirty = true;
-
-            return;
-        }
-        else
-        {
-            // Tag did not match, so evict the block
-            kickouts++;
-
-            // Check if the block that we are evicting is dirty
-            if(table[index].blocks[0].dirty)
+            // Valid, so check the tag
+            if(table[index].blocks[b].tag == tag)
             {
-                // We are performing a dirty kickout
-                dirty_kickouts++;
+                // Tag matches, so we have a hit
+                hit_count++;
 
-                // Write the dirty block to a lower level in the hierarchy
-                if(lower_level != NULL)
-                {
-                    // write to cache, not main memory, but also need to
-                    // handle transfer time from L1 to L2
-                    lower_level->write(address);
-                    execution.exec_time += transfer_time * transfers_per_block;
-                    transfers++;
-                }
-                else
-                {
-                    // write to main memory
-                    execution.exec_time += mem_sendaddr + mem_ready +
-                    (mem_chunktime * transfers_per_block);
-                    transfers++;
-                }
+                // Update the LRU stack
+                table[index].LRU->update_stack_on_hit(b);
+
+                // Update the execution time by adding on the hit time
+                execution.exec_time += hit_time;
+
+                // Difference between read and write: on a write hit, we need
+                // to set the dirty bit
+                table[index].blocks[b].dirty = true;
+
+                return;
             }
+
         }
-
-    }
-
+    }    
+    
     // Miss
     miss_count++;
     execution.exec_time += miss_time;
+
+    // None of the blocks in the set were a match, so determine which block to evict
+    unsigned long long way_number = table[index].LRU->update_stack_on_miss();
+    if(table[index].blocks[way_number].valid)
+    {
+        // Block that we are evicting is valid, so record a kickout
+        kickouts++;
+
+        // Check if the block that we are evicting is dirty
+        if(table[index].blocks[0].dirty)
+        {
+            // We are performing a dirty kickout
+            dirty_kickouts++;
+
+            // Write the dirty block to a lower level in the hierarchy
+            if(lower_level != NULL)
+            {
+                // write to cache, not main memory, but also need to
+                // handle transfer time from L1 to L2
+                lower_level->write(address);
+                execution.exec_time += transfer_time * transfers_per_block;
+                transfers++;
+            }
+            else
+            {
+                // write to main memory
+                execution.exec_time += mem_sendaddr + mem_ready +
+                    (mem_chunktime * transfers_per_block);
+                transfers++;
+            }
+        }
+    }
 
     // Generate a read to the next lower level
     if(lower_level != NULL)
@@ -236,12 +255,9 @@ void cache::write(unsigned long long int address)
     {
         // Read from main memory
         execution.exec_time += mem_sendaddr + mem_ready +
-        (mem_chunktime * transfers_per_block);
+            (mem_chunktime * transfers_per_block);
         transfers++;
     }
-
-    // "Replay" the request i.e. add on the hit time
-    execution.exec_time += hit_time;
 
     // Update the actual cache entries
     table[index].blocks[0].tag = tag;
