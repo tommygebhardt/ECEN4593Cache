@@ -62,11 +62,11 @@ LRU_stack::~LRU_stack()
     llnode * node_p = head;
     // Free all memory
     for(unsigned int i = 0; i < ways; ++i)
-	{
-	    head = head->next;
-	    delete node_p;
-	    node_p = head;
-	}
+    {
+        head = head->next;
+        delete node_p;
+        node_p = head;
+    }
     
     // Make sure the LRU stack is not used again
     head = NULL;
@@ -88,53 +88,53 @@ void LRU_stack::update_stack_on_hit(unsigned long long ref_way_num)
     llnode * node_p = head;
     
     if(ref_way_num >= ways)
-	{
+    {
 #if LRU_DEBUG
-	    cout << "ref_way_num >= ways" << endl;
+        cout << "ref_way_num >= ways" << endl;
 #endif
-	    return;
-	}
+        return;
+    }
     if(head->way_number == ref_way_num)
-	{
+    {
 #if LRU_DEBUG
-	    cout << "head->way_number == ref_way_num" << endl;
+        cout << "head->way_number == ref_way_num" << endl;
 #endif
-	    return;
-	}
-    
+        return;
+    }
+
     while(node_p != tail)
-	{
-	    node_p = node_p->next;
-	    if(node_p->way_number == ref_way_num)
-		{
+    {
+        node_p = node_p->next;
+        if(node_p->way_number == ref_way_num)
+        {
 #if LRU_DEBUG
-		    cout << "Found ref_way_num" << endl;
+            cout << "Found ref_way_num" << endl;
 #endif
-		    node_p->prev->next = node_p->next;
-		    if(node_p == tail)
-			{
+            node_p->prev->next = node_p->next;
+            if(node_p == tail)
+            {
 #if LRU_DEBUG
-			    cout << "ref_way_num was at the tail" << endl;
+                cout << "ref_way_num was at the tail" << endl;
 #endif
-			    tail = node_p->prev;
-			}
-		    else
-			{
+                tail = node_p->prev;
+            }
+            else
+            {
 #if LRU_DEBUG
-			    cout << "ref_way_num was NOT at the tail" << endl;
+                cout << "ref_way_num was NOT at the tail" << endl;
 #endif
-			    node_p->next->prev = node_p->prev;
-			}
-		    node_p->next = head;
-		    node_p->prev = NULL;
-		    head->prev = node_p;
-		    head = node_p;
+                node_p->next->prev = node_p->prev;
+            }
+            node_p->next = head;
+            node_p->prev = NULL;
+            head->prev = node_p;
+            head = node_p;
 #if LRU_DEBUG
-		    cout << "Finished updating LRU stack. Exiting..." << endl;
+            cout << "Finished updating LRU stack. Exiting..." << endl;
 #endif
-		    return;
-		}
-	}
+            return;
+        }
+    }
     
 #if LRU_DEBUG
     cout << "Impossible! ref_way_num not in LRU stack" << endl;
@@ -153,9 +153,9 @@ unsigned long long LRU_stack::update_stack_on_miss()
     llnode * node_p = tail;
     
     if(head == tail)
-	{
-	    return head->way_number;
-	}
+    {
+        return head->way_number;
+    }
     
     node_p->prev->next = NULL;
     tail = node_p->prev;
@@ -177,10 +177,10 @@ void LRU_stack::print_stack()
     llnode * node_p = head;
     
     for(unsigned int i = 0; i < ways; ++i)
-	{
-	    cout << node_p->way_number << endl;
-	    node_p = node_p->next;
-	}
+    {
+        cout << node_p->way_number << endl;
+        node_p = node_p->next;
+    }
     
     return;
 }
