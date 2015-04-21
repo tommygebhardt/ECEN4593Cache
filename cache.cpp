@@ -59,21 +59,21 @@ unsigned long long int cache::read(unsigned long long int address)
     // Going to adjust the tag by shifting out low order bits by
     // block_offset and index_offset.
     unsigned long long int time = 0;
-    unsigned long long int tag = address >> index_offset;
-    tag = tag >> block_offset;
+    unsigned long long int tag = address >> block_offset;
+    tag = tag >> index_offset;
 
 #if DEBUG_CACHE
-    cout << "Handling read for address " << hex << address << "with tag " << tag << dec << endl;
+    cout << "Handling read for address " << hex << address << " with tag " << tag << dec << endl;
 #endif
 
-    unsigned int index; // effective index used for the request
+    unsigned long long index; // effective index used for the request
 
     // We want the mask to be all 1's for the index
     unsigned long long int mask;
     mask = (unsigned long long int) table_size - 1;
 
     // Get the index
-    index = (unsigned int)((address >> block_offset) & mask);
+    index = (unsigned long long)((address >> block_offset) & mask);
 
     // Increment counter for requests
     requests++;
@@ -95,6 +95,25 @@ unsigned long long int cache::read(unsigned long long int address)
                 // Update the execution time by adding on the hit time
                 execution.exec_time += hit_time;
                 time += hit_time;
+
+#if DEBUG_CACHE
+                if(lower_level != NULL)
+                {
+                    if(index == 0xFF)
+                    {
+                        cout << "Contents of L1" << endl;
+                        printCache();
+                    }
+                }
+                else
+                {
+                    if(index == 0x1FF)
+                    {
+                        cout << "Contents of L2" << endl;
+                        printCache();
+                    }
+                }
+#endif
 
                 return time;
             }
@@ -123,14 +142,25 @@ unsigned long long int cache::read(unsigned long long int address)
             // Write the dirty block to a lower level in the hierarchy
             if(lower_level != NULL)
             {
+                // create the effective address of the block that we are kicking out
+                unsigned long long eff_address =
+                    (((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
+#if DEBUG_CACHE
+                cout << "L1 dirty kickout sending address " << hex << eff_address << dec << " to L2 cache" << endl;
+#endif
+
                 // write to cache, not main memory, but also need to
                 // handle transfer time from L1 to L2
-                time += lower_level->write(address);
+                time += lower_level->write(eff_address);
                 execution.exec_time += transfer_time * transfers_per_block;
                 time += transfer_time * transfers_per_block;
             }
             else
             {
+#if DEBUG_CACHE
+                cout << "L2 dirty kickout" << endl;
+                cout << "   Sending to memory" << endl;
+#endif
                 // write to main memory
                 execution.exec_time += mem_sendaddr + mem_ready +
                     (mem_chunktime * transfers_per_block);
@@ -154,9 +184,9 @@ unsigned long long int cache::read(unsigned long long int address)
     {
         // Read from main memory
         execution.exec_time += mem_sendaddr + mem_ready +
-        (mem_chunktime * transfers_per_block);
+            (mem_chunktime * transfers_per_block);
         time += mem_sendaddr + mem_ready +
-        (mem_chunktime * transfers_per_block);
+            (mem_chunktime * transfers_per_block);
         transfers++;
     }
 
@@ -169,6 +199,25 @@ unsigned long long int cache::read(unsigned long long int address)
     table[index].blocks[way_number].dirty = false;
     table[index].blocks[way_number].valid = true;
 
+#if DEBUG_CACHE
+    if(lower_level != NULL)
+    {
+        if(index == 0xFF)
+        {
+            cout << "Contents of L1" << endl;
+            printCache();
+        }
+    }
+    else
+    {
+        if(index == 0x1FF)
+        {
+            cout << "Contents of L2" << endl;
+            printCache();
+        }
+    }
+#endif
+
     return time;
 }
 
@@ -177,21 +226,21 @@ unsigned long long int cache::write(unsigned long long int address)
     // Going to adjust the tag by shifting out low order bits by
     // block_offset and index_offset.
     unsigned long long int time = 0;
-    unsigned long long int tag = address >> index_offset;
-    tag = tag >> block_offset;
+    unsigned long long int tag = address >> block_offset;
+    tag = tag >> index_offset;
 
 #if DEBUG_CACHE
-    cout << "Handling write for address " << hex << address << "with tag " << tag << dec << endl;
+    cout << "Handling write for address " << hex << address << " with tag " << tag << dec << endl;
 #endif
 
-    unsigned int index; // effective index used for the request
+    unsigned long long index; // effective index used for the request
 
     // We want the mask to be all 1's for the index
     unsigned long long int mask;
     mask = (unsigned long long int) table_size - 1;
 
     // Get the index
-    index = (unsigned int)((address >> block_offset) & mask);
+    index = (unsigned long long)((address >> block_offset) & mask);
 
     // Increment counter for requests
     requests++;
@@ -218,9 +267,26 @@ unsigned long long int cache::write(unsigned long long int address)
                 // to set the dirty bit
                 table[index].blocks[b].dirty = true;
 
+#if DEBUG_CACHE
+                if(lower_level != NULL)
+                {
+                    if(index == 0xFF)
+                    {
+                        cout << "Contents of L1" << endl;
+                        printCache();
+                    }
+                }
+                else
+                {
+                    if(index == 0x1FF)
+                    {
+                        cout << "Contents of L2" << endl;
+                        printCache();
+                    }
+                }
+#endif
                 return time;
             }
-
         }
     }
 
@@ -245,14 +311,26 @@ unsigned long long int cache::write(unsigned long long int address)
             // Write the dirty block to a lower level in the hierarchy
             if(lower_level != NULL)
             {
+                // create the effective address of the block that we are kicking out
+                unsigned long long eff_address =
+                    (((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
+#if DEBUG_CACHE
+                cout << "L1 dirty kickout" << endl;
+                cout << "   Sending address " << hex << eff_address << dec << " to L2 cache" << endl;
+#endif
+
                 // write to cache, not main memory, but also need to
                 // handle transfer time from L1 to L2
-                time += lower_level->write(address);
+                time += lower_level->write(eff_address);
                 execution.exec_time += transfer_time * transfers_per_block;
                 time += transfer_time * transfers_per_block;
             }
             else
             {
+#if DEBUG_CACHE
+                cout << "L2 dirty kickout" << endl;
+                cout << "   Sending to memory" << endl;
+#endif
                 // write to main memory
                 execution.exec_time += mem_sendaddr + mem_ready +
                     (mem_chunktime * transfers_per_block);
@@ -291,6 +369,25 @@ unsigned long long int cache::write(unsigned long long int address)
     table[index].blocks[way_number].dirty = true; // write sets the dirty bit
     table[index].blocks[way_number].valid = true;
 
+#if DEBUG_CACHE
+    if(lower_level != NULL)
+    {
+        if(index == 0xFF)
+        {
+            cout << "Contents of L1" << endl;
+            printCache();
+        }
+    }
+    else
+    {
+        if(index == 0x1FF)
+        {
+            cout << "Contents of L2" << endl;
+            printCache();
+        }
+    }
+#endif
+
     return time;
 
 }
@@ -299,6 +396,7 @@ unsigned long long int cache::flush()
 {
     unsigned long long int eff_address;
     unsigned long long int time = 0;
+    unsigned long long zero = 0;
     // Loop through the entire table, invalidating all valid bits. When
     // a dirty block is encountered, write to the next level below
     // before invalidating.
@@ -319,7 +417,7 @@ unsigned long long int cache::flush()
                     if(lower_level != NULL)
                     {
                         // Reconstruct the effective address of the block
-                        eff_address = (((table[i].blocks[j].tag) << index_offset) | (unsigned long long)i) << block_offset;
+                        eff_address = (((table[i].blocks[j].tag) << index_offset) | (zero + i)) << block_offset;
 
                         // Write to the next level
                         time += lower_level->write(eff_address);
@@ -392,7 +490,7 @@ void cache::printCache()
         } else {
             cout << " D: 0 Tag: - |";
         }
-        if((b+1)%2 == 0 && b+1 < assoc)
+        if((b)%2 == 1 && b+1 < assoc)
         {
             cout << endl;
         }

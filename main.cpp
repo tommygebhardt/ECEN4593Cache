@@ -281,6 +281,9 @@ int main(int argc, char ** argv)
 
     }
 
+    // Add flush time to instruction time. Flushes count as instructions too!
+    execution.inst_time += execution.flush_time;
+
 #if PRINT_FORMATTED_STATS
     print_all_stats(L1I, L1D, L2);
 
