@@ -96,6 +96,7 @@ class cache
     unsigned long long int flush();
     void printInfo();
     void printCounts();
+    void printCache();
     // Function to print formatted summary of all statistics
     friend void print_all_stats(cache& L1I, cache& L1D, cache& L2);
 };

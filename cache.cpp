@@ -376,3 +376,30 @@ void cache::printCounts()
     cout << "Transfers: " << transfers << endl;
     cout << "Flush Kickouts: " << flush_kickouts << endl;
 }
+
+void cache::printCache()
+{
+    bool print_index = false;
+    for (unsigned int index = 0; index < table_size; index++){
+	for (unsigned int b = 0; b < assoc; b++){
+	    if (table[index].blocks[b].valid == true){
+		print_index = true;
+		break;
+	    }
+	}
+	if(print_index){
+	    cout << "Index: " << hex << index << " |";
+	    for (unsigned int b = 0; b < assoc; b++){
+		cout << " V: " << dec << table[index].blocks[b].valid;
+		if (table[index].blocks[b].valid){
+		    cout << " D: " << dec << table[index].blocks[b].dirty;
+		    cout << " Tag: " << hex << table[index].blocks[b].tag << "|";
+		} else
+		    cout << " D: 0 Tag: - |";
+	    }
+	    cout << endl;
+	    print_index = false;
+	}
+    }
+
+}

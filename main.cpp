@@ -272,7 +272,7 @@ int main(int argc, char ** argv)
             op << " " << hex << address << " " << dec << bytesize << endl;
             break;
         }
-        req_count += num_requests;
+        execution.req_count += num_requests;
         flush_counter++;
     }
 
