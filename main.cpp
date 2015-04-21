@@ -202,7 +202,7 @@ int main(int argc, char ** argv)
         if(flush_counter == 380000)
         {
             // flush each cache (must be in order)
-            execution.flush_time += L1I.flush();
+            L1I.flush(); // Ignore flush time since we just want to invalidate
             execution.flush_time += L1D.flush();
             execution.flush_time += L2.flush();
 
@@ -232,6 +232,9 @@ int main(int argc, char ** argv)
                 eff_address = (address + ((unsigned long long int)i<<2));
                 execution.inst_time += L1I.read(eff_address);
             }
+
+            // Flush every 380000 instructions
+            flush_counter++;
             break;
         case 'R':
 #if DEBUG
@@ -275,11 +278,19 @@ int main(int argc, char ** argv)
             break;
         }
         execution.req_count += num_requests;
-        flush_counter++;
+
     }
 
 #if PRINT_FORMATTED_STATS
     print_all_stats(L1I, L1D, L2);
+
+    cout << "Memory Level:  L1i" << endl;
+    L1I.printCache();
+    cout << "Memory Level:  L1d" << endl;
+    L1D.printCache();
+    cout << "Memory Level:  L2" << endl;
+    L2.printCache();
+
 #endif
 
 #if (DEBUG == 1)
@@ -293,15 +304,49 @@ int main(int argc, char ** argv)
 // Function to print formatted summary of all statistics
 void print_all_stats(cache& L1I, cache& L1D, cache& L2)
 {
-    // TODO: Acquire the trace file name and process config file to determine these
-    string tracefile = "sjeng";
-    string cacheconfig = "Default";
+    // Acquire the trace file name
+    string tracefile = "      ";
+    string cacheconfig;
+
+    // Figure out cache configuration
+    if(L1I.assoc == 1)
+    {
+        if(L1I.cache_size == 8192)
+            cacheconfig = "Default";
+        else if(L1I.cache_size == 4096)
+            cacheconfig = "L1-small";
+    }
+    else if(L1I.assoc == 2)
+    {
+        if(L2.assoc == 1)
+            cacheconfig = "L1-2way";
+        else if(L2.assoc == 2)
+            cacheconfig = "All-2way";
+        else if(L2.assoc == 4)
+            cacheconfig = "L2-4way";
+        else
+            cacheconfig = "L2-Big";
+    }
+    else if(L1I.assoc == 4)
+    {
+        if(L1I.cache_size == 8192)
+            cacheconfig = "All-4way";
+        else if(L1I.cache_size == 4096)
+            cacheconfig = "L1-small-4way";
+    }
+    else
+    {
+        if(L2.cache_size == 32768)
+            cacheconfig = "All-FA";
+        else if(L2.cache_size == 65536)
+            cacheconfig = "All-FA-L2Big";
+    }
 
     // Make all decimals round to the tenths place
-    cout << fixed << setprecision(1);
+    cout << fixed << setprecision(1) << left;
 
     cout << "--------------------------------------------------------------------------------" << endl;
-    cout << "      " << tracefile << ", " << cacheconfig << "          " <<
+    cout << "      " << tracefile << " " << cacheconfig << "          " <<
         "Simulation Results" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << endl;
@@ -326,9 +371,9 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << endl;
 
     cout << " Total cycles for activities:  [Percentage]" << endl;
-    cout << "   Reads  = " << execution.read_time << "    [" << (float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Writes = " << execution.write_time << "    [" << (float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Inst.  = " << execution.inst_time << "    [" << (float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Reads  = " << execution.read_time << "    [" << 100.0*(float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Writes = " << execution.write_time << "    [" << 100.0*(float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "   Inst.  = " << execution.inst_time << "    [" << 100.0*(float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
     cout << "   Total  = " << execution.exec_time << endl;
     cout << endl;
 
@@ -338,6 +383,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << " Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << (float)(execution.inst_count + execution.total_count)/(float)(execution.inst_count) << endl;
     cout << " Ideal mis-aligned: Exec. Time = " << (execution.inst_count + execution.req_count) << "; CPI = "
         << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
+    cout << endl;
 
     cout << " Memory Level:  L1i" << endl;
     cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
@@ -363,10 +409,11 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Flush Kickouts = " << L2.flush_kickouts << endl;
     cout << endl;
 
-    // compute cache costs
-    unsigned int L1Icost = (L1_COST_PER_4KB * L1I.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1I.assoc));
-    unsigned int L1Dcost = (L1_COST_PER_4KB * L1D.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1D.assoc));
-    unsigned int L2cost = (L2_COST_PER_64KB * L2.cache_size / 65536) + (L2_COST_OF_DOUBLE_WAYS * log2(L2.assoc));
+    // Compute cache costs
+    unsigned int L1Icost = (L1_COST_PER_4KB * L1I.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1I.assoc) * L1I.cache_size / 4096);
+    unsigned int L1Dcost = (L1_COST_PER_4KB * L1D.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1D.assoc) * L1D.cache_size / 4096);
+    // TODO: Check the default L2 cache size
+    unsigned int L2cost = (L2_COST_PER_64KB * L2.cache_size / 32768) + (L2_COST_OF_DOUBLE_WAYS * log2(L2.assoc) * L2.cache_size / 32768);
     unsigned int MMcost = (MM_COST_OF_LATENCY30 + MM_COST_OF_BANDWIDTH8) +
         (MM_COST_TO_DOUBLE_BANDWIDTH * log2(mem_chunksize / 8)) + (MM_COST_TO_HALVE_LATENCY * log2(mem_ready / 30));
 

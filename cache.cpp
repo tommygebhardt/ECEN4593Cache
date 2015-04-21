@@ -1,7 +1,7 @@
 #include "cache.h"
 #include <iostream>
 
-#define DEBUG_CACHE 1
+#define DEBUG_CACHE 0
 using namespace std;
 
 cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned int htime,
@@ -62,6 +62,10 @@ unsigned long long int cache::read(unsigned long long int address)
     unsigned long long int tag = address >> index_offset;
     tag = tag >> block_offset;
 
+#if DEBUG_CACHE
+    cout << "Handling read for address " << hex << address << "with tag " << tag << dec << endl;
+#endif
+
     unsigned int index; // effective index used for the request
 
     // We want the mask to be all 1's for the index
@@ -111,7 +115,7 @@ unsigned long long int cache::read(unsigned long long int address)
         kickouts++;
 
         // Check if the block that we are evicting is dirty
-        if(table[index].blocks[0].dirty)
+        if(table[index].blocks[way_number].dirty)
         {
             // We are performing a dirty kickout
             dirty_kickouts++;
@@ -124,7 +128,6 @@ unsigned long long int cache::read(unsigned long long int address)
                 time += lower_level->write(address);
                 execution.exec_time += transfer_time * transfers_per_block;
                 time += transfer_time * transfers_per_block;
-                transfers++;
             }
             else
             {
@@ -133,7 +136,6 @@ unsigned long long int cache::read(unsigned long long int address)
                     (mem_chunktime * transfers_per_block);
                 time += mem_sendaddr + mem_ready +
                     (mem_chunktime * transfers_per_block);
-                transfers++;
             }
         }
     }
@@ -163,9 +165,9 @@ unsigned long long int cache::read(unsigned long long int address)
     time += hit_time;
 
     // Update the actual cache entries
-    table[index].blocks[0].tag = tag;
-    table[index].blocks[0].dirty = false;
-    table[index].blocks[0].valid = true;
+    table[index].blocks[way_number].tag = tag;
+    table[index].blocks[way_number].dirty = false;
+    table[index].blocks[way_number].valid = true;
 
     return time;
 }
@@ -177,6 +179,10 @@ unsigned long long int cache::write(unsigned long long int address)
     unsigned long long int time = 0;
     unsigned long long int tag = address >> index_offset;
     tag = tag >> block_offset;
+
+#if DEBUG_CACHE
+    cout << "Handling write for address " << hex << address << "with tag " << tag << dec << endl;
+#endif
 
     unsigned int index; // effective index used for the request
 
@@ -231,7 +237,7 @@ unsigned long long int cache::write(unsigned long long int address)
         kickouts++;
 
         // Check if the block that we are evicting is dirty
-        if(table[index].blocks[0].dirty)
+        if(table[index].blocks[way_number].dirty)
         {
             // We are performing a dirty kickout
             dirty_kickouts++;
@@ -244,7 +250,6 @@ unsigned long long int cache::write(unsigned long long int address)
                 time += lower_level->write(address);
                 execution.exec_time += transfer_time * transfers_per_block;
                 time += transfer_time * transfers_per_block;
-                transfers++;
             }
             else
             {
@@ -253,7 +258,6 @@ unsigned long long int cache::write(unsigned long long int address)
                     (mem_chunktime * transfers_per_block);
                 time += mem_sendaddr + mem_ready +
                     (mem_chunktime * transfers_per_block);
-                transfers++;
             }
         }
     }
@@ -272,9 +276,9 @@ unsigned long long int cache::write(unsigned long long int address)
     {
         // Read from main memory
         execution.exec_time += mem_sendaddr + mem_ready +
-        (mem_chunktime * transfers_per_block);
+            (mem_chunktime * transfers_per_block);
         time += mem_sendaddr + mem_ready +
-        (mem_chunktime * transfers_per_block);
+            (mem_chunktime * transfers_per_block);
         transfers++;
     }
 
@@ -283,9 +287,9 @@ unsigned long long int cache::write(unsigned long long int address)
     time += hit_time;
 
     // Update the actual cache entries
-    table[index].blocks[0].tag = tag;
-    table[index].blocks[0].dirty = true; // write sets the dirty bit
-    table[index].blocks[0].valid = true;
+    table[index].blocks[way_number].tag = tag;
+    table[index].blocks[way_number].dirty = true; // write sets the dirty bit
+    table[index].blocks[way_number].valid = true;
 
     return time;
 
@@ -309,13 +313,13 @@ unsigned long long int cache::flush()
                 // If the block is dirty, write it out to the next level
                 if(table[i].blocks[j].dirty)
                 {
-                    // Perform a dirty_kickout
-                    dirty_kickouts++;
+                    // Perform a flush kickout
+                    flush_kickouts++;
 
                     if(lower_level != NULL)
                     {
                         // Reconstruct the effective address of the block
-                        eff_address = ((table[i].blocks[j].tag) << (block_offset + index_offset)) | ((unsigned long long)(i << block_offset));
+                        eff_address = (((table[i].blocks[j].tag) << index_offset) | (unsigned long long)i) << block_offset;
 
                         // Write to the next level
                         time += lower_level->write(eff_address);
@@ -324,30 +328,21 @@ unsigned long long int cache::flush()
                         execution.exec_time += transfer_time * transfers_per_block;
                         time += transfer_time * transfers_per_block;
                         transfers++;
-
-                        // Also add to flush time
-                        execution.flush_time += transfer_time * transfers_per_block;
                     }
                     else
                     {
                         // Write to main memory
                         execution.exec_time += mem_sendaddr + mem_ready +
-                        (mem_chunktime * transfers_per_block);
+                            (mem_chunktime * transfers_per_block);
                         time += mem_sendaddr + mem_ready +
-                        (mem_chunktime * transfers_per_block);
+                            (mem_chunktime * transfers_per_block);
                         transfers++;
-
-                        // Also add to flush time
-                        execution.flush_time += mem_sendaddr + mem_ready +
-                        (mem_chunktime * transfers_per_block);
                     }
                 }
 
                 // Regardless of whether the block was dirty, we need to
-                // clear the valid bit, and increment flush_kickouts
+                // clear the valid bit
                 table[i].blocks[j].valid = false;
-                flush_kickouts++;
-                kickouts++;
             }
 
         }
@@ -381,25 +376,30 @@ void cache::printCache()
 {
     bool print_index = false;
     for (unsigned int index = 0; index < table_size; index++){
-	for (unsigned int b = 0; b < assoc; b++){
-	    if (table[index].blocks[b].valid == true){
-		print_index = true;
-		break;
-	    }
-	}
-	if(print_index){
-	    cout << "Index: " << hex << index << " |";
-	    for (unsigned int b = 0; b < assoc; b++){
-		cout << " V: " << dec << table[index].blocks[b].valid;
-		if (table[index].blocks[b].valid){
-		    cout << " D: " << dec << table[index].blocks[b].dirty;
-		    cout << " Tag: " << hex << table[index].blocks[b].tag << "|";
-		} else
-		    cout << " D: 0 Tag: - |";
-	    }
-	    cout << endl;
-	    print_index = false;
-	}
+    for (unsigned int b = 0; b < assoc; b++){
+        if (table[index].blocks[b].valid == true){
+        print_index = true;
+        break;
+        }
+    }
+    if(print_index){
+        cout << "Index: " << hex << index << " |";
+        for (unsigned int b = assoc; b > 0; --b){
+        cout << " V: " << dec << table[index].blocks[b-1].valid;
+        if (table[index].blocks[b-1].valid){
+            cout << " D: " << dec << table[index].blocks[b-1].dirty;
+            cout << " Tag: " << hex << table[index].blocks[b-1].tag << "|";
+        } else {
+            cout << " D: 0 Tag: - |";
+        }
+        if((b+1)%2 == 0 && b+1 < assoc)
+        {
+            cout << endl;
+        }
+        }
+        cout << endl;
+        print_index = false;
+    }
     }
 
 }
