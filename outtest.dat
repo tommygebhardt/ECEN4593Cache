@@ -1,0 +1,827 @@
+--------------------------------------------------------------------------------
+             All-FA-L2Big          Simulation Results
+--------------------------------------------------------------------------------
+
+ Memory system:
+   Dcache size = 8192 : ways = 256 : block size = 32
+   Icache size = 8192 : ways = 256 : block size = 32
+   L2-cache size = 65536 : ways = 1024 : block size = 64
+   Memory ready time = 30 : chunksize = 8 : chunktime = 15
+
+ Execute time = 2802829;  Total refs = 1000000
+ Flush time = 162350
+ Inst refs = 725772;  Data refs = 274228
+
+ Number of reference types:  [Percentage]
+   Reads  = 174372     [17.4%]
+   Writes = 99856     [10.0%]
+   Inst.  = 725772     [72.6%]
+   Total  = 1000000
+
+ Total cycles for activities:  [Percentage]
+   Reads  = 480926    [17.2%]
+   Writes = 783032    [27.9%]
+   Inst.  = 1538871    [54.9%]
+   Total  = 2802829
+
+ Average cycles per activity:
+   Read =  2.8; Write = 7.8; Inst. = 3.9
+ Ideal: Exec. Time = 1725772; CPI = 2.4
+ Ideal mis-aligned: Exec. Time = 2237653; CPI = 3.1
+
+ Memory Level:  L1i
+   Hit Count = 1212724  Miss Count = 1375
+   Total Requests = 1214099
+   Hit Rate = 99.9%   Miss Rate = 0.1%
+   Kickouts = 1111; Dirty kickouts = 0; Transfers = 1375
+   Flush Kickouts = 0
+
+ Memory Level:  L1d
+   Hit Count = 290409  Miss Count = 7373
+   Total Requests = 297782
+   Hit Rate = 97.5%   Miss Rate = 2.5%
+   Kickouts = 6861; Dirty kickouts = 4701; Transfers = 7583
+   Flush Kickouts = 210
+
+ Memory Level:  L2
+   Hit Count = 9014  Miss Count = 4645
+   Total Requests = 13659
+   Hit Rate = 66.0%   Miss Rate = 34.0%
+   Kickouts = 2756; Dirty kickouts = 890; Transfers = 5640
+   Flush Kickouts = 995
+
+ L1 cache cost (Icache $1800) + (Dcache $1800) = $3600
+ L2 cache cost = $1100;  Memory cost = $75  Total cost = $4775
+ Flushes = 1 : Invalidates = 1
+
+Memory Level:  L1i
+Index: 0 | V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 2017b| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 2017d| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 2017f| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 20179|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 2017c| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 2017e| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 2017a|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 20178| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+
+Memory Level:  L1d
+Index: 0 | V: 1 D: 1 Tag: 31584| V: 1 D: 0 Tag: 31094| V: 1 D: 1 Tag: 31800| V: 1 D: 1 Tag: 31a7d|
+ V: 1 D: 1 Tag: 31a8e| V: 1 D: 1 Tag: 31d26|
+ V: 1 D: 1 Tag: 312f7| V: 1 D: 1 Tag: 31591|
+ V: 1 D: 1 Tag: 31aa2| V: 1 D: 1 Tag: 31d28|
+ V: 1 D: 1 Tag: 3157e| V: 1 D: 1 Tag: 31d1b|
+ V: 1 D: 0 Tag: 20c34| V: 1 D: 1 Tag: 31d12|
+ V: 1 D: 1 Tag: 31589| V: 1 D: 1 Tag: 3157f|
+ V: 1 D: 1 Tag: 3157b| V: 1 D: 1 Tag: 3157c|
+ V: 1 D: 1 Tag: 31a7c| V: 1 D: 1 Tag: 3157d|
+ V: 1 D: 1 Tag: 31306| V: 1 D: 1 Tag: 31816|
+ V: 1 D: 1 Tag: 3fffad42128| V: 1 D: 1 Tag: 31a87|
+ V: 1 D: 1 Tag: 31587| V: 1 D: 1 Tag: 31303|
+ V: 1 D: 1 Tag: 3180c| V: 1 D: 1 Tag: 31d24|
+ V: 1 D: 1 Tag: 317f6| V: 1 D: 0 Tag: 20c55|
+ V: 1 D: 1 Tag: 31d22| V: 1 D: 0 Tag: 20c42|
+ V: 1 D: 1 Tag: 31810| V: 1 D: 0 Tag: 20c53|
+ V: 1 D: 1 Tag: 31d1f| V: 1 D: 1 Tag: 31d2a|
+ V: 1 D: 1 Tag: 31583| V: 1 D: 1 Tag: 317f9|
+ V: 1 D: 1 Tag: 31d23| V: 1 D: 1 Tag: 31a9f|
+ V: 1 D: 0 Tag: 20c39| V: 1 D: 1 Tag: 31804|
+ V: 1 D: 1 Tag: 312ed| V: 1 D: 1 Tag: 3130b|
+ V: 1 D: 1 Tag: 31811| V: 1 D: 1 Tag: 3fffad42127|
+ V: 1 D: 1 Tag: 31d0a| V: 1 D: 1 Tag: 31581|
+ V: 1 D: 1 Tag: 31a98| V: 1 D: 1 Tag: 3158e|
+ V: 1 D: 1 Tag: 31579| V: 1 D: 0 Tag: 31099|
+ V: 1 D: 1 Tag: 31d0b| V: 1 D: 1 Tag: 31578|
+ V: 1 D: 1 Tag: 31a89| V: 1 D: 1 Tag: 31594|
+ V: 1 D: 1 Tag: 312e5| V: 1 D: 1 Tag: 3130c|
+ V: 1 D: 1 Tag: 31a81| V: 1 D: 1 Tag: 3158a|
+ V: 1 D: 1 Tag: 312ee| V: 1 D: 1 Tag: 31d0c|
+ V: 1 D: 1 Tag: 3156d| V: 1 D: 1 Tag: 31592|
+ V: 1 D: 1 Tag: 3156b| V: 1 D: 1 Tag: 312f3|
+ V: 1 D: 0 Tag: 31095| V: 1 D: 1 Tag: 31307|
+ V: 1 D: 1 Tag: 31308| V: 1 D: 1 Tag: 31585|
+ V: 1 D: 1 Tag: 31305| V: 1 D: 1 Tag: 31a9e|
+ V: 1 D: 1 Tag: 31580| V: 1 D: 0 Tag: 20c43|
+ V: 1 D: 1 Tag: 3181c| V: 1 D: 0 Tag: 20c4f|
+ V: 1 D: 1 Tag: 312e8| V: 1 D: 1 Tag: 31812|
+ V: 1 D: 1 Tag: 31819| V: 1 D: 1 Tag: 31593|
+ V: 1 D: 1 Tag: 31a8c| V: 1 D: 1 Tag: 312f4|
+ V: 1 D: 1 Tag: 3180d| V: 1 D: 1 Tag: 31a99|
+ V: 1 D: 1 Tag: 31d15| V: 1 D: 1 Tag: 31a85|
+ V: 1 D: 1 Tag: 31aa5| V: 1 D: 1 Tag: 31818|
+ V: 1 D: 1 Tag: 3156c| V: 1 D: 1 Tag: 31a7f|
+ V: 1 D: 0 Tag: 20c4e| V: 1 D: 1 Tag: 31a9d|
+ V: 1 D: 1 Tag: 31a88| V: 1 D: 1 Tag: 3180e|
+ V: 1 D: 1 Tag: 31802| V: 1 D: 1 Tag: 31301|
+ V: 1 D: 0 Tag: 20c49| V: 1 D: 0 Tag: 20c3a|
+ V: 1 D: 1 Tag: 3158c| V: 1 D: 1 Tag: 31a8a|
+ V: 1 D: 1 Tag: 3156e| V: 1 D: 1 Tag: 31a8f|
+ V: 1 D: 1 Tag: 312e7| V: 1 D: 1 Tag: 317f4|
+ V: 1 D: 1 Tag: 312ff| V: 1 D: 1 Tag: 31588|
+ V: 1 D: 1 Tag: 31a80| V: 1 D: 0 Tag: 20c50|
+ V: 1 D: 1 Tag: 31808| V: 1 D: 1 Tag: 31304|
+ V: 1 D: 1 Tag: 31d2b| V: 1 D: 1 Tag: 312f6|
+ V: 1 D: 1 Tag: 31d19| V: 1 D: 0 Tag: 31098|
+ V: 1 D: 1 Tag: 31a7e| V: 1 D: 0 Tag: 31091|
+ V: 1 D: 1 Tag: 31806| V: 1 D: 1 Tag: 31d2d|
+ V: 1 D: 1 Tag: 31d07| V: 1 D: 1 Tag: 31d0d|
+ V: 1 D: 1 Tag: 31574| V: 1 D: 1 Tag: 31805|
+ V: 1 D: 1 Tag: 312fe| V: 1 D: 1 Tag: 312eb|
+ V: 1 D: 1 Tag: 3158f| V: 1 D: 1 Tag: 312e4|
+ V: 1 D: 1 Tag: 31a96| V: 1 D: 0 Tag: 20c4a|
+ V: 1 D: 1 Tag: 31aa4| V: 1 D: 0 Tag: 20c36|
+ V: 1 D: 1 Tag: 3181a| V: 1 D: 1 Tag: 31309|
+ V: 1 D: 1 Tag: 312f0| V: 1 D: 1 Tag: 31d0f|
+ V: 1 D: 0 Tag: 20c3c| V: 1 D: 1 Tag: 312fd|
+ V: 1 D: 1 Tag: 31576| V: 1 D: 1 Tag: 31815|
+ V: 1 D: 1 Tag: 31d25| V: 1 D: 1 Tag: 31a9b|
+ V: 1 D: 1 Tag: 31a97| V: 1 D: 1 Tag: 31a8d|
+ V: 1 D: 1 Tag: 31d27| V: 1 D: 1 Tag: 31a93|
+ V: 1 D: 1 Tag: 31a8b| V: 1 D: 1 Tag: 31570|
+ V: 1 D: 1 Tag: 31d16| V: 1 D: 0 Tag: 20c33|
+ V: 1 D: 0 Tag: 20c4b| V: 1 D: 1 Tag: 312f1|
+ V: 1 D: 1 Tag: 312ea| V: 1 D: 1 Tag: 31590|
+ V: 1 D: 1 Tag: 3180a| V: 1 D: 1 Tag: 31d29|
+ V: 1 D: 0 Tag: 20c37| V: 1 D: 1 Tag: 317ff|
+ V: 1 D: 1 Tag: 3180b| V: 1 D: 1 Tag: 3156f|
+ V: 1 D: 1 Tag: 31571| V: 1 D: 0 Tag: 20c3b|
+ V: 1 D: 1 Tag: 317fd| V: 1 D: 1 Tag: 31a90|
+ V: 1 D: 1 Tag: 31d18| V: 1 D: 1 Tag: 312ec|
+ V: 1 D: 0 Tag: 20c46| V: 1 D: 1 Tag: 312fa|
+ V: 1 D: 0 Tag: 20c47| V: 1 D: 0 Tag: 20c4d|
+ V: 1 D: 1 Tag: 312fc| V: 1 D: 1 Tag: 31a91|
+ V: 1 D: 1 Tag: 31d0e| V: 1 D: 1 Tag: 312f5|
+ V: 1 D: 0 Tag: 20c48| V: 1 D: 1 Tag: 31d05|
+ V: 1 D: 1 Tag: 31586| V: 1 D: 1 Tag: 31d17|
+ V: 1 D: 1 Tag: 31d1d| V: 1 D: 1 Tag: 31d2c|
+ V: 1 D: 1 Tag: 31d13| V: 1 D: 1 Tag: 31575|
+ V: 1 D: 0 Tag: 20c4c| V: 1 D: 1 Tag: 31a9c|
+ V: 1 D: 1 Tag: 312e6| V: 1 D: 1 Tag: 31d08|
+ V: 1 D: 1 Tag: 317f7| V: 1 D: 1 Tag: 31d21|
+ V: 1 D: 1 Tag: 31573| V: 1 D: 0 Tag: 20c52|
+ V: 1 D: 1 Tag: 31300| V: 1 D: 1 Tag: 317f8|
+ V: 1 D: 1 Tag: 31a95| V: 1 D: 1 Tag: 31807|
+ V: 1 D: 1 Tag: 31803| V: 1 D: 1 Tag: 31aa1|
+ V: 1 D: 0 Tag: 20c44| V: 1 D: 0 Tag: 31093|
+ V: 1 D: 1 Tag: 3157a| V: 1 D: 0 Tag: 20c45|
+ V: 1 D: 1 Tag: 31d14| V: 1 D: 1 Tag: 31aa0|
+ V: 1 D: 1 Tag: 31d1a| V: 1 D: 1 Tag: 31d1e|
+ V: 1 D: 0 Tag: 20c35| V: 1 D: 1 Tag: 31d06|
+ V: 1 D: 1 Tag: 31582| V: 1 D: 1 Tag: 312f9|
+ V: 1 D: 1 Tag: 31d20| V: 1 D: 1 Tag: 3181d|
+ V: 1 D: 1 Tag: 31813| V: 1 D: 1 Tag: 31a82|
+ V: 1 D: 1 Tag: 31a9a| V: 1 D: 1 Tag: 312f2|
+ V: 1 D: 1 Tag: 31a86| V: 1 D: 0 Tag: 31097|
+ V: 1 D: 1 Tag: 31577| V: 1 D: 1 Tag: 31d1c|
+ V: 1 D: 1 Tag: 312e9| V: 1 D: 1 Tag: 31a83|
+ V: 1 D: 1 Tag: 3180f| V: 1 D: 1 Tag: 317fe|
+ V: 1 D: 1 Tag: 31302| V: 1 D: 1 Tag: 312f8|
+ V: 1 D: 0 Tag: 20c54| V: 1 D: 0 Tag: 31092|
+ V: 1 D: 1 Tag: 31814| V: 1 D: 1 Tag: 317fc|
+ V: 1 D: 0 Tag: 20c41| V: 1 D: 0 Tag: 20c40|
+ V: 1 D: 1 Tag: 317f5| V: 1 D: 1 Tag: 317fb|
+ V: 1 D: 0 Tag: 20c3d| V: 1 D: 0 Tag: 20c38|
+ V: 1 D: 1 Tag: 31a94| V: 1 D: 1 Tag: 312fb|
+ V: 1 D: 1 Tag: 31a84| V: 1 D: 0 Tag: 20c32|
+ V: 1 D: 0 Tag: 31096| V: 1 D: 1 Tag: 31d09|
+ V: 1 D: 0 Tag: 3109a| V: 1 D: 1 Tag: 31801|
+ V: 1 D: 0 Tag: 20c3f| V: 1 D: 0 Tag: 20c51|
+ V: 1 D: 1 Tag: 3158b| V: 1 D: 1 Tag: 312ef|
+ V: 1 D: 1 Tag: 31572| V: 1 D: 1 Tag: 31d11|
+ V: 1 D: 1 Tag: 3181b| V: 1 D: 1 Tag: 317fa|
+ V: 1 D: 1 Tag: 31809| V: 1 D: 1 Tag: 31a92|
+ V: 1 D: 1 Tag: 31aa3| V: 1 D: 0 Tag: 20c3e|
+ V: 1 D: 1 Tag: 3130a| V: 1 D: 1 Tag: 31d10|
+ V: 1 D: 1 Tag: 3158d| V: 1 D: 1 Tag: 31817|
+
+Memory Level:  L2
+Index: 0 | V: 1 D: 1 Tag: 18cd1| V: 1 D: 1 Tag: 1896e| V: 1 D: 1 Tag: 18ce9| V: 1 D: 1 Tag: 18ce0|
+ V: 1 D: 1 Tag: 18d21| V: 1 D: 1 Tag: 18ba8|
+ V: 1 D: 0 Tag: 18984| V: 1 D: 1 Tag: 18e2a|
+ V: 1 D: 1 Tag: 18931| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18e16| V: 1 D: 1 Tag: 18be9|
+ V: 1 D: 1 Tag: 18bc1| V: 1 D: 1 Tag: 18953|
+ V: 1 D: 1 Tag: 18a99| V: 1 D: 1 Tag: 18a4d|
+ V: 1 D: 1 Tag: 18a61| V: 1 D: 1 Tag: 18e1c|
+ V: 1 D: 1 Tag: 18cda| V: 1 D: 1 Tag: 18ba6|
+ V: 1 D: 1 Tag: 1894d| V: 1 D: 1 Tag: 18b8e|
+ V: 1 D: 0 Tag: 18bfe| V: 1 D: 1 Tag: 18a82|
+ V: 1 D: 0 Tag: 18ab9| V: 1 D: 0 Tag: 18975|
+ V: 1 D: 0 Tag: 18d46| V: 1 D: 1 Tag: 18a49|
+ V: 1 D: 1 Tag: 18bed| V: 1 D: 1 Tag: 18cea|
+ V: 1 D: 1 Tag: 18cd8| V: 1 D: 1 Tag: 18dfd|
+ V: 1 D: 1 Tag: 18b75| V: 1 D: 1 Tag: 18b77|
+ V: 1 D: 1 Tag: 1891e| V: 1 D: 1 Tag: 18b95|
+ V: 1 D: 1 Tag: 18952| V: 1 D: 1 Tag: 18b93|
+ V: 1 D: 1 Tag: 18ce2| V: 1 D: 1 Tag: 18ba7|
+ V: 1 D: 1 Tag: 18aae| V: 1 D: 1 Tag: 1890d|
+ V: 1 D: 1 Tag: 18a62| V: 1 D: 1 Tag: 18e62|
+ V: 1 D: 1 Tag: 18e2f| V: 1 D: 1 Tag: 18d16|
+ V: 1 D: 1 Tag: 18a3b| V: 1 D: 1 Tag: 18a63|
+ V: 1 D: 1 Tag: 18a9d| V: 1 D: 1 Tag: 18e30|
+ V: 1 D: 1 Tag: 18a64| V: 1 D: 1 Tag: 1895a|
+ V: 1 D: 1 Tag: 18dff| V: 1 D: 1 Tag: 18958|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18e1f|
+ V: 1 D: 1 Tag: 18a32| V: 1 D: 1 Tag: 18b76|
+ V: 1 D: 1 Tag: 188ee| V: 1 D: 1 Tag: 18b98|
+ V: 1 D: 1 Tag: 18bd6| V: 1 D: 1 Tag: 18a33|
+ V: 1 D: 1 Tag: 18e00| V: 1 D: 1 Tag: 18e21|
+ V: 1 D: 1 Tag: 18cbc| V: 1 D: 1 Tag: 18e68|
+ V: 1 D: 1 Tag: 18927| V: 1 D: 1 Tag: 18e66|
+ V: 1 D: 1 Tag: 18a34| V: 1 D: 1 Tag: 1894f|
+ V: 1 D: 1 Tag: 18a74| V: 1 D: 1 Tag: 18e13|
+ V: 1 D: 1 Tag: 18b9a| V: 1 D: 1 Tag: 18e65|
+ V: 1 D: 1 Tag: 18a8d| V: 1 D: 1 Tag: 18e7d|
+ V: 1 D: 1 Tag: 18b79| V: 1 D: 1 Tag: 18a76|
+ V: 1 D: 1 Tag: 18cbd| V: 1 D: 1 Tag: 18a66|
+ V: 1 D: 1 Tag: 18cde| V: 1 D: 1 Tag: 18923|
+ V: 1 D: 1 Tag: 18a56| V: 1 D: 1 Tag: 18bda|
+ V: 1 D: 1 Tag: 18a35| V: 1 D: 1 Tag: 18a75|
+ V: 1 D: 1 Tag: 18bb5| V: 1 D: 1 Tag: 18e03|
+ V: 1 D: 1 Tag: 18bdf| V: 1 D: 1 Tag: 18b7b|
+ V: 1 D: 1 Tag: 18b9b| V: 1 D: 1 Tag: 18cbe|
+ V: 1 D: 1 Tag: 18a73| V: 1 D: 1 Tag: 1892e|
+ V: 1 D: 1 Tag: 18b9c| V: 1 D: 1 Tag: 18914|
+ V: 1 D: 0 Tag: 18e93| V: 1 D: 1 Tag: 18e04|
+ V: 1 D: 1 Tag: 18ce1| V: 1 D: 1 Tag: 188f3|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18a37|
+ V: 1 D: 1 Tag: 18a59| V: 1 D: 1 Tag: 18cc0|
+ V: 1 D: 1 Tag: 18aad| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b7d| V: 1 D: 1 Tag: 18b9e|
+ V: 1 D: 0 Tag: 18d47| V: 1 D: 1 Tag: 18b7e|
+ V: 1 D: 0 Tag: 10619| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 1895c|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 188f5|
+ V: 1 D: 1 Tag: 18e2c| V: 1 D: 1 Tag: 18a9b|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18e06|
+ V: 1 D: 1 Tag: 18a5a| V: 1 D: 1 Tag: 18cc4|
+ V: 1 D: 1 Tag: 18b81| V: 1 D: 1 Tag: 18917|
+ V: 1 D: 1 Tag: 1891d| V: 1 D: 1 Tag: 18b82|
+ V: 1 D: 1 Tag: 18bb7| V: 1 D: 1 Tag: 18a5c|
+ V: 1 D: 1 Tag: 18cc6| V: 1 D: 1 Tag: 188fa|
+ V: 1 D: 1 Tag: 18a3e| V: 1 D: 1 Tag: 18919|
+ V: 1 D: 1 Tag: 18e0b| V: 1 D: 1 Tag: 18b83|
+ V: 1 D: 1 Tag: 18937| V: 1 D: 1 Tag: 188fb|
+ V: 1 D: 1 Tag: 18964| V: 1 D: 1 Tag: 18d36|
+ V: 1 D: 1 Tag: 18e6d| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18e83| V: 1 D: 1 Tag: 18bc7|
+ V: 1 D: 1 Tag: 18e0c| V: 1 D: 1 Tag: 18e36|
+ V: 1 D: 1 Tag: 18b84| V: 1 D: 1 Tag: 18cc8|
+ V: 1 D: 1 Tag: 18d31| V: 1 D: 1 Tag: 18bb4|
+ V: 1 D: 1 Tag: 18e75| V: 1 D: 1 Tag: 18bbb|
+ V: 1 D: 1 Tag: 18e6c| V: 1 D: 1 Tag: 18e31|
+ V: 1 D: 1 Tag: 18e4f| V: 1 D: 1 Tag: 18a9f|
+ V: 1 D: 1 Tag: 18d0d| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 1895f| V: 1 D: 1 Tag: 18bef|
+ V: 1 D: 1 Tag: 18cdc| V: 1 D: 1 Tag: 18d32|
+ V: 1 D: 1 Tag: 1896f| V: 1 D: 1 Tag: 18be4|
+ V: 1 D: 1 Tag: 18a84| V: 1 D: 1 Tag: 18bca|
+ V: 1 D: 1 Tag: 18942| V: 1 D: 1 Tag: 18a3a|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18bdc|
+ V: 1 D: 1 Tag: 18a86| V: 1 D: 1 Tag: 18bf8|
+ V: 1 D: 1 Tag: 18bcb| V: 1 D: 1 Tag: 18e54|
+ V: 1 D: 1 Tag: 18d26| V: 1 D: 0 Tag: 18983|
+ V: 1 D: 1 Tag: 18bd8| V: 1 D: 1 Tag: 18bb6|
+ V: 1 D: 0 Tag: 18ac3| V: 1 D: 0 Tag: 18ac0|
+ V: 1 D: 1 Tag: 18930| V: 1 D: 1 Tag: 18bb9|
+ V: 1 D: 1 Tag: 188fc| V: 1 D: 1 Tag: 18ced|
+ V: 1 D: 1 Tag: 18a42| V: 1 D: 1 Tag: 18a40|
+ V: 1 D: 1 Tag: 18cf4| V: 1 D: 1 Tag: 18cc9|
+ V: 1 D: 1 Tag: 18aa7| V: 1 D: 1 Tag: 18a41|
+ V: 1 D: 1 Tag: 18921| V: 1 D: 1 Tag: 18d29|
+ V: 1 D: 1 Tag: 18e0e| V: 1 D: 1 Tag: 18baa|
+ V: 1 D: 1 Tag: 18cca| V: 1 D: 1 Tag: 188fe|
+ V: 1 D: 1 Tag: 18e0f| V: 1 D: 1 Tag: 18e6b|
+ V: 1 D: 1 Tag: 18e10| V: 1 D: 1 Tag: 18cef|
+ V: 1 D: 1 Tag: 18cb0| V: 1 D: 1 Tag: 188ff|
+ V: 1 D: 1 Tag: 18cdd| V: 1 D: 1 Tag: 188ef|
+ V: 1 D: 0 Tag: 18c03| V: 1 D: 1 Tag: 18e1d|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18bad|
+ V: 1 D: 1 Tag: 18950| V: 1 D: 1 Tag: 18b88|
+ V: 1 D: 1 Tag: 18a98| V: 1 D: 0 Tag: 18d4b|
+ V: 1 D: 1 Tag: 18e3b| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18bf3| V: 1 D: 1 Tag: 18b89|
+ V: 1 D: 1 Tag: 18a94| V: 1 D: 1 Tag: 18a91|
+ V: 1 D: 0 Tag: 18e90| V: 1 D: 0 Tag: 18ab6|
+ V: 1 D: 1 Tag: 18903| V: 1 D: 1 Tag: 18ab0|
+ V: 1 D: 1 Tag: 18971| V: 1 D: 1 Tag: 18d1f|
+ V: 1 D: 1 Tag: 18a44| V: 1 D: 1 Tag: 18e11|
+ V: 1 D: 1 Tag: 18a6a| V: 1 D: 1 Tag: 18901|
+ V: 1 D: 1 Tag: 18a46| V: 1 D: 1 Tag: 18a88|
+ V: 1 D: 1 Tag: 18cf3| V: 1 D: 1 Tag: 18bf5|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18e7e|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18ab7|
+ V: 1 D: 1 Tag: 18ab3| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b8a| V: 1 D: 1 Tag: 18e5a|
+ V: 1 D: 0 Tag: 18d40| V: 1 D: 1 Tag: 18e38|
+ V: 1 D: 1 Tag: 18a6b| V: 1 D: 1 Tag: 18b91|
+ V: 1 D: 1 Tag: 18cf6| V: 1 D: 1 Tag: 18b8d|
+ V: 1 D: 1 Tag: 18e44| V: 1 D: 1 Tag: 18d13|
+ V: 1 D: 1 Tag: 18a4b| V: 1 D: 1 Tag: 18cf5|
+ V: 1 D: 1 Tag: 18954| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18d3e|
+ V: 1 D: 0 Tag: 18972| V: 1 D: 1 Tag: 18e18|
+ V: 1 D: 0 Tag: 18973| V: 1 D: 1 Tag: 18909|
+ V: 1 D: 1 Tag: 1892a| V: 1 D: 1 Tag: 18d00|
+ V: 1 D: 1 Tag: 18e1a| V: 1 D: 1 Tag: 18b92|
+ V: 1 D: 1 Tag: 1890b| V: 1 D: 1 Tag: 18a6f|
+ V: 1 D: 1 Tag: 1890c| V: 1 D: 1 Tag: 18a4f|
+ V: 1 D: 1 Tag: 18a50| V: 1 D: 1 Tag: 18956|
+ V: 1 D: 1 Tag: 18cd9| V: 1 D: 1 Tag: 18d1d|
+ V: 1 D: 1 Tag: 18e3d| V: 1 D: 1 Tag: 18a51|
+ V: 1 D: 1 Tag: 18cf9| V: 1 D: 1 Tag: 18e1e|
+ V: 1 D: 1 Tag: 18a9e| V: 1 D: 1 Tag: 18d0a|
+ V: 1 D: 1 Tag: 18968| V: 1 D: 1 Tag: 1895e|
+ V: 1 D: 1 Tag: 1892f| V: 1 D: 1 Tag: 188e4|
+ V: 1 D: 1 Tag: 1890e| V: 1 D: 1 Tag: 18961|
+ V: 1 D: 1 Tag: 18ccd| V: 1 D: 1 Tag: 18a52|
+ V: 1 D: 1 Tag: 18e50| V: 1 D: 1 Tag: 18936|
+ V: 1 D: 1 Tag: 18b97| V: 1 D: 1 Tag: 18d0e|
+ V: 1 D: 1 Tag: 18948| V: 1 D: 1 Tag: 18cff|
+ V: 1 D: 1 Tag: 18d08| V: 1 D: 0 Tag: 18d3f|
+ V: 1 D: 1 Tag: 18935| V: 1 D: 1 Tag: 18e4e|
+ V: 1 D: 1 Tag: 18e6a| V: 1 D: 1 Tag: 18cdb|
+ V: 1 D: 1 Tag: 18929| V: 1 D: 1 Tag: 18be5|
+ V: 1 D: 1 Tag: 18a53| V: 1 D: 1 Tag: 18e25|
+ V: 1 D: 1 Tag: 18d03| V: 1 D: 1 Tag: 18957|
+ V: 1 D: 1 Tag: 1890f| V: 1 D: 1 Tag: 18d23|
+ V: 1 D: 1 Tag: 18e20| V: 1 D: 1 Tag: 18bc0|
+ V: 1 D: 1 Tag: 18910| V: 1 D: 1 Tag: 18ba2|
+ V: 1 D: 1 Tag: 18911| V: 1 D: 1 Tag: 18a7c|
+ V: 1 D: 1 Tag: 18bdb| V: 1 D: 1 Tag: 18939|
+ V: 1 D: 0 Tag: 18d4d| V: 1 D: 1 Tag: 18ba0|
+ V: 1 D: 1 Tag: 18a55| V: 1 D: 1 Tag: 18e22|
+ V: 1 D: 1 Tag: 18d06| V: 1 D: 1 Tag: 18912|
+ V: 1 D: 1 Tag: 1893a| V: 1 D: 1 Tag: 18a7e|
+ V: 1 D: 1 Tag: 18bdd| V: 1 D: 1 Tag: 18d10|
+ V: 1 D: 1 Tag: 18a7f| V: 1 D: 1 Tag: 1894a|
+ V: 1 D: 1 Tag: 18a57| V: 1 D: 1 Tag: 18e7a|
+ V: 1 D: 1 Tag: 18e23| V: 1 D: 1 Tag: 18e24|
+ V: 1 D: 1 Tag: 18bcd| V: 1 D: 1 Tag: 18e49|
+ V: 1 D: 1 Tag: 1893c| V: 1 D: 1 Tag: 18cdf|
+ V: 1 D: 1 Tag: 18913| V: 1 D: 1 Tag: 18a58|
+ V: 1 D: 1 Tag: 1893d| V: 1 D: 1 Tag: 18be2|
+ V: 1 D: 1 Tag: 18be3| V: 1 D: 1 Tag: 18a27|
+ V: 1 D: 1 Tag: 18915| V: 1 D: 1 Tag: 18b9d|
+ V: 1 D: 0 Tag: 18d41| V: 1 D: 1 Tag: 18959|
+ V: 1 D: 1 Tag: 1893e| V: 1 D: 1 Tag: 18e67|
+ V: 1 D: 1 Tag: 18e26| V: 1 D: 0 Tag: 18bff|
+ V: 1 D: 1 Tag: 18e27| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18ce4| V: 1 D: 0 Tag: 18977|
+ V: 1 D: 1 Tag: 18bd5| V: 1 D: 0 Tag: 18978|
+ V: 1 D: 1 Tag: 18d39| V: 1 D: 1 Tag: 18916|
+ V: 1 D: 1 Tag: 18e28| V: 1 D: 1 Tag: 18963|
+ V: 1 D: 1 Tag: 18b9f| V: 1 D: 1 Tag: 18ce3|
+ V: 1 D: 1 Tag: 18d28| V: 1 D: 1 Tag: 18a5b|
+ V: 1 D: 1 Tag: 18918| V: 1 D: 0 Tag: 18c0c|
+ V: 1 D: 1 Tag: 18e29| V: 1 D: 1 Tag: 18bc9|
+ V: 1 D: 1 Tag: 18ba1| V: 1 D: 1 Tag: 18a45|
+ V: 1 D: 1 Tag: 18a5d| V: 1 D: 1 Tag: 18ce5|
+ V: 1 D: 1 Tag: 18aa4| V: 1 D: 1 Tag: 18a85|
+ V: 1 D: 1 Tag: 1891a| V: 1 D: 1 Tag: 18e53|
+ V: 1 D: 1 Tag: 18e2b| V: 1 D: 1 Tag: 18a5f|
+ V: 1 D: 1 Tag: 18aac| V: 1 D: 1 Tag: 18d0f|
+ V: 1 D: 1 Tag: 18ce8| V: 1 D: 1 Tag: 1891c|
+ V: 1 D: 1 Tag: 18e2d| V: 1 D: 1 Tag: 18bcc|
+ V: 1 D: 0 Tag: 18ac4| V: 1 D: 0 Tag: 18d4c|
+ V: 1 D: 1 Tag: 18be0| V: 1 D: 1 Tag: 18951|
+ V: 1 D: 1 Tag: 18a77| V: 1 D: 0 Tag: 18ac5|
+ V: 1 D: 0 Tag: 18e92| V: 1 D: 1 Tag: 18943|
+ V: 1 D: 1 Tag: 18ce7| V: 1 D: 1 Tag: 18d11|
+ V: 1 D: 1 Tag: 18e47| V: 1 D: 1 Tag: 18e52|
+ V: 1 D: 1 Tag: 18d2d| V: 1 D: 1 Tag: 1896b|
+ V: 1 D: 1 Tag: 18d2b| V: 1 D: 1 Tag: 18d2c|
+ V: 1 D: 1 Tag: 18960| V: 1 D: 1 Tag: 18e70|
+ V: 1 D: 1 Tag: 18941| V: 1 D: 1 Tag: 18be8|
+ V: 1 D: 1 Tag: 18ab4| V: 1 D: 1 Tag: 18e63|
+ V: 1 D: 1 Tag: 18b70| V: 1 D: 1 Tag: 18e64|
+ V: 1 D: 0 Tag: 18d51| V: 1 D: 1 Tag: 18d20|
+ V: 1 D: 1 Tag: 18cfa| V: 1 D: 1 Tag: 18d1c|
+ V: 1 D: 0 Tag: 18e8e| V: 1 D: 1 Tag: 18ceb|
+ V: 1 D: 1 Tag: 18d1e| V: 1 D: 1 Tag: 18ba9|
+ V: 1 D: 1 Tag: 18a89| V: 1 D: 1 Tag: 18955|
+ V: 1 D: 1 Tag: 18a65| V: 1 D: 1 Tag: 18e32|
+ V: 1 D: 1 Tag: 18a97| V: 1 D: 1 Tag: 18d04|
+ V: 1 D: 1 Tag: 18a8e| V: 1 D: 1 Tag: 18949|
+ V: 1 D: 1 Tag: 18922| V: 1 D: 1 Tag: 18e35|
+ V: 1 D: 1 Tag: 18d3c| V: 1 D: 1 Tag: 18cee|
+ V: 1 D: 0 Tag: 18ac2| V: 1 D: 0 Tag: 18980|
+ V: 1 D: 1 Tag: 18e33| V: 1 D: 1 Tag: 18bac|
+ V: 1 D: 1 Tag: 18cf0| V: 1 D: 0 Tag: 18c08|
+ V: 1 D: 1 Tag: 18d2e| V: 1 D: 1 Tag: 18be1|
+ V: 1 D: 1 Tag: 18a69| V: 1 D: 1 Tag: 18e39|
+ V: 1 D: 1 Tag: 18bae| V: 1 D: 1 Tag: 18947|
+ V: 1 D: 1 Tag: 18926| V: 1 D: 1 Tag: 18a6e|
+ V: 1 D: 1 Tag: 18e37| V: 1 D: 1 Tag: 18e59|
+ V: 1 D: 1 Tag: 18baf| V: 1 D: 1 Tag: 18bb0|
+ V: 1 D: 1 Tag: 18be6| V: 1 D: 1 Tag: 18928|
+ V: 1 D: 1 Tag: 18e3a| V: 1 D: 1 Tag: 18a6c|
+ V: 1 D: 1 Tag: 18bb1| V: 1 D: 1 Tag: 18a71|
+ V: 1 D: 1 Tag: 18e41| V: 1 D: 1 Tag: 18a6d|
+ V: 1 D: 1 Tag: 18bb2| V: 1 D: 1 Tag: 18e5b|
+ V: 1 D: 1 Tag: 18bb3| V: 1 D: 1 Tag: 18a8f|
+ V: 1 D: 1 Tag: 18cf7| V: 1 D: 1 Tag: 1892b|
+ V: 1 D: 1 Tag: 18a9a| V: 1 D: 1 Tag: 18d18|
+ V: 1 D: 1 Tag: 18e3c| V: 1 D: 1 Tag: 18d22|
+ V: 1 D: 1 Tag: 1892c| V: 1 D: 1 Tag: 18a90|
+ V: 1 D: 1 Tag: 18a70| V: 1 D: 1 Tag: 18bbd|
+ V: 1 D: 1 Tag: 18e42| V: 1 D: 1 Tag: 18d19|
+ V: 1 D: 1 Tag: 18cfb| V: 1 D: 1 Tag: 18d1a|
+ V: 1 D: 1 Tag: 18bd7| V: 1 D: 1 Tag: 18a92|
+ V: 1 D: 1 Tag: 18e46| V: 1 D: 1 Tag: 18bbe|
+ V: 1 D: 1 Tag: 18bbf| V: 1 D: 1 Tag: 18a81|
+ V: 1 D: 1 Tag: 18e48| V: 1 D: 1 Tag: 18a93|
+ V: 1 D: 1 Tag: 18e4b| V: 1 D: 1 Tag: 18e3e|
+ V: 1 D: 1 Tag: 18938| V: 1 D: 1 Tag: 18a72|
+ V: 1 D: 1 Tag: 18d25| V: 1 D: 1 Tag: 18bc4|
+ V: 1 D: 1 Tag: 18a7d| V: 1 D: 1 Tag: 18e69|
+ V: 1 D: 1 Tag: 18beb| V: 1 D: 1 Tag: 18d07|
+ V: 1 D: 1 Tag: 18e4c| V: 1 D: 1 Tag: 18d3a|
+ V: 1 D: 1 Tag: 18a80| V: 1 D: 1 Tag: 18e56|
+ V: 1 D: 1 Tag: 18e57| V: 1 D: 1 Tag: 18bd9|
+ V: 1 D: 1 Tag: 18d3b| V: 1 D: 1 Tag: 18bc5|
+ V: 1 D: 1 Tag: 18aa5| V: 1 D: 0 Tag: 18c0a|
+ V: 1 D: 1 Tag: 18e4d| V: 1 D: 0 Tag: 18e96|
+ V: 1 D: 0 Tag: 18e91| V: 1 D: 1 Tag: 18d09|
+ V: 1 D: 1 Tag: 18bc6| V: 1 D: 1 Tag: 18a95|
+ V: 1 D: 1 Tag: 1895b| V: 1 D: 1 Tag: 18ce6|
+ V: 1 D: 1 Tag: 18e71| V: 1 D: 1 Tag: 18d27|
+ V: 1 D: 1 Tag: 18aa3| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 1892d| V: 1 D: 1 Tag: 18aa1|
+ V: 1 D: 1 Tag: 18d0b| V: 1 D: 1 Tag: 18a38|
+ V: 1 D: 1 Tag: 18aa0| V: 1 D: 1 Tag: 18bec|
+ V: 1 D: 1 Tag: 18d2f| V: 1 D: 1 Tag: 18e73|
+ V: 1 D: 1 Tag: 18aa6| V: 1 D: 1 Tag: 18e55|
+ V: 1 D: 0 Tag: 18c07| V: 1 D: 1 Tag: 188e1|
+ V: 1 D: 1 Tag: 1896a| V: 1 D: 1 Tag: 18be7|
+ V: 1 D: 1 Tag: 18a26| V: 1 D: 1 Tag: 18b78|
+ V: 1 D: 1 Tag: 18e78| V: 1 D: 1 Tag: 18cd0|
+ V: 1 D: 1 Tag: 18a7b| V: 1 D: 0 Tag: 18c0e|
+ V: 1 D: 1 Tag: 1896c| V: 1 D: 1 Tag: 18d37|
+ V: 1 D: 1 Tag: 18aaf| V: 1 D: 1 Tag: 18944|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 1896d|
+ V: 1 D: 1 Tag: 18945| V: 1 D: 1 Tag: 18ab2|
+ V: 1 D: 1 Tag: 18bce| V: 1 D: 1 Tag: 18bd0|
+ V: 1 D: 1 Tag: 18d14| V: 1 D: 1 Tag: 18d12|
+ V: 1 D: 0 Tag: 18e84| V: 1 D: 1 Tag: 18962|
+ V: 1 D: 0 Tag: 1897f| V: 1 D: 1 Tag: 18a8a|
+ V: 1 D: 1 Tag: 18924| V: 1 D: 1 Tag: 18e58|
+ V: 1 D: 1 Tag: 18e17| V: 1 D: 1 Tag: 1895d|
+ V: 1 D: 1 Tag: 18bcf| V: 1 D: 1 Tag: 18a8b|
+ V: 1 D: 1 Tag: 18e14| V: 1 D: 1 Tag: 18a67|
+ V: 1 D: 1 Tag: 18946| V: 1 D: 1 Tag: 18e72|
+ V: 1 D: 1 Tag: 18ba4| V: 1 D: 1 Tag: 18a68|
+ V: 1 D: 1 Tag: 18a8c| V: 1 D: 1 Tag: 18d17|
+ V: 1 D: 1 Tag: 18ba3| V: 1 D: 1 Tag: 188f2|
+ V: 1 D: 1 Tag: 18d15| V: 1 D: 1 Tag: 1891b|
+ V: 1 D: 1 Tag: 18e82| V: 1 D: 1 Tag: 18bd1|
+ V: 1 D: 1 Tag: 18aa2| V: 1 D: 1 Tag: 18bd2|
+ V: 1 D: 0 Tag: 18ac6| V: 1 D: 0 Tag: 18974|
+ V: 1 D: 0 Tag: 18e85| V: 1 D: 1 Tag: 18bd3|
+ V: 1 D: 1 Tag: 18907| V: 1 D: 1 Tag: 18cd4|
+ V: 1 D: 1 Tag: 18a4a| V: 1 D: 0 Tag: 18976|
+ V: 1 D: 0 Tag: 18e87| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18d43| V: 1 D: 0 Tag: 18e8f|
+ V: 1 D: 0 Tag: 18d44| V: 1 D: 1 Tag: 18e6f|
+ V: 1 D: 1 Tag: 18933| V: 1 D: 0 Tag: 18c0b|
+ V: 1 D: 0 Tag: 18c01| V: 1 D: 0 Tag: 18d45|
+ V: 1 D: 1 Tag: 18900| V: 1 D: 1 Tag: 18b99|
+ V: 1 D: 0 Tag: 18e8a| V: 1 D: 1 Tag: 18908|
+ V: 1 D: 1 Tag: 18a4c| V: 1 D: 1 Tag: 18e19|
+ V: 1 D: 0 Tag: 1897a| V: 1 D: 1 Tag: 18b8b|
+ V: 1 D: 1 Tag: 18ccf| V: 1 D: 1 Tag: 18cce|
+ V: 1 D: 0 Tag: 18e8c| V: 1 D: 1 Tag: 18b8c|
+ V: 1 D: 0 Tag: 18e8d| V: 1 D: 0 Tag: 18d4a|
+ V: 1 D: 0 Tag: 18e86| V: 1 D: 1 Tag: 18e6e|
+ V: 1 D: 0 Tag: 18d42| V: 1 D: 1 Tag: 1894b|
+ V: 1 D: 1 Tag: 18e5c| V: 1 D: 1 Tag: 1894c|
+ V: 1 D: 1 Tag: 18bd4| V: 1 D: 1 Tag: 18bde|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18986|
+ V: 1 D: 1 Tag: 18cf1| V: 1 D: 1 Tag: 18e5d|
+ V: 1 D: 0 Tag: 18e89| V: 1 D: 1 Tag: 18aa9|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18aca|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a79| V: 1 D: 1 Tag: 18d01|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18979| V: 1 D: 1 Tag: 18e5e|
+ V: 1 D: 1 Tag: 18d2a| V: 1 D: 0 Tag: 18abd|
+ V: 1 D: 0 Tag: 18c02| V: 1 D: 1 Tag: 1894e|
+ V: 1 D: 1 Tag: 18e5f| V: 1 D: 1 Tag: 18e60|
+ V: 1 D: 1 Tag: 18d1b| V: 1 D: 1 Tag: 18e34|
+ V: 1 D: 0 Tag: 18abf| V: 1 D: 1 Tag: 18e40|
+ V: 1 D: 1 Tag: 18bbc| V: 1 D: 1 Tag: 18e61|
+ V: 1 D: 0 Tag: 1897e| V: 1 D: 1 Tag: 18a87|
+ V: 1 D: 1 Tag: 18932| V: 1 D: 1 Tag: 18e74|
+ V: 1 D: 1 Tag: 18d30| V: 1 D: 1 Tag: 18cfd|
+ V: 1 D: 0 Tag: 18c09| V: 1 D: 0 Tag: 1061f|
+ V: 1 D: 1 Tag: 18d0c| V: 1 D: 1 Tag: 18e51|
+ V: 1 D: 0 Tag: 18e95| V: 1 D: 1 Tag: 18aa8|
+ V: 1 D: 1 Tag: 188e0| V: 1 D: 1 Tag: 18965|
+ V: 1 D: 1 Tag: 18bba| V: 1 D: 1 Tag: 18bf1|
+ V: 1 D: 1 Tag: 18b7c| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18e76| V: 1 D: 1 Tag: 18bee|
+ V: 1 D: 1 Tag: 18e77| V: 1 D: 1 Tag: 18966|
+ V: 1 D: 1 Tag: 18aaa| V: 1 D: 1 Tag: 18e79|
+ V: 1 D: 1 Tag: 18b96| V: 1 D: 1 Tag: 18967|
+ V: 1 D: 1 Tag: 18d33| V: 1 D: 1 Tag: 18aab|
+ V: 1 D: 1 Tag: 18bf0| V: 1 D: 1 Tag: 18d34|
+ V: 1 D: 1 Tag: 18d35| V: 1 D: 1 Tag: 18969|
+ V: 1 D: 0 Tag: 18985| V: 1 D: 1 Tag: 18bf2|
+ V: 1 D: 1 Tag: 18e7b| V: 1 D: 0 Tag: 10625|
+ V: 1 D: 0 Tag: 18ac9| V: 1 D: 1 Tag: 18e7c|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 1897b|
+ V: 1 D: 1 Tag: 18bf4| V: 1 D: 1 Tag: 18d38|
+ V: 1 D: 0 Tag: 18abe| V: 1 D: 0 Tag: 1061d|
+ V: 1 D: 0 Tag: 1061b| V: 1 D: 1 Tag: 18ab1|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18d52|
+ V: 1 D: 1 Tag: 18bf6| V: 1 D: 1 Tag: 18bab|
+ V: 1 D: 1 Tag: 18e7f| V: 1 D: 1 Tag: 18bc8|
+ V: 1 D: 1 Tag: 18bf7| V: 1 D: 1 Tag: 1893b|
+ V: 1 D: 1 Tag: 18a28| V: 1 D: 1 Tag: 188f7|
+ V: 1 D: 1 Tag: 18cfe| V: 1 D: 1 Tag: 18cb4|
+ V: 1 D: 1 Tag: 1893f| V: 1 D: 1 Tag: 18d02|
+ V: 1 D: 1 Tag: 18e80| V: 1 D: 1 Tag: 18cad|
+ V: 1 D: 1 Tag: 18e81| V: 1 D: 1 Tag: 18970|
+ V: 1 D: 0 Tag: 18bfd| V: 1 D: 0 Tag: 18e8b|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18cfc|
+ V: 1 D: 1 Tag: 18e07| V: 1 D: 1 Tag: 18bf9|
+ V: 1 D: 1 Tag: 18d3d| V: 1 D: 1 Tag: 18ab5|
+ V: 1 D: 0 Tag: 18bfa| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a83| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18bfb| V: 1 D: 0 Tag: 18bfc|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18ab8| V: 1 D: 1 Tag: 18906|
+ V: 1 D: 0 Tag: 18aba| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18caf| V: 1 D: 0 Tag: 18c00|
+ V: 1 D: 0 Tag: 18abb| V: 1 D: 0 Tag: 18e88|
+ V: 1 D: 0 Tag: 18abc| V: 1 D: 1 Tag: 18cf8|
+ V: 1 D: 0 Tag: 1061e| V: 1 D: 1 Tag: 18bc3|
+ V: 1 D: 1 Tag: 18a3c| V: 1 D: 1 Tag: 18e15|
+ V: 1 D: 1 Tag: 18904| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18e4a| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18b90|
+ V: 1 D: 0 Tag: 1897c| V: 1 D: 0 Tag: 18c04|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18d48|
+ V: 1 D: 0 Tag: 18c05| V: 1 D: 0 Tag: 18d49|
+ V: 1 D: 0 Tag: 1897d| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18ac1| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18c06| V: 1 D: 1 Tag: 188f4|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 188f9| V: 1 D: 1 Tag: 18cc5|
+ V: 1 D: 1 Tag: 18e08| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 1884c| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18981| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b8f| V: 1 D: 1 Tag: 18cd3|
+ V: 1 D: 0 Tag: 18d4e| V: 1 D: 0 Tag: 18d50|
+ V: 1 D: 0 Tag: 18982| V: 1 D: 0 Tag: 18d4f|
+ V: 1 D: 0 Tag: 18ac7| V: 1 D: 0 Tag: 18e94|
+ V: 1 D: 0 Tag: 18ac8| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 18c0d| V: 1 D: 1 Tag: 18e1b|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18940| V: 1 D: 1 Tag: 18b7f|
+ V: 1 D: 1 Tag: 18e45| V: 1 D: 1 Tag: 18df7|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18925|
+ V: 1 D: 1 Tag: 18cd6| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b6f| V: 1 D: 0 Tag: 1884d|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 18848|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18cd7|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18b69|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 10622|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 1061a| V: 1 D: 0 Tag: 100bc|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 188e3|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18df2| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 10628| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18b6b|
+ V: 1 D: 1 Tag: 188f8| V: 1 D: 1 Tag: 18b6c|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18905|
+ V: 1 D: 1 Tag: 18b6d| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18a48|
+ V: 1 D: 1 Tag: 18df6| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18a96|
+ V: 1 D: 1 Tag: 18a2a| V: 1 D: 1 Tag: 18a7a|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a2b| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a2c| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b71| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a2d| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b72| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 188ea| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18b73| V: 1 D: 1 Tag: 18a78|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a9c| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18cb8| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 10627| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18a30| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18e09| V: 1 D: 1 Tag: 18b80|
+ V: 1 D: 1 Tag: 18e2e| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18cb9| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 1fffd6a1093|
+ V: 1 D: 1 Tag: 188ed| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 1890a| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18920| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18cec| V: 0 D: 0 Tag: - |
+ V: 1 D: 0 Tag: 10621| V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18dfe| V: 0 D: 0 Tag: - |
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 18cba| V: 1 D: 1 Tag: 18bc2|
+ V: 0 D: 0 Tag: - | V: 1 D: 1 Tag: 18cbb|
+ V: 0 D: 0 Tag: - | V: 0 D: 0 Tag: - |
+ V: 1 D: 1 Tag: 188f0| V: 1 D: 1 Tag: 18b68|
+ V: 0 D: 0 Tag: - | V: 1 D: 0 Tag: 1884a|
+ V: 1 D: 1 Tag: 18e01| V: 1 D: 0 Tag: 100bd|
+ V: 1 D: 0 Tag: 18849| V: 1 D: 1 Tag: 18cac|
+ V: 1 D: 1 Tag: 188f1| V: 1 D: 0 Tag: 100be|
+ V: 1 D: 0 Tag: 10629| V: 1 D: 0 Tag: 10620|
+ V: 1 D: 1 Tag: 18a54| V: 1 D: 1 Tag: 18b94|
+ V: 1 D: 1 Tag: 18e02| V: 1 D: 1 Tag: 18df0|
+ V: 1 D: 0 Tag: 1884b| V: 1 D: 1 Tag: 18b7a|
+ V: 1 D: 1 Tag: 18a24| V: 1 D: 1 Tag: 18a36|
+ V: 1 D: 0 Tag: 1062a| V: 1 D: 1 Tag: 18e3f|
+ V: 1 D: 0 Tag: 1fffd6a1094| V: 1 D: 1 Tag: 18cbf|
+ V: 1 D: 0 Tag: 10624| V: 1 D: 1 Tag: 18bb8|
+ V: 1 D: 0 Tag: 100bf| V: 1 D: 1 Tag: 18a5e|
+ V: 1 D: 1 Tag: 18df1| V: 1 D: 0 Tag: 10623|
+ V: 1 D: 1 Tag: 188f6| V: 1 D: 1 Tag: 18e05|
+ V: 1 D: 0 Tag: 10626| V: 1 D: 1 Tag: 18cc1|
+ V: 1 D: 1 Tag: 18a39| V: 1 D: 1 Tag: 18a25|
+ V: 1 D: 0 Tag: 1061c| V: 1 D: 1 Tag: 18a3d|
+ V: 1 D: 1 Tag: 18b6a| V: 1 D: 1 Tag: 18cae|
+ V: 1 D: 1 Tag: 18e0a| V: 1 D: 1 Tag: 188e2|
+ V: 1 D: 1 Tag: 18df3| V: 1 D: 1 Tag: 18d24|
+ V: 1 D: 1 Tag: 18cd5| V: 1 D: 1 Tag: 18df4|
+ V: 1 D: 1 Tag: 1891f| V: 1 D: 1 Tag: 188e5|
+ V: 1 D: 1 Tag: 18cb1| V: 1 D: 1 Tag: 18df5|
+ V: 1 D: 1 Tag: 18cc7| V: 1 D: 1 Tag: 18cc3|
+ V: 1 D: 1 Tag: 18a29| V: 1 D: 1 Tag: 18b6e|
+ V: 1 D: 1 Tag: 18a3f| V: 1 D: 1 Tag: 18cb2|
+ V: 1 D: 1 Tag: 188e6| V: 1 D: 1 Tag: 18b87|
+ V: 1 D: 1 Tag: 18cb3| V: 1 D: 1 Tag: 188e7|
+ V: 1 D: 1 Tag: 18e0d| V: 1 D: 1 Tag: 18902|
+ V: 1 D: 1 Tag: 18df8| V: 1 D: 1 Tag: 18b85|
+ V: 1 D: 1 Tag: 188e8| V: 1 D: 1 Tag: 188e9|
+ V: 1 D: 1 Tag: 188fd| V: 1 D: 1 Tag: 18cc2|
+ V: 1 D: 1 Tag: 18df9| V: 1 D: 1 Tag: 18b86|
+ V: 1 D: 1 Tag: 18cb5| V: 1 D: 1 Tag: 18bea|
+ V: 1 D: 1 Tag: 18cf2| V: 1 D: 1 Tag: 18e43|
+ V: 1 D: 1 Tag: 18dfa| V: 1 D: 1 Tag: 18934|
+ V: 1 D: 1 Tag: 18ccb| V: 1 D: 1 Tag: 188eb|
+ V: 1 D: 1 Tag: 18d05| V: 1 D: 1 Tag: 18a43|
+ V: 1 D: 1 Tag: 18cb6| V: 1 D: 1 Tag: 18cd2|
+ V: 1 D: 1 Tag: 18ccc| V: 1 D: 1 Tag: 18a2e|
+ V: 1 D: 1 Tag: 18dfb| V: 1 D: 1 Tag: 18a47|
+ V: 1 D: 1 Tag: 18cb7| V: 1 D: 1 Tag: 18a2f|
+ V: 1 D: 1 Tag: 18dfc| V: 1 D: 1 Tag: 18e12|
+ V: 1 D: 1 Tag: 18b74| V: 1 D: 1 Tag: 18a60|
+ V: 1 D: 1 Tag: 18ba5| V: 1 D: 1 Tag: 18a4e|
+ V: 1 D: 1 Tag: 188ec| V: 1 D: 1 Tag: 18a31|
+
