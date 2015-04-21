@@ -42,7 +42,7 @@ cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned
     }
 }
 
-unsigned int cache::log2(unsigned int x)
+unsigned int log2(unsigned int x)
 {
     unsigned int log2x = 0;
     unsigned int comp = 0x01;

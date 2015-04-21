@@ -4,7 +4,7 @@
 #include <cstdio>
 #include "cache.h"
 
-#define DEBUG 1
+#define DEBUG 0
 #define PRINT_FORMATTED_STATS 1
 
 // Memory system cost parameters
@@ -14,8 +14,9 @@
 #define L2_COST_OF_DOUBLE_WAYS 50
 #define MM_COST_TO_HALVE_LATENCY 200
 #define MM_COST_TO_DOUBLE_BANDWIDTH 100
-#define MM_COST_OF_LATENCY50 50
-#define MM_COST_OF_BANDWIDTH16 25
+// Check these two parameters since it looks like the pdf is outdated)
+#define MM_COST_OF_LATENCY30 50
+#define MM_COST_OF_BANDWIDTH8 25
 
 using namespace std;
 
@@ -187,8 +188,9 @@ int main(int argc, char ** argv)
     L2.printCounts();
 #endif
 
-
+#if DEBUG
     cout << "Starting trace file..." << endl;
+#endif
     // Main loop to read trace data and start tracking statistics
     while(scanf("%c %Lx %d%*c", &op, &address, &bytesize) == 3)
     {
@@ -272,7 +274,7 @@ int main(int argc, char ** argv)
             op << " " << hex << address << " " << dec << bytesize << endl;
             break;
         }
-        req_count += num_requests;
+        execution.req_count += num_requests;
         flush_counter++;
     }
 
@@ -327,14 +329,15 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "   Reads  = " << execution.read_time << "    [" << (float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
     cout << "   Writes = " << execution.write_time << "    [" << (float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
     cout << "   Inst.  = " << execution.inst_time << "    [" << (float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Total = " << execution.exec_time << endl;
+    cout << "   Total  = " << execution.exec_time << endl;
     cout << endl;
 
     cout << " Average cycles per activity:" << endl;
     cout << "   Read =  " << (float)(execution.read_time)/(float)(execution.read_count) << "; Write = " <<
-        (float)(execution.write_time)/(float)(execution.write_count) << "; Inst. = " << (float)(execution.inst_time)/(float)(execution.inst_count) << endl;
-    cout << " Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << (float)(execution.exec_time)/(float)(execution.total_count) << endl;
-    // cout << " Ideal mis-aligned: Exec. Time = " <<  << "; CPI = " << (float)()/(float)() << endl;
+        (float)(execution.write_time)/(float)(execution.write_count) << "; Inst. = " << (float)(execution.exec_time)/(float)(execution.inst_count) << endl;
+    cout << " Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << (float)(execution.inst_count + execution.total_count)/(float)(execution.inst_count) << endl;
+    cout << " Ideal mis-aligned: Exec. Time = " << (execution.inst_count + execution.req_count) << "; CPI = "
+        << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
 
     cout << " Memory Level:  L1i" << endl;
     cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
@@ -361,10 +364,16 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << endl;
 
     // compute cache costs
+    unsigned int L1Icost = (L1_COST_PER_4KB * L1I.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1I.assoc));
+    unsigned int L1Dcost = (L1_COST_PER_4KB * L1D.cache_size / 4096) + (L1_COST_OF_DOUBLE_WAYS * log2(L1D.assoc));
+    unsigned int L2cost = (L2_COST_PER_64KB * L2.cache_size / 65536) + (L2_COST_OF_DOUBLE_WAYS * log2(L2.assoc));
+    unsigned int MMcost = (MM_COST_OF_LATENCY30 + MM_COST_OF_BANDWIDTH8) +
+        (MM_COST_TO_DOUBLE_BANDWIDTH * log2(mem_chunksize / 8)) + (MM_COST_TO_HALVE_LATENCY * log2(mem_ready / 30));
 
-    cout << " L1 cache cost (Icache $" <<
-
+    cout << " L1 cache cost (Icache $" << L1Icost << ") + (Dcache $" << L1Dcost << ") = $" << (L1Icost + L1Dcost) << endl;
+    cout << " L2 cache cost = $" << L2cost << ";  Memory cost = $" << MMcost << "  Total cost = $" << (L1Icost + L1Dcost + L2cost + MMcost) << endl;
     cout << " Flushes = " << execution.flushes << " : Invalidates = " << execution.flushes << endl;
+    cout << endl;
 
     return;
 }
