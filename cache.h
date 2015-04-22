@@ -1,6 +1,10 @@
 #ifndef CACHE_H
 #define CACHE_H
 
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <cstdio>
 #include <cstring>
 #include "lru_stack.h"
 
