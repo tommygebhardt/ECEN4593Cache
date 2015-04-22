@@ -308,7 +308,7 @@ int main(int argc, char ** argv)
 void print_all_stats(cache& L1I, cache& L1D, cache& L2)
 {
     // Acquire the trace file name
-    string tracefile = "      ";
+    string tracefile = "   ";
     string cacheconfig;
 
     // Figure out cache configuration
@@ -346,70 +346,69 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     }
 
     // Make all decimals round to the tenths place
-    cout << fixed << setprecision(1) << left;
+    cout << fixed << setprecision(1);
 
-    cout << "--------------------------------------------------------------------------------" << endl;
-    cout << "      " << tracefile << " " << cacheconfig << "          " <<
-        "Simulation Results" << endl;
-    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "      " << tracefile << "." << cacheconfig << "    " << "Simulation Results" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
     cout << endl;
 
-    cout << " Memory system:" << endl;
-    cout << "   Dcache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
-    cout << "   Icache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
-    cout << "   L2-cache size = " << csizeL2 << " : ways = " << waysL2 << " : block size = " << bsizeL2 << endl;
-    cout << "   Memory ready time = " << mem_ready << " : chunksize = " << mem_chunksize << " : chunktime = " << mem_chunktime << endl;
+    cout << "  Memory system:" << endl;
+    cout << "    Dcache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
+    cout << "    Icache size = " << csize << " : ways = " << ways << " : block size = " << bsize << endl;
+    cout << "    L2-cache size = " << csizeL2 << " : ways = " << waysL2 << " : block size = " << bsizeL2 << endl;
+    cout << "    Memory ready time = " << mem_ready << " : chunksize = " << mem_chunksize << " : chunktime = " << mem_chunktime << endl;
     cout << endl;
 
-    cout << " Execute time = " << execution.exec_time << ";  Total refs = " << execution.total_count << endl;
-    cout << " Flush time = " << execution.flush_time << endl;
-    cout << " Inst refs = " << execution.inst_count << ";  " << "Data refs = " << (execution.read_count + execution.write_count) << endl;
+    cout << "  Execute time = " << setw(12) << right << execution.exec_time << ";  Total refs = " << execution.total_count << endl;
+    cout << "  Flush time = " << setw(12) << execution.flush_time << endl;
+    cout << "  Inst refs = " << execution.inst_count << ";  " << "Data refs = " << (execution.read_count + execution.write_count) << endl;
     cout << endl;
 
-    cout << " Number of reference types:  [Percentage]" << endl;
-    cout << "   Reads  = " << execution.read_count << "     [" << 100.0*(float)(execution.read_count)/(float)(execution.total_count) << "%]" << endl;
-    cout << "   Writes = " << execution.write_count << "     [" << 100.0*(float)(execution.write_count)/(float)(execution.total_count) << "%]" << endl;
-    cout << "   Inst.  = " << execution.inst_count << "     [" << 100.0*(float)(execution.inst_count)/(float)(execution.total_count) << "%]" << endl;
-    cout << "   Total  = " << execution.total_count << endl;
+    cout << "  Number of reference types:  [Percentage]" << endl;
+    cout << "    Reads  = " << setw(11) << execution.read_count << "    [" << setw(4) << 100.0*(float)(execution.read_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "    Writes = " << setw(11) << execution.write_count << "    [" << setw(4) << 100.0*(float)(execution.write_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "    Inst.  = " << setw(11) << execution.inst_count << "    [" << setw(4) << 100.0*(float)(execution.inst_count)/(float)(execution.total_count) << "%]" << endl;
+    cout << "    Total  = " << setw(11) << execution.total_count << endl;
     cout << endl;
 
-    cout << " Total cycles for activities:  [Percentage]" << endl;
-    cout << "   Reads  = " << execution.read_time << "    [" << 100.0*(float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Writes = " << execution.write_time << "    [" << 100.0*(float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Inst.  = " << execution.inst_time << "    [" << 100.0*(float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
-    cout << "   Total  = " << execution.exec_time << endl;
+    cout << "  Total cycles for activities:  [Percentage]" << endl;
+    cout << "    Reads  = " << setw(11) << execution.read_time << "    [" << setw(4) << 100.0*(float)(execution.read_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "    Writes = " << setw(11) << execution.write_time << "    [" << setw(4) << 100.0*(float)(execution.write_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "    Inst.  = " << setw(11) << execution.inst_time << "    [" << setw(4) << 100.0*(float)(execution.inst_time)/(float)(execution.exec_time) << "%]" << endl;
+    cout << "    Total  = " << setw(11) << execution.exec_time << endl;
     cout << endl;
 
-    cout << " Average cycles per activity:" << endl;
-    cout << "   Read =  " << (float)(execution.read_time)/(float)(execution.read_count) << "; Write = " <<
+    cout << "  Average cycles per activity:" << endl;
+    cout << "    Read = " << (float)(execution.read_time)/(float)(execution.read_count) << "; Write = " <<
         (float)(execution.write_time)/(float)(execution.write_count) << "; Inst. = " << (float)(execution.exec_time)/(float)(execution.inst_count) << endl;
-    cout << " Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << (float)(execution.inst_count + execution.total_count)/(float)(execution.inst_count) << endl;
-    cout << " Ideal mis-aligned: Exec. Time = " << (execution.inst_count + execution.req_count) << "; CPI = "
-        << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
+    cout << "  Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << setw(4) << right << (float)(execution.inst_count + execution.total_count)/(float)(execution.inst_count) << endl;
+    cout << "  Ideal mis-aligned: Exec. Time = " << (execution.inst_count + execution.req_count) << "; CPI = "
+        << setw(4) << right << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
     cout << endl;
 
-    cout << " Memory Level:  L1i" << endl;
-    cout << "   Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
-    cout << "   Total Requests = " << L1I.requests << endl;
-    cout << "   Hit Rate = " << 100.0*(float)(L1I.hit_count)/(float)(L1I.requests) << "%   Miss Rate = " << 100.0*(float)(L1I.miss_count)/(float)(L1I.requests) << "%" << endl;
-    cout << "   Kickouts = " << L1I.kickouts << "; Dirty kickouts = " << L1I.dirty_kickouts << "; Transfers = " << L1I.transfers << endl;
-    cout << "   Flush Kickouts = " << L1I.flush_kickouts << endl;
+    cout << "  Memory Level:  L1i" << endl;
+    cout << "    Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
+    cout << "    Total Requests = " << L1I.requests << endl;
+    cout << "    Hit Rate = " << setw(4) << right << 100.0*(float)(L1I.hit_count)/(float)(L1I.requests) << "%   Miss Rate = " << setw(4) << right << 100.0*(float)(L1I.miss_count)/(float)(L1I.requests) << "%" << endl;
+    cout << "    Kickouts = " << L1I.kickouts << "; Dirty kickouts = " << L1I.dirty_kickouts << "; Transfers = " << L1I.transfers << endl;
+    cout << "    Flush Kickouts = " << L1I.flush_kickouts << endl;
     cout << endl;
 
-    cout << " Memory Level:  L1d" << endl;
-    cout << "   Hit Count = " << L1D.hit_count << "  Miss Count = " << L1D.miss_count << endl;
-    cout << "   Total Requests = " << L1D.requests << endl;
-    cout << "   Hit Rate = " << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << "%" << endl;
-    cout << "   Kickouts = " << L1D.kickouts << "; Dirty kickouts = " << L1D.dirty_kickouts << "; Transfers = " << L1D.transfers << endl;
-    cout << "   Flush Kickouts = " << L1D.flush_kickouts << endl;
+    cout << "  Memory Level:  L1d" << endl;
+    cout << "    Hit Count = " << L1D.hit_count << "  Miss Count = " << L1D.miss_count << endl;
+    cout << "    Total Requests = " << L1D.requests << endl;
+    cout << "    Hit Rate = " << setw(4) << right << 100.0*(float)(L1D.hit_count)/(float)(L1D.requests) << "%   Miss Rate = " << setw(4) << right << 100.0*(float)(L1D.miss_count)/(float)(L1D.requests) << "%" << endl;
+    cout << "    Kickouts = " << L1D.kickouts << "; Dirty kickouts = " << L1D.dirty_kickouts << "; Transfers = " << L1D.transfers << endl;
+    cout << "    Flush Kickouts = " << L1D.flush_kickouts << endl;
     cout << endl;
 
-    cout << " Memory Level:  L2" << endl;
-    cout << "   Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
-    cout << "   Total Requests = " << L2.requests << endl;
-    cout << "   Hit Rate = " << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << "%" << endl;
-    cout << "   Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
-    cout << "   Flush Kickouts = " << L2.flush_kickouts << endl;
+    cout << "  Memory Level:  L2" << endl;
+    cout << "    Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
+    cout << "    Total Requests = " << L2.requests << endl;
+    cout << "    Hit Rate = " << setw(4) << right << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << setw(4) << right << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << "%" << endl;
+    cout << "    Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
+    cout << "    Flush Kickouts = " << L2.flush_kickouts << endl;
     cout << endl;
 
     // Compute cache costs
@@ -420,10 +419,11 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     unsigned int MMcost = (MM_COST_OF_LATENCY30 + MM_COST_OF_BANDWIDTH8) +
         (MM_COST_TO_DOUBLE_BANDWIDTH * log2(mem_chunksize / 8)) + (MM_COST_TO_HALVE_LATENCY * log2(mem_ready / 30));
 
-    cout << " L1 cache cost (Icache $" << L1Icost << ") + (Dcache $" << L1Dcost << ") = $" << (L1Icost + L1Dcost) << endl;
-    cout << " L2 cache cost = $" << L2cost << ";  Memory cost = $" << MMcost << "  Total cost = $" << (L1Icost + L1Dcost + L2cost + MMcost) << endl;
-    cout << " Flushes = " << execution.flushes << " : Invalidates = " << execution.flushes << endl;
+    cout << "  L1 cache cost (Icache $" << L1Icost << ") + (Dcache $" << L1Dcost << ") = $" << (L1Icost + L1Dcost) << endl;
+    cout << "  L2 cache cost = $" << L2cost << ";  Memory cost = $" << MMcost << "  Total cost = $" << (L1Icost + L1Dcost + L2cost + MMcost) << endl;
+    cout << "  Flushes = " << execution.flushes << " : Invalidates = " << execution.flushes << endl;
     cout << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
 
     return;
 }
