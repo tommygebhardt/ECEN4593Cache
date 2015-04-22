@@ -305,7 +305,7 @@ int main(int argc, char ** argv)
 void print_all_stats(cache& L1I, cache& L1D, cache& L2)
 {
     // Acquire the trace file name
-    string tracefile = "      ";
+    string tracefile = "   ";
     string cacheconfig;
 
     // Figure out cache configuration
@@ -343,12 +343,12 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     }
 
     // Make all decimals round to the tenths place
+
     cout << fixed << setprecision(1) << right;
 
-    cout << "--------------------------------------------------------------------------------" << endl;
-    cout << "      " << tracefile << " " << cacheconfig << "          " <<
-        "Simulation Results" << endl;
-    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "      " << tracefile << "." << cacheconfig << "    " << "Simulation Results" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
     cout << endl;
 
     cout << "  Memory system:" << endl;
@@ -389,6 +389,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "    Hit Count = " << L1I.hit_count << "  Miss Count = " << L1I.miss_count << endl;
     cout << "    Total Requests = " << L1I.requests << endl;
     cout << "    Hit Rate = " << setw(4) << 100.0*(float)(L1I.hit_count)/(float)(L1I.requests) << "%   Miss Rate = "<< setw(4) << 100.0*(float)(L1I.miss_count)/(float)(L1I.requests) << "%" << endl;
+
     cout << "    Kickouts = " << L1I.kickouts << "; Dirty kickouts = " << L1I.dirty_kickouts << "; Transfers = " << L1I.transfers << endl;
     cout << "    Flush Kickouts = " << L1I.flush_kickouts << endl;
     cout << endl;
@@ -405,6 +406,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "    Hit Count = " << L2.hit_count << "  Miss Count = " << L2.miss_count << endl;
     cout << "    Total Requests = " << L2.requests << endl;
     cout << "    Hit Rate = " << setw(4) << 100.0*(float)(L2.hit_count)/(float)(L2.requests) << "%   Miss Rate = " << setw(4) << 100.0*(float)(L2.miss_count)/(float)(L2.requests) << "%" << endl;
+
     cout << "    Kickouts = " << L2.kickouts << "; Dirty kickouts = " << L2.dirty_kickouts << "; Transfers = " << L2.transfers << endl;
     cout << "    Flush Kickouts = " << L2.flush_kickouts << endl;
     cout << endl;
@@ -421,6 +423,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
     cout << "  L2 cache cost = $" << L2cost << ";  Memory cost = $" << MMcost << "  Total cost = $" << (L1Icost + L1Dcost + L2cost + MMcost) << endl;
     cout << "  Flushes = " << execution.flushes << " : Invalidates = " << execution.flushes << endl;
     cout << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
 
     return;
 }
