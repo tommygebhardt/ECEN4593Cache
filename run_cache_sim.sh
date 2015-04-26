@@ -23,13 +23,46 @@ L2_transfer_time,5
 L2_bus_width,16"
 
 # Default configuration
+echo "Configuring memory system for Default..."
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
 
+echo "Starting bzip2 simulation"
+zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_Default.dat
+
+echo "Starting h264ref simulation"
+zcat ../traces-long/h264ref.gz | ./main config.csv > ./output/h264ref_Default.dat
+
+echo "Starting libquantum simulation"
+zcat ../traces-long/libquantum.gz | ./main config.csv > ./output/limquantum_Default.dat
+
+echo "Starting omnetpp simulation"
+zcat ../traces-long/omnetpp.gz | ./main config.csv > ./output/omnetpp_Default.dat
+
+echo "Starting sjeng simulation"
+zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_Default.dat
 
 # L1-2way configuration
+echo "Configuring memory system for L1-2way..."
+L1_ASSOC="L1_assoc,2\n"
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+
+echo "Starting bzip2 simulation"
+zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L1-2way.dat
+
+echo "Starting h264ref simulation"
+zcat ../traces-long/h264ref.gz | ./main config.csv > ./output/h264ref_L1-2way.dat
+
+echo "Starting libquantum simulation"
+zcat ../traces-long/libquantum.gz | ./main config.csv > ./output/limquantum_L1-2way.dat
+
+echo "Starting omnetpp simulation"
+zcat ../traces-long/omnetpp.gz | ./main config.csv > ./output/omnetpp_L1-2way.dat
+
+echo "Starting sjeng simulation"
+zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_L1-2way.dat
 
 # All-2way configuration
 echo "Configuring memory system for All-2way..."
-L1_ASSOC="L1_assoc,2\n"
 L2_ASSOC="L2_assoc,2\n"
 echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
 
