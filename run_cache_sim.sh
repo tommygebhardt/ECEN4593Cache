@@ -20,11 +20,12 @@ L2_ASSOC="L2_assoc,1\n"
 SECT3="L2_hit_time,5
 L2_miss_time,7
 L2_transfer_time,5
-L2_bus_width,16"
+L2_bus_width,16\n"
+MM_CHUNK="MM_chunksize,8"
 
 # Default configuration
 echo "Configuring memory system for Default..."
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_Default.dat
@@ -44,7 +45,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_Default.dat
 # L1-2way configuration
 echo "Configuring memory system for L1-2way..."
 L1_ASSOC="L1_assoc,2\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L1-2way.dat
@@ -64,7 +65,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_L1-2way.dat
 # All-2way configuration
 echo "Configuring memory system for All-2way..."
 L2_ASSOC="L2_assoc,2\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_All-2way.dat
@@ -85,7 +86,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_All-2way.dat
 # L2-4way configuration
 echo "Configuring memory system for L2-4way..."
 L2_ASSOC="L2_assoc,4\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L2-4way.dat
@@ -106,7 +107,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_L2-4way.dat
 # All-4way configuration
 echo "Configuring memory system for All-4way..."
 L1_ASSOC="L1_assoc,4\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_All-4way.dat
@@ -128,7 +129,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_All-4way.dat
 echo "Configuring memory system for L1-8way..."
 L1_ASSOC="L1_assoc,8\n"
 L2_ASSOC="L2_assoc,1\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L1-8way.dat
@@ -150,7 +151,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_L1-8way.dat
 echo "Configuring memory system for L2-Big..."
 L1_ASSOC="L1_assoc,2\n"
 L2_SIZE="L2_cache_size,65536\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L2-Big.dat
@@ -174,7 +175,7 @@ L1_SIZE="L1_cache_size,4096\n"
 L1_ASSOC="L1_assoc,1\n"
 L2_SIZE="L2_cache_size,32768\n"
 L2_ASSOC="L2_assoc,1\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L1-small.dat
@@ -195,7 +196,7 @@ zcat ../traces-long/sjeng.gz | ./main config.csv > ./output/sjeng_L1-small.dat
 # L1-small-4way configuration
 echo "Configuring memory system for L1-small-4way..."
 L1_ASSOC="L1_assoc,4\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_L1-small-4way.dat
@@ -219,7 +220,7 @@ L1_SIZE="L1_cache_size,8192\n"
 L1_ASSOC="L1_assoc,256\n"
 L2_SIZE="L2_cache_size,32768\n"
 L2_ASSOC="L2_assoc,512\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_All-FA.dat
@@ -243,7 +244,7 @@ L1_SIZE="L1_cache_size,8192\n"
 L1_ASSOC="L1_assoc,256\n"
 L2_SIZE="L2_cache_size,65536\n"
 L2_ASSOC="L2_assoc,1024\n"
-echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3" > config.csv
+echo -e "$SECT1$L1_SIZE$L1_ASSOC$SECT2$L2_SIZE$L2_ASSOC$SECT3$MM_CHUNK" > config.csv
 
 echo "Starting bzip2 simulation"
 zcat ../traces-long/bzip2.gz | ./main config.csv > ./output/bzip2_All-FA-L2Big.dat

@@ -1,3 +1,8 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <cstdio>
+#include <cstring>
 #include "cache.h"
 
 #define DEBUG 0
@@ -119,6 +124,11 @@ int main(int argc, char ** argv)
         getline(file,line);
         position = line.find(',');
         bwidth = stoi(line.substr(position+1));
+
+        // Thirteenth line is main memory - L2 bus width (mem_chunksize)
+        getline(file, line);
+        position = line.find(',');
+        mem_chunksize = stoi(line.substr(position+1));
 
     }
     else if (argc == 1)
@@ -382,7 +392,7 @@ void print_all_stats(cache& L1I, cache& L1D, cache& L2)
         (float)(execution.write_time)/(float)(execution.write_count) << "; Inst. = " << setw(4) << (float)(execution.exec_time)/(float)(execution.inst_count) << endl;
     cout << "  Ideal: Exec. Time = " << (execution.inst_count + execution.total_count) << "; CPI = " << setw(4) << (float)(execution.inst_count + execution.total_count)/(float)(execution.inst_count) << endl;
     cout << "  Ideal mis-aligned: Exec. Time = " << (execution.inst_count + execution.req_count) << "; CPI = "
-	 << setw(4) << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
+     << setw(4) << (float)(execution.inst_count + execution.req_count)/(float)(execution.inst_count) << endl;
     cout << endl;
 
     cout << "  Memory Level:  L1i" << endl;

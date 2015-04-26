@@ -1,11 +1,12 @@
-#include "cache.h"
 #include <iostream>
+#include <iomanip>
+#include "cache.h"
 
 #define DEBUG_CACHE 0
 using namespace std;
 
 cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned int htime,
-	     unsigned int mtime, unsigned int trantime, unsigned int bwidth, cache * lower)
+         unsigned int mtime, unsigned int trantime, unsigned int bwidth, cache * lower)
 {
     cache_size = csize;
     assoc = ways;
@@ -33,13 +34,13 @@ cache::cache(unsigned int csize, unsigned int ways, unsigned int bsize, unsigned
     table = new set[table_size];
     // Initialize all sets
     for (unsigned int i = 0; i < table_size; i++)
-	{
-	    table[i].assoc = assoc;
-	    table[i].blocks = new block[assoc];
+    {
+        table[i].assoc = assoc;
+        table[i].blocks = new block[assoc];
 
-	    // Initialize LRU stack for each set
-	    table[i].LRU = new LRU_stack(assoc);
-	}
+        // Initialize LRU stack for each set
+        table[i].LRU = new LRU_stack(assoc);
+    }
 }
 
 unsigned int log2(unsigned int x)
@@ -47,10 +48,10 @@ unsigned int log2(unsigned int x)
     unsigned int log2x = 0;
     unsigned int comp = 0x01;
     while((x & comp) == 0)
-	{
-	    comp = comp << 1;
-	    log2x++;
-	}
+    {
+        comp = comp << 1;
+        log2x++;
+    }
     return log2x;
 }
 
@@ -80,46 +81,46 @@ unsigned long long int cache::read(unsigned long long int address)
 
     // Check if valid at the effective index for any block in the set
     for(unsigned long long b = 0; b < table[index].assoc; ++b)
-	{
-	    if(table[index].blocks[b].valid)
-		{
-		    // Valid, so check the tag
-		    if(table[index].blocks[b].tag == tag)
-			{
-			    // Tag matches, so we have a hit
-			    hit_count++;
+    {
+        if(table[index].blocks[b].valid)
+        {
+            // Valid, so check the tag
+            if(table[index].blocks[b].tag == tag)
+            {
+                // Tag matches, so we have a hit
+                hit_count++;
 
-			    // Update the LRU stack
-			    table[index].LRU->update_stack_on_hit(b);
+                // Update the LRU stack
+                table[index].LRU->update_stack_on_hit(b);
 
-			    // Update the execution time by adding on the hit time
-			    execution.exec_time += hit_time;
-			    time += hit_time;
+                // Update the execution time by adding on the hit time
+                execution.exec_time += hit_time;
+                time += hit_time;
 
 #if DEBUG_CACHE
-			    if(lower_level != NULL)
-				{
-				    if(index == 0xFF)
-					{
-					    cout << "Contents of L1" << endl;
-					    printCache();
-					}
-				}
-			    else
-				{
-				    if(index == 0x1FF)
-					{
-					    cout << "Contents of L2" << endl;
-					    printCache();
-					}
-				}
+                if(lower_level != NULL)
+                {
+                    if(index == 0xFF)
+                    {
+                        cout << "Contents of L1" << endl;
+                        printCache();
+                    }
+                }
+                else
+                {
+                    if(index == 0x1FF)
+                    {
+                        cout << "Contents of L2" << endl;
+                        printCache();
+                    }
+                }
 #endif
 
-			    return time;
-			}
+                return time;
+            }
 
-		}
-	}
+        }
+    }
 
     // Miss
     miss_count++;
@@ -129,66 +130,66 @@ unsigned long long int cache::read(unsigned long long int address)
     // None of the blocks in the set were a match, so determine which block to evict
     unsigned long long way_number = table[index].LRU->update_stack_on_miss();
     if(table[index].blocks[way_number].valid)
-	{
-	    // Block that we are evicting is valid, so record a kickout
-	    kickouts++;
+    {
+        // Block that we are evicting is valid, so record a kickout
+        kickouts++;
 
-	    // Check if the block that we are evicting is dirty
-	    if(table[index].blocks[way_number].dirty)
-		{
-		    // We are performing a dirty kickout
-		    dirty_kickouts++;
+        // Check if the block that we are evicting is dirty
+        if(table[index].blocks[way_number].dirty)
+        {
+            // We are performing a dirty kickout
+            dirty_kickouts++;
 
-		    // Write the dirty block to a lower level in the hierarchy
-		    if(lower_level != NULL)
-			{
-			    // create the effective address of the block that we are kicking out
-			    unsigned long long eff_address =
-				(((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
+            // Write the dirty block to a lower level in the hierarchy
+            if(lower_level != NULL)
+            {
+                // create the effective address of the block that we are kicking out
+                unsigned long long eff_address =
+                (((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
 #if DEBUG_CACHE
-			    cout << "L1 dirty kickout sending address " << hex << eff_address << dec << " to L2 cache" << endl;
+                cout << "L1 dirty kickout sending address " << hex << eff_address << dec << " to L2 cache" << endl;
 #endif
 
-			    // write to cache, not main memory, but also need to
-			    // handle transfer time from L1 to L2
-			    time += lower_level->write(eff_address);
-			    execution.exec_time += transfer_time * transfers_per_block;
-			    time += transfer_time * transfers_per_block;
-			}
-		    else
-			{
+                // write to cache, not main memory, but also need to
+                // handle transfer time from L1 to L2
+                time += lower_level->write(eff_address);
+                execution.exec_time += transfer_time * transfers_per_block;
+                time += transfer_time * transfers_per_block;
+            }
+            else
+            {
 #if DEBUG_CACHE
-			    cout << "L2 dirty kickout" << endl;
-			    cout << "   Sending to memory" << endl;
+                cout << "L2 dirty kickout" << endl;
+                cout << "   Sending to memory" << endl;
 #endif
-			    // write to main memory
-			    execution.exec_time += mem_sendaddr + mem_ready +
-				(mem_chunktime * transfers_per_block);
-			    time += mem_sendaddr + mem_ready +
-				(mem_chunktime * transfers_per_block);
-			}
-		}
-	}
+                // write to main memory
+                execution.exec_time += mem_sendaddr + mem_ready +
+                (mem_chunktime * transfers_per_block);
+                time += mem_sendaddr + mem_ready +
+                (mem_chunktime * transfers_per_block);
+            }
+        }
+    }
 
     // Generate a read to the next lower level
     if(lower_level != NULL)
-	{
-	    // Read from cache, not main memory, but also need to
-	    // handle transfer time from L2 to L1
-	    time += lower_level->read(address);
-	    execution.exec_time += transfer_time * transfers_per_block;
-	    time += transfer_time * transfers_per_block;
-	    transfers++;
-	}
+    {
+        // Read from cache, not main memory, but also need to
+        // handle transfer time from L2 to L1
+        time += lower_level->read(address);
+        execution.exec_time += transfer_time * transfers_per_block;
+        time += transfer_time * transfers_per_block;
+        transfers++;
+    }
     else
-	{
-	    // Read from main memory
-	    execution.exec_time += mem_sendaddr + mem_ready +
-		(mem_chunktime * transfers_per_block);
-	    time += mem_sendaddr + mem_ready +
-		(mem_chunktime * transfers_per_block);
-	    transfers++;
-	}
+    {
+        // Read from main memory
+        execution.exec_time += mem_sendaddr + mem_ready +
+        (mem_chunktime * transfers_per_block);
+        time += mem_sendaddr + mem_ready +
+        (mem_chunktime * transfers_per_block);
+        transfers++;
+    }
 
     // "Replay" the request i.e. add on the hit time
     execution.exec_time += hit_time;
@@ -201,21 +202,21 @@ unsigned long long int cache::read(unsigned long long int address)
 
 #if DEBUG_CACHE
     if(lower_level != NULL)
-	{
-	    if(index == 0xFF)
-		{
-		    cout << "Contents of L1" << endl;
-		    printCache();
-		}
-	}
+    {
+        if(index == 0xFF)
+        {
+            cout << "Contents of L1" << endl;
+            printCache();
+        }
+    }
     else
-	{
-	    if(index == 0x1FF)
-		{
-		    cout << "Contents of L2" << endl;
-		    printCache();
-		}
-	}
+    {
+        if(index == 0x1FF)
+        {
+            cout << "Contents of L2" << endl;
+            printCache();
+        }
+    }
 #endif
 
     return time;
@@ -247,48 +248,48 @@ unsigned long long int cache::write(unsigned long long int address)
 
     // Check if valid at the effective index for any block in the set
     for(unsigned long long b = 0; b < table[index].assoc; ++b)
-	{
-	    if(table[index].blocks[b].valid)
-		{
-		    // Valid, so check the tag
-		    if(table[index].blocks[b].tag == tag)
-			{
-			    // Tag matches, so we have a hit
-			    hit_count++;
+    {
+        if(table[index].blocks[b].valid)
+        {
+            // Valid, so check the tag
+            if(table[index].blocks[b].tag == tag)
+            {
+                // Tag matches, so we have a hit
+                hit_count++;
 
-			    // Update the LRU stack
-			    table[index].LRU->update_stack_on_hit(b);
+                // Update the LRU stack
+                table[index].LRU->update_stack_on_hit(b);
 
-			    // Update the execution time by adding on the hit time
-			    execution.exec_time += hit_time;
-			    time += hit_time;
+                // Update the execution time by adding on the hit time
+                execution.exec_time += hit_time;
+                time += hit_time;
 
-			    // Difference between read and write: on a write hit, we need
-			    // to set the dirty bit
-			    table[index].blocks[b].dirty = true;
+                // Difference between read and write: on a write hit, we need
+                // to set the dirty bit
+                table[index].blocks[b].dirty = true;
 
 #if DEBUG_CACHE
-			    if(lower_level != NULL)
-				{
-				    if(index == 0xFF)
-					{
-					    cout << "Contents of L1" << endl;
-					    printCache();
-					}
-				}
-			    else
-				{
-				    if(index == 0x1FF)
-					{
-					    cout << "Contents of L2" << endl;
-					    printCache();
-					}
-				}
+                if(lower_level != NULL)
+                {
+                    if(index == 0xFF)
+                    {
+                        cout << "Contents of L1" << endl;
+                        printCache();
+                    }
+                }
+                else
+                {
+                    if(index == 0x1FF)
+                    {
+                        cout << "Contents of L2" << endl;
+                        printCache();
+                    }
+                }
 #endif
-			    return time;
-			}
-		}
-	}
+                return time;
+            }
+        }
+    }
 
     // Miss
     miss_count++;
@@ -298,67 +299,67 @@ unsigned long long int cache::write(unsigned long long int address)
     // None of the blocks in the set were a match, so determine which block to evict
     unsigned long long way_number = table[index].LRU->update_stack_on_miss();
     if(table[index].blocks[way_number].valid)
-	{
-	    // Block that we are evicting is valid, so record a kickout
-	    kickouts++;
+    {
+        // Block that we are evicting is valid, so record a kickout
+        kickouts++;
 
-	    // Check if the block that we are evicting is dirty
-	    if(table[index].blocks[way_number].dirty)
-		{
-		    // We are performing a dirty kickout
-		    dirty_kickouts++;
+        // Check if the block that we are evicting is dirty
+        if(table[index].blocks[way_number].dirty)
+        {
+            // We are performing a dirty kickout
+            dirty_kickouts++;
 
-		    // Write the dirty block to a lower level in the hierarchy
-		    if(lower_level != NULL)
-			{
-			    // create the effective address of the block that we are kicking out
-			    unsigned long long eff_address =
-				(((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
+            // Write the dirty block to a lower level in the hierarchy
+            if(lower_level != NULL)
+            {
+                // create the effective address of the block that we are kicking out
+                unsigned long long eff_address =
+                (((table[index].blocks[way_number].tag) << index_offset) | index) << block_offset;
 #if DEBUG_CACHE
-			    cout << "L1 dirty kickout" << endl;
-			    cout << "   Sending address " << hex << eff_address << dec << " to L2 cache" << endl;
+                cout << "L1 dirty kickout" << endl;
+                cout << "   Sending address " << hex << eff_address << dec << " to L2 cache" << endl;
 #endif
 
-			    // write to cache, not main memory, but also need to
-			    // handle transfer time from L1 to L2
-			    time += lower_level->write(eff_address);
-			    execution.exec_time += transfer_time * transfers_per_block;
-			    time += transfer_time * transfers_per_block;
-			}
-		    else
-			{
+                // write to cache, not main memory, but also need to
+                // handle transfer time from L1 to L2
+                time += lower_level->write(eff_address);
+                execution.exec_time += transfer_time * transfers_per_block;
+                time += transfer_time * transfers_per_block;
+            }
+            else
+            {
 #if DEBUG_CACHE
-			    cout << "L2 dirty kickout" << endl;
-			    cout << "   Sending to memory" << endl;
+                cout << "L2 dirty kickout" << endl;
+                cout << "   Sending to memory" << endl;
 #endif
-			    // write to main memory
-			    execution.exec_time += mem_sendaddr + mem_ready +
-				(mem_chunktime * transfers_per_block);
-			    time += mem_sendaddr + mem_ready +
-				(mem_chunktime * transfers_per_block);
-			}
-		}
-	}
+                // write to main memory
+                execution.exec_time += mem_sendaddr + mem_ready +
+                (mem_chunktime * transfers_per_block);
+                time += mem_sendaddr + mem_ready +
+                (mem_chunktime * transfers_per_block);
+            }
+        }
+    }
 
     // Generate a read to the next lower level
     if(lower_level != NULL)
-	{
-	    // Read from cache, not main memory, but also need to
-	    // handle transfer time from L2 to L1
-	    time += lower_level->read(address);
-	    execution.exec_time += transfer_time * transfers_per_block;
-	    time += transfer_time * transfers_per_block;
-	    transfers++;
-	}
+    {
+        // Read from cache, not main memory, but also need to
+        // handle transfer time from L2 to L1
+        time += lower_level->read(address);
+        execution.exec_time += transfer_time * transfers_per_block;
+        time += transfer_time * transfers_per_block;
+        transfers++;
+    }
     else
-	{
-	    // Read from main memory
-	    execution.exec_time += mem_sendaddr + mem_ready +
-		(mem_chunktime * transfers_per_block);
-	    time += mem_sendaddr + mem_ready +
-		(mem_chunktime * transfers_per_block);
-	    transfers++;
-	}
+    {
+        // Read from main memory
+        execution.exec_time += mem_sendaddr + mem_ready +
+        (mem_chunktime * transfers_per_block);
+        time += mem_sendaddr + mem_ready +
+        (mem_chunktime * transfers_per_block);
+        transfers++;
+    }
 
     // "Replay" the request i.e. add on the hit time
     execution.exec_time += hit_time;
@@ -371,21 +372,21 @@ unsigned long long int cache::write(unsigned long long int address)
 
 #if DEBUG_CACHE
     if(lower_level != NULL)
-	{
-	    if(index == 0xFF)
-		{
-		    cout << "Contents of L1" << endl;
-		    printCache();
-		}
-	}
+    {
+        if(index == 0xFF)
+        {
+            cout << "Contents of L1" << endl;
+            printCache();
+        }
+    }
     else
-	{
-	    if(index == 0x1FF)
-		{
-		    cout << "Contents of L2" << endl;
-		    printCache();
-		}
-	}
+    {
+        if(index == 0x1FF)
+        {
+            cout << "Contents of L2" << endl;
+            printCache();
+        }
+    }
 #endif
 
     return time;
@@ -401,50 +402,50 @@ unsigned long long int cache::flush()
     // a dirty block is encountered, write to the next level below
     // before invalidating.
     for(unsigned int i = 0; i < table_size; ++i)
-	{
-	    // loop through each block in the set
-	    for(unsigned int j = 0; j < assoc; ++j)
-		{
-		    // If the block is valid, then we need to check if it is dirty
-		    if(table[i].blocks[j].valid)
-			{
-			    // If the block is dirty, write it out to the next level
-			    if(table[i].blocks[j].dirty)
-				{
-				    // Perform a flush kickout
-				    flush_kickouts++;
+    {
+        // loop through each block in the set
+        for(unsigned int j = 0; j < assoc; ++j)
+        {
+            // If the block is valid, then we need to check if it is dirty
+            if(table[i].blocks[j].valid)
+            {
+                // If the block is dirty, write it out to the next level
+                if(table[i].blocks[j].dirty)
+                {
+                    // Perform a flush kickout
+                    flush_kickouts++;
 
-				    if(lower_level != NULL)
-					{
-					    // Reconstruct the effective address of the block
-					    eff_address = (((table[i].blocks[j].tag) << index_offset) | (zero + i)) << block_offset;
+                    if(lower_level != NULL)
+                    {
+                        // Reconstruct the effective address of the block
+                        eff_address = (((table[i].blocks[j].tag) << index_offset) | (zero + i)) << block_offset;
 
-					    // Write to the next level
-					    time += lower_level->write(eff_address);
+                        // Write to the next level
+                        time += lower_level->write(eff_address);
 
-					    // Add time for transfer from L1 to L2
-					    execution.exec_time += transfer_time * transfers_per_block;
-					    time += transfer_time * transfers_per_block;
-					    transfers++;
-					}
-				    else
-					{
-					    // Write to main memory
-					    execution.exec_time += mem_sendaddr + mem_ready +
-						(mem_chunktime * transfers_per_block);
-					    time += mem_sendaddr + mem_ready +
-						(mem_chunktime * transfers_per_block);
-					    transfers++;
-					}
-				}
+                        // Add time for transfer from L1 to L2
+                        execution.exec_time += transfer_time * transfers_per_block;
+                        time += transfer_time * transfers_per_block;
+                        transfers++;
+                    }
+                    else
+                    {
+                        // Write to main memory
+                        execution.exec_time += mem_sendaddr + mem_ready +
+                        (mem_chunktime * transfers_per_block);
+                        time += mem_sendaddr + mem_ready +
+                        (mem_chunktime * transfers_per_block);
+                        transfers++;
+                    }
+                }
 
-			    // Regardless of whether the block was dirty, we need to
-			    // clear the valid bit
-			    table[i].blocks[j].valid = false;
-			}
+                // Regardless of whether the block was dirty, we need to
+                // clear the valid bit
+                table[i].blocks[j].valid = false;
+            }
 
-		}
-	}
+        }
+    }
 
     return time;
 }
@@ -474,30 +475,30 @@ void cache::printCache()
 {
     bool print_index = false;
     for (unsigned int index = 0; index < table_size; index++){
-	for (unsigned int b = 0; b < assoc; b++){
-	    if (table[index].blocks[b].valid == true){
-		print_index = true;
-		break;
-	    }
-	}
-	if(print_index){
-	    cout << "Index: " << setw(4) << hex << index << " |";
-	    for (unsigned int b = assoc; b > 0; --b){
-		cout << " V: " << dec << table[index].blocks[b-1].valid;
-		if (table[index].blocks[b-1].valid){
-		    cout << " D: " << dec << table[index].blocks[b-1].dirty;
-		    cout << " Tag: " << setw(12) << hex << table[index].blocks[b-1].tag << " |";
-		} else {
-		    cout << " D: 0 Tag: - |";
-		}
-		cout << (b+1 < assoc);
-		if( b%2 == 1 && b-1 > 0 ){
-		    cout << endl << "            |";
-		}
-	    }
-	    cout << endl;
-	    print_index = false;
-	}
+    for (unsigned int b = 0; b < assoc; b++){
+        if (table[index].blocks[b].valid == true){
+        print_index = true;
+        break;
+        }
+    }
+    if(print_index){
+        cout << "Index: " << setw(4) << hex << index << " |";
+        for (unsigned int b = assoc; b > 0; --b){
+        cout << " V: " << dec << table[index].blocks[b-1].valid;
+        if (table[index].blocks[b-1].valid){
+            cout << " D: " << dec << table[index].blocks[b-1].dirty;
+            cout << " Tag: " << setw(12) << hex << table[index].blocks[b-1].tag << " |";
+        } else {
+            cout << " D: 0 Tag: - |";
+        }
+        cout << (b+1 < assoc);
+        if( b%2 == 1 && b-1 > 0 ){
+            cout << endl << "            |";
+        }
+        }
+        cout << endl;
+        print_index = false;
+    }
     }
 
 }
