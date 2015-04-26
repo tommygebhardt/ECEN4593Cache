@@ -1,0 +1,559 @@
+-------------------------------------------------------------------------
+         .All-2way    Simulation Results
+-------------------------------------------------------------------------
+
+  Memory system:
+    Dcache size = 8192 : ways = 2 : block size = 32
+    Icache size = 8192 : ways = 2 : block size = 32
+    L2-cache size = 32768 : ways = 2 : block size = 64
+    Memory ready time = 30 : chunksize = 8 : chunktime = 15
+
+  Execute time = 105993547017;  Total refs = 16506492546
+  Flush time =   1267132427
+  Inst refs = 12487578510;  Data refs = 4018914036
+
+  Number of reference types:  [Percentage]
+    Reads  =  3526260463    [21.4%]
+    Writes =   492653573    [ 3.0%]
+    Inst.  = 12487578510    [75.7%]
+    Total  = 16506492546
+
+  Total cycles for activities:  [Percentage]
+    Reads  = 86764716181    [81.9%]
+    Writes =  1197968976    [ 1.1%]
+    Inst.  = 18030861860    [17.0%]
+    Total  = 105993547017
+
+  Average cycles per activity:
+    Read = 24.6; Write =  2.4; Inst. =  8.5
+  Ideal: Exec. Time = 28994071056; CPI =  2.3
+  Ideal mis-aligned: Exec. Time = 35948584560; CPI =  2.9
+
+  Memory Level:  L1i
+    Hit Count = 16620543263  Miss Count = 845790
+    Total Requests = 16621389053
+    Hit Rate = 100.0%   Miss Rate =  0.0%
+    Kickouts = 4867; Dirty kickouts = 0; Transfers = 845790
+    Flush Kickouts = 0
+
+  Memory Level:  L1d
+    Hit Count = 6262666441  Miss Count = 576950556
+    Total Requests = 6839616997
+    Hit Rate = 91.6%   Miss Rate =  8.4%
+    Kickouts = 568537628; Dirty kickouts = 234411130; Transfers = 580300116
+    Flush Kickouts = 3349560
+
+  Memory Level:  L2
+    Hit Count = 526028653  Miss Count = 289528383
+    Total Requests = 815557036
+    Hit Rate = 64.5%   Miss Rate = 35.5%
+    Kickouts = 272742875; Dirty kickouts = 125971716; Transfers = 297120099
+    Flush Kickouts = 7591716
+
+  L1 cache cost (Icache $400) + (Dcache $400) = $800
+  L2 cache cost = $100;  Memory cost = $75  Total cost = $975
+  Flushes = 32862 : Invalidates = 32862
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+Cache final contents - Index and Tag values are in HEX
+
+Memory Level:  L1i
+Index:    0 | V: 1 D: 0 Tag:    7f9ff1375 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    3 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    4 | V: 1 D: 0 Tag:    7f9ff139f |0 V: 0 D: 0 Tag: - |0
+Index:    5 | V: 1 D: 0 Tag:    7f9ff139f |0 V: 1 D: 0 Tag:    7f9ff1415 |0
+Index:    6 | V: 1 D: 0 Tag:    7f9ff139f |0 V: 1 D: 0 Tag:    7f9ff1375 |0
+Index:    7 | V: 1 D: 0 Tag:    7f9ff1375 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    8 | V: 1 D: 0 Tag:    7f9ff13a0 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    9 | V: 1 D: 0 Tag:    7f9ff13a0 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    a | V: 1 D: 0 Tag:    7f9ff139f |0 V: 1 D: 0 Tag:    7f9ff13a0 |0
+Index:    c | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    7f9ff13ae |0
+Index:    d | V: 1 D: 0 Tag:    7f9ff139f |0 V: 1 D: 0 Tag:    7f9ff13ae |0
+Index:    e | V: 1 D: 0 Tag:    7f9ff1375 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:    f | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    7f9ff1375 |0
+Index:   10 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac8 |0
+Index:   11 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac8 |0
+Index:   12 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac8 |0
+Index:   13 | V: 1 D: 0 Tag:    7f9ff13a0 |0 V: 1 D: 0 Tag:    7fa004ac8 |0
+Index:   14 | V: 1 D: 0 Tag:    7fa004abd |0 V: 0 D: 0 Tag: - |0
+Index:   15 | V: 1 D: 0 Tag:    7fa004abd |0 V: 0 D: 0 Tag: - |0
+Index:   16 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff1375 |0
+Index:   17 | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   18 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   19 | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   1a | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   1b | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 0 D: 0 Tag: - |0
+Index:   1c | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 0 D: 0 Tag: - |0
+Index:   1d | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   1e | V: 1 D: 0 Tag:    7f9ff1373 |0 V: 0 D: 0 Tag: - |0
+Index:   1f | V: 1 D: 0 Tag:    7f9ff16e9 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   20 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7f9ff1375 |0
+Index:   21 | V: 1 D: 0 Tag:    7f9ff1375 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   22 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac3 |0
+Index:   23 | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac3 |0
+Index:   24 | V: 1 D: 0 Tag:    7fa004ac3 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   25 | V: 1 D: 0 Tag:    7fa004ac3 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   26 | V: 1 D: 0 Tag:    7f9ff136f |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   27 | V: 1 D: 0 Tag:    7f9ff13a4 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   28 | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   29 | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   2a | V: 1 D: 0 Tag:    7f9ff16e9 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   2b | V: 1 D: 0 Tag:          407 |0 V: 1 D: 0 Tag:    7fa004abd |0
+Index:   2c | V: 1 D: 0 Tag:    7fa004abd |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   2d | V: 1 D: 0 Tag:          403 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   2e | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:          403 |0
+Index:   2f | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff13a4 |0
+Index:   30 | V: 1 D: 0 Tag:    7f9ff13a4 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   31 | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff13a4 |0
+Index:   32 | V: 1 D: 0 Tag:    7f9ff13a4 |0 V: 1 D: 0 Tag:    7f9ff136f |0
+Index:   33 | V: 1 D: 0 Tag:          406 |0 V: 1 D: 0 Tag:    7f9ff13a4 |0
+Index:   34 | V: 1 D: 0 Tag:    7fa004ac1 |0 V: 1 D: 0 Tag:    7fa004acc |0
+Index:   35 | V: 1 D: 0 Tag:    7f9ff13a4 |0 V: 1 D: 0 Tag:    7fa004ac1 |0
+Index:   36 | V: 1 D: 0 Tag:    7fa004acc |0 V: 1 D: 0 Tag:    7fa004ac1 |0
+Index:   37 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004ac1 |0
+Index:   38 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   39 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7fa004ac1 |0
+Index:   3a | V: 1 D: 0 Tag:    7fa004ac1 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   3b | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   3c | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   3d | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   3e | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7fa004ac1 |0
+Index:   3f | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   40 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   41 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   42 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   43 | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   44 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   45 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   46 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   47 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7f9ff16e9 |0
+Index:   48 | V: 1 D: 0 Tag:    7f9ff140b |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   49 | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   4a | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   4b | V: 1 D: 0 Tag:    7fa004ac2 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   4c | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   4d | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   4e | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   4f | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   50 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   51 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   52 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004ac2 |0
+Index:   53 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   54 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   55 | V: 1 D: 0 Tag:    7f9ff1374 |0 V: 1 D: 0 Tag:    7f9ff136d |0
+Index:   56 | V: 1 D: 0 Tag:    7f9ff136d |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   57 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a4 |0
+Index:   58 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   59 | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   5a | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   5b | V: 1 D: 0 Tag:    7f9ff13a1 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   5c | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13a1 |0
+Index:   5d | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff136d |0
+Index:   5e | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff136f |0
+Index:   5f | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13e4 |0
+Index:   60 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff13e4 |0
+Index:   61 | V: 1 D: 0 Tag:          406 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   62 | V: 1 D: 0 Tag:          406 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   63 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff136d |0
+Index:   64 | V: 1 D: 0 Tag:    7f9ff1426 |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   65 | V: 1 D: 0 Tag:    7f9ff1426 |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   66 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:    7f9ff1426 |0
+Index:   67 | V: 1 D: 0 Tag:          400 |0 V: 1 D: 0 Tag:    7fa004abc |0
+Index:   68 | V: 1 D: 0 Tag:    7fa004abc |0 V: 1 D: 0 Tag:          400 |0
+Index:   69 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   6a | V: 1 D: 0 Tag:    7f9ff1360 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   6b | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   6c | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff1360 |0
+Index:   6d | V: 1 D: 0 Tag:    7f9ff1360 |0 V: 1 D: 0 Tag:    7f9ff136f |0
+Index:   6e | V: 1 D: 0 Tag:    7f9ff136d |0 V: 1 D: 0 Tag:    7f9ff136f |0
+Index:   6f | V: 1 D: 0 Tag:    7f9ff13a3 |0 V: 1 D: 0 Tag:    7f9ff139e |0
+Index:   70 | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff13a3 |0
+Index:   71 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff13a3 |0
+Index:   72 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff13a3 |0
+Index:   73 | V: 1 D: 0 Tag:    7f9ff13a3 |0 V: 1 D: 0 Tag:    7f9ff142d |0
+Index:   74 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff13a3 |0
+Index:   75 | V: 1 D: 0 Tag:    7f9ff13a3 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:   76 | V: 1 D: 0 Tag:    7f9ff13a4 |0 V: 1 D: 0 Tag:    7f9ff139f |0
+Index:   77 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff13a4 |0
+Index:   78 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   79 | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   7a | V: 1 D: 0 Tag:    7f9ff142d |0 V: 1 D: 0 Tag:    7f9ff13a0 |0
+Index:   7b | V: 1 D: 0 Tag:    7f9ff1343 |0 V: 1 D: 0 Tag:    7f9ff13a0 |0
+Index:   7c | V: 1 D: 0 Tag:    7f9ff13a0 |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   7d | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    7f9ff1374 |0
+Index:   7e | V: 1 D: 0 Tag:    7f9ff139e |0 V: 0 D: 0 Tag: - |0
+Index:   7f | V: 1 D: 0 Tag:    7f9ff139e |0 V: 1 D: 0 Tag:    7f9ff1751 |0
+
+Memory Level:  L1d
+Index:    0 | V: 1 D: 1 Tag:         25e1 |0 V: 1 D: 0 Tag:    7f9ff1254 |0
+Index:    1 | V: 1 D: 0 Tag:         25e1 |0 V: 1 D: 0 Tag:    7f9ff16dd |0
+Index:    2 | V: 1 D: 0 Tag:    7fa004cd6 |0 V: 1 D: 0 Tag:          609 |0
+Index:    3 | V: 1 D: 1 Tag:    7f9ff1a61 |0 V: 1 D: 0 Tag:    7f9ff1ad7 |0
+Index:    4 | V: 1 D: 1 Tag:    7f9ff1a61 |0 V: 1 D: 0 Tag:    7f9ff1ad7 |0
+Index:    5 | V: 1 D: 1 Tag:    7f9ff19df |0 V: 1 D: 0 Tag:    7f9ff133b |0
+Index:    6 | V: 1 D: 0 Tag:    7f9ff1ad7 |0 V: 1 D: 0 Tag:    7f9ff19df |0
+Index:    7 | V: 1 D: 0 Tag:    7f9ff1ad7 |0 V: 1 D: 1 Tag:    7f9ff19df |0
+Index:    8 | V: 1 D: 0 Tag:    7f9ff1497 |0 V: 1 D: 1 Tag:          609 |0
+Index:    9 | V: 1 D: 0 Tag:    7f9ff1497 |0 V: 1 D: 0 Tag:         261e |0
+Index:    a | V: 1 D: 0 Tag:    7f9ff1497 |0 V: 1 D: 0 Tag:         261e |0
+Index:    b | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 1 Tag:    7f9ff16dd |0
+Index:    c | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 1 Tag:    7f9ff16dd |0
+Index:    d | V: 1 D: 0 Tag:    7fa004acf |0 V: 1 D: 0 Tag:    7f9ff16de |0
+Index:    e | V: 1 D: 0 Tag:    7f9ff1498 |0 V: 1 D: 0 Tag:    7f9ff16e3 |0
+Index:    f | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7f9ff148b |0
+Index:   10 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:         261d |0
+Index:   11 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:         261d |0
+Index:   12 | V: 1 D: 1 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:         261e |0
+Index:   13 | V: 1 D: 0 Tag:    7f9ff16e9 |0 V: 1 D: 1 Tag:    7f9ff16de |0
+Index:   14 | V: 1 D: 0 Tag:    7f9ff16e9 |0 V: 1 D: 1 Tag:    7f9ff16de |0
+Index:   15 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7f9ff16de |0
+Index:   16 | V: 1 D: 1 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   17 | V: 1 D: 0 Tag:    7fa004cd7 |0 V: 1 D: 1 Tag:    7f9ff16de |0
+Index:   18 | V: 1 D: 0 Tag:    7fa004cd7 |0 V: 1 D: 1 Tag:    7f9ff16de |0
+Index:   19 | V: 1 D: 1 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   1a | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7f9ff16e4 |0
+Index:   1b | V: 1 D: 0 Tag:    7f9ff16df |0 V: 1 D: 0 Tag:    7f9ff16de |0
+Index:   1c | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   1d | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:         261e |0
+Index:   1e | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   1f | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   20 | V: 1 D: 1 Tag:    7f9ff16de |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   21 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   22 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   23 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   24 | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   25 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   26 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   27 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   28 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   29 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   2a | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   2b | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   2c | V: 1 D: 0 Tag:    7fa004cd7 |0 V: 1 D: 0 Tag:    7f9ff1338 |0
+Index:   2d | V: 1 D: 0 Tag:    7f9ff1338 |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   2e | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fa004cd7 |0
+Index:   2f | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff14a0 |0
+Index:   30 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   31 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   32 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   33 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   34 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7f9ff16dd |0
+Index:   35 | V: 1 D: 1 Tag:    7fa004cd7 |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   36 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   37 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:    7f9ff1328 |0
+Index:   38 | V: 1 D: 0 Tag:    7fa004aee |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   39 | V: 1 D: 1 Tag:    7f9ff16dd |0 V: 1 D: 0 Tag:    7fa004aee |0
+Index:   3a | V: 1 D: 1 Tag:    7f9ff16dd |0 V: 1 D: 1 Tag:    7fa004aee |0
+Index:   3b | V: 1 D: 1 Tag:    7f9ff16dd |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   3c | V: 1 D: 0 Tag:    7f9ff1333 |0 V: 1 D: 0 Tag:    7f9ff1325 |0
+Index:   3d | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   3e | V: 1 D: 1 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   3f | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   40 | V: 1 D: 0 Tag:    7f9ff16d9 |0 V: 1 D: 0 Tag:    7f9ff1326 |0
+Index:   41 | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   42 | V: 1 D: 0 Tag:    7f9ff16e5 |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   43 | V: 1 D: 0 Tag:    7fa004cd7 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   44 | V: 1 D: 1 Tag:    7fa004ca4 |0 V: 1 D: 0 Tag:    7fa004cd7 |0
+Index:   45 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:         261d |0
+Index:   46 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:         261d |0
+Index:   47 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:         261d |0
+Index:   48 | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   49 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   4a | V: 1 D: 1 Tag:    7fa004cd6 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   4b | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:         261e |0
+Index:   4c | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 0 Tag:         261e |0
+Index:   4d | V: 1 D: 1 Tag:    7fa004cd6 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   4e | V: 1 D: 0 Tag:    7f9ff16e8 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   4f | V: 1 D: 0 Tag:    7fa004cd6 |0 V: 1 D: 0 Tag:    7f9ff16e8 |0
+Index:   50 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 0 Tag:    7fa004cd6 |0
+Index:   51 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 0 Tag:          407 |0
+Index:   52 | V: 1 D: 0 Tag:    7f9ff16e8 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   53 | V: 1 D: 0 Tag:         261e |0 V: 1 D: 1 Tag:    7f9ff16df |0
+Index:   54 | V: 1 D: 1 Tag:    7f9ff16df |0 V: 1 D: 0 Tag:    7fa004cd6 |0
+Index:   55 | V: 1 D: 1 Tag:    7f9ff16df |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   56 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   57 | V: 1 D: 0 Tag:    7fa004cd6 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   58 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   59 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16df |0
+Index:   5a | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16df |0
+Index:   5b | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 1 Tag:    7fa004cd7 |0
+Index:   5c | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16df |0
+Index:   5d | V: 1 D: 0 Tag:    7fa004cd5 |0 V: 1 D: 0 Tag:    7f9ff16df |0
+Index:   5e | V: 1 D: 0 Tag:    7f9ff16dc |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   5f | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004cd5 |0
+Index:   60 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   61 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 1 Tag:    7fa004cd7 |0
+Index:   62 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:         261e |0
+Index:   63 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   64 | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   65 | V: 1 D: 0 Tag:    7fa004cd5 |0 V: 1 D: 1 Tag:    7fa004ca4 |0
+Index:   66 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   67 | V: 1 D: 1 Tag:    7fa004cd6 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   68 | V: 1 D: 1 Tag:         25ed |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   69 | V: 1 D: 0 Tag:    7f9ff19de |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   6a | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   6b | V: 1 D: 0 Tag:    7fa004ca4 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   6c | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004cd6 |0
+Index:   6d | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 1 Tag:    7fa004cd6 |0
+Index:   6e | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff19de |0
+Index:   6f | V: 1 D: 0 Tag:    7f9ff16e7 |0 V: 1 D: 1 Tag:    7fffb1559 |0
+Index:   70 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   71 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   72 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   73 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7f9ff19de |0
+Index:   74 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:          608 |0
+Index:   75 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:          608 |0
+Index:   76 | V: 1 D: 1 Tag:    7fffb1559 |0 V: 1 D: 0 Tag:    7fa004ca4 |0
+Index:   77 | V: 1 D: 0 Tag:    7f9ff16dc |0 V: 1 D: 0 Tag:         261d |0
+Index:   78 | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   79 | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:    7f9ff16dc |0
+Index:   7a | V: 1 D: 1 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7fa004cd6 |0
+Index:   7b | V: 1 D: 0 Tag:    7f9ff16de |0 V: 1 D: 0 Tag:    7f9ff1497 |0
+Index:   7c | V: 1 D: 0 Tag:    7f9ff16dd |0 V: 1 D: 0 Tag:    7f9ff16e2 |0
+Index:   7d | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:    7f9ff133b |0
+Index:   7e | V: 1 D: 0 Tag:         261d |0 V: 1 D: 0 Tag:    7f9ff19de |0
+Index:   7f | V: 1 D: 0 Tag:    7f9ff19de |0 V: 1 D: 0 Tag:         266a |0
+
+Memory Level:  L2
+Index:    0 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc495 |0
+Index:    4 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 0 D: 0 Tag: - |0
+Index:    5 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc526 |0
+Index:    6 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc526 |0
+Index:    7 | V: 1 D: 0 Tag:    1fe7fc526 |0 V: 0 D: 0 Tag: - |0
+Index:    8 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe8012b2 |0
+Index:    9 | V: 1 D: 0 Tag:    1fe8012b2 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:    b | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 0 D: 0 Tag: - |0
+Index:    c | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:    d | V: 1 D: 0 Tag:          100 |0 V: 1 D: 0 Tag:    1fe7fc5b9 |0
+Index:    e | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   11 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   12 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   13 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   14 | V: 1 D: 0 Tag:    1fe7fc4e9 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   15 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe8012b3 |0
+Index:   16 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe7fc4ce |0
+Index:   17 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   18 | V: 1 D: 0 Tag:    1fe7fc4e9 |0 V: 1 D: 0 Tag:    1fe7fc4ea |0
+Index:   19 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   1a | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   1b | V: 1 D: 0 Tag:    1fe7fc4ca |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   1c | V: 1 D: 0 Tag:    1fe8012ad |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   1d | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   1e | V: 1 D: 0 Tag:    1fe8012b3 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   1f | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   20 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   21 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe7fc4d8 |0
+Index:   22 | V: 1 D: 0 Tag:    1fe7fc4d8 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   23 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe7fc4d8 |0
+Index:   24 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4d8 |0
+Index:   25 | V: 1 D: 0 Tag:    1fe7fc4d8 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   26 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   27 | V: 1 D: 0 Tag:    1fe7fc5ba |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   28 | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   29 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   2a | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   2b | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   2c | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   2d | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4e9 |0
+Index:   2e | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   2f | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe7fc4f9 |0
+Index:   30 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4f9 |0
+Index:   31 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   32 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4d8 |0
+Index:   33 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   34 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc4d8 |0
+Index:   35 | V: 1 D: 0 Tag:    1fe7fc4d8 |0 V: 1 D: 1 Tag:    1fe801329 |0
+Index:   36 | V: 1 D: 0 Tag:    1fe7fc4d8 |0 V: 1 D: 0 Tag:          100 |0
+Index:   37 | V: 1 D: 0 Tag:          100 |0 V: 1 D: 0 Tag:          987 |0
+Index:   38 | V: 1 D: 0 Tag:          100 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   39 | V: 1 D: 0 Tag:          182 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   3a | V: 1 D: 0 Tag:    1fe801329 |0 V: 1 D: 0 Tag:          182 |0
+Index:   3b | V: 1 D: 0 Tag:    1fe7fc4e9 |0 V: 1 D: 0 Tag:    1fe801329 |0
+Index:   3c | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   3d | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   3e | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   3f | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:          987 |0
+Index:   40 | V: 1 D: 0 Tag:          978 |0 V: 1 D: 1 Tag:    1fe7fc698 |0
+Index:   41 | V: 1 D: 1 Tag:    1fe7fc698 |0 V: 1 D: 0 Tag:          182 |0
+Index:   42 | V: 1 D: 0 Tag:    1fe7fc698 |0 V: 1 D: 0 Tag:    1fe7fc505 |0
+Index:   43 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 1 Tag:          182 |0
+Index:   44 | V: 1 D: 0 Tag:          182 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   45 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   46 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   47 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   48 | V: 1 D: 0 Tag:    1fe7fc4dd |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   49 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc5ba |0
+Index:   4a | V: 1 D: 0 Tag:    1fe7fc5ba |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   4b | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   4c | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   4d | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   4e | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          987 |0
+Index:   4f | V: 1 D: 0 Tag:    1fe7fc5ba |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   50 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   51 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   52 | V: 1 D: 0 Tag:    1fe7fc4d7 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   53 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   54 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe8012af |0
+Index:   55 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 0 Tag:    1fe7fc5ba |0
+Index:   56 | V: 1 D: 0 Tag:    1fe8012af |0 V: 1 D: 1 Tag:    1fffec556 |0
+Index:   57 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 1 Tag:    1fffec556 |0
+Index:   58 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   59 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4dd |0
+Index:   5a | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 1 Tag:    1fffec556 |0
+Index:   5b | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   5c | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   5d | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   5e | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   5f | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   60 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc5b6 |0
+Index:   61 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc5b9 |0
+Index:   62 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc5ba |0
+Index:   63 | V: 1 D: 0 Tag:    1fe7fc5ba |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   64 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc5ba |0
+Index:   65 | V: 1 D: 0 Tag:          987 |0 V: 0 D: 0 Tag: - |0
+Index:   66 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:          987 |0
+Index:   67 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   68 | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   69 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   6a | V: 1 D: 1 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   6b | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   6c | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   6d | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   6e | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   6f | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   70 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   71 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   72 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   73 | V: 1 D: 1 Tag:    1fffec556 |0 V: 1 D: 0 Tag:          97b |0
+Index:   74 | V: 1 D: 0 Tag:          97b |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   75 | V: 1 D: 1 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   76 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   77 | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   78 | V: 1 D: 0 Tag:    1fe7fc50b |0 V: 1 D: 0 Tag:    1fffec556 |0
+Index:   79 | V: 1 D: 1 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc50b |0
+Index:   7a | V: 1 D: 0 Tag:    1fe7fc50b |0 V: 1 D: 1 Tag:    1fffec556 |0
+Index:   7b | V: 1 D: 0 Tag:    1fffec556 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   7c | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc50b |0
+Index:   7d | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc50b |0
+Index:   7e | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   7f | V: 1 D: 0 Tag:    1fe7fc5d4 |0 V: 1 D: 0 Tag:          987 |0
+Index:   80 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   81 | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:          987 |0
+Index:   82 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          987 |0
+Index:   83 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          987 |0
+Index:   84 | V: 1 D: 0 Tag:    1fe7fc4eb |0 V: 1 D: 0 Tag:          987 |0
+Index:   85 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   86 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe7fc4eb |0
+Index:   87 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   88 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          987 |0
+Index:   89 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   8a | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   8b | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   8c | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   8d | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   8e | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   8f | V: 1 D: 0 Tag:          987 |0 V: 0 D: 0 Tag: - |0
+Index:   90 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          987 |0
+Index:   91 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          987 |0
+Index:   92 | V: 1 D: 0 Tag:          987 |0 V: 0 D: 0 Tag: - |0
+Index:   93 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:          987 |0
+Index:   94 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   95 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   96 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   97 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   98 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   99 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   9a | V: 1 D: 0 Tag:    1fe8012bb |0 V: 1 D: 0 Tag:          101 |0
+Index:   9b | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   9c | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe8012bb |0
+Index:   9d | V: 1 D: 0 Tag:    1fe8012bb |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   9e | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   9f | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   a0 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe7fc4c9 |0
+Index:   a1 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   a2 | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   a3 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   a4 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   a5 | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   a6 | V: 1 D: 0 Tag:    1fe8012b0 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   a7 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   a8 | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   a9 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   aa | V: 1 D: 0 Tag:    1fe8012b3 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   ab | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   ac | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   ad | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   ae | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   af | V: 1 D: 0 Tag:          101 |0 V: 1 D: 0 Tag:          987 |0
+Index:   b0 | V: 1 D: 0 Tag:          101 |0 V: 1 D: 0 Tag:          987 |0
+Index:   b1 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:          101 |0
+Index:   b2 | V: 1 D: 0 Tag:    1fe7fc509 |0 V: 1 D: 0 Tag:          101 |0
+Index:   b3 | V: 1 D: 0 Tag:    1fe7fc509 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   b4 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe7fc677 |0
+Index:   b5 | V: 1 D: 0 Tag:    1fe7fc677 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   b6 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   b7 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe7fc677 |0
+Index:   b8 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   b9 | V: 1 D: 0 Tag:          987 |0 V: 1 D: 0 Tag:    1fe7fc677 |0
+Index:   ba | V: 1 D: 0 Tag:    1fe7fc5b8 |0 V: 0 D: 0 Tag: - |0
+Index:   bb | V: 1 D: 0 Tag:    1fe7fc5b8 |0 V: 0 D: 0 Tag: - |0
+Index:   bd | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   be | V: 1 D: 0 Tag:    1fe7fc5b8 |0 V: 0 D: 0 Tag: - |0
+Index:   bf | V: 1 D: 0 Tag:          99a |0 V: 1 D: 0 Tag:    1fe7fc677 |0
+Index:   c0 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 0 D: 0 Tag: - |0
+Index:   c1 | V: 1 D: 0 Tag:    1fe7fc6b5 |0 V: 1 D: 0 Tag:    1fe7fc525 |0
+Index:   c2 | V: 1 D: 0 Tag:    1fe7fc4ce |0 V: 1 D: 0 Tag:    1fe7fc6b5 |0
+Index:   c3 | V: 1 D: 0 Tag:    1fe7fc677 |0 V: 1 D: 0 Tag:    1fe7fc6b5 |0
+Index:   c4 | V: 1 D: 0 Tag:    1fe7fc525 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   c5 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe7fc525 |0
+Index:   c6 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe8012b3 |0
+Index:   c7 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 1 D: 0 Tag:    1fe7fc522 |0
+Index:   c8 | V: 1 D: 0 Tag:    1fe7fc4e7 |0 V: 0 D: 0 Tag: - |0
+Index:   cb | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   cc | V: 1 D: 0 Tag:    1fe801335 |0 V: 0 D: 0 Tag: - |0
+Index:   cd | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   cf | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   d1 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   d2 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe8012b0 |0
+Index:   d3 | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   d4 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   d5 | V: 1 D: 0 Tag:          101 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   d6 | V: 1 D: 0 Tag:          100 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   d7 | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:          100 |0
+Index:   d8 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 0 D: 0 Tag: - |0
+Index:   d9 | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   da | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   db | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 0 D: 0 Tag: - |0
+Index:   dc | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   dd | V: 1 D: 0 Tag:    1fe7fc5b6 |0 V: 0 D: 0 Tag: - |0
+Index:   de | V: 1 D: 0 Tag:    1fe7fc4cc |0 V: 0 D: 0 Tag: - |0
+Index:   e0 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   e1 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   e2 | V: 1 D: 0 Tag:    1fe801335 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   e3 | V: 1 D: 0 Tag:    1fe8012b2 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   e4 | V: 1 D: 0 Tag:    1fe7fc502 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   e7 | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 1 D: 0 Tag:          101 |0
+Index:   e8 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:          101 |0
+Index:   e9 | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:          101 |0
+Index:   ea | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 1 D: 1 Tag:    1fe7fc5b7 |0
+Index:   eb | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   ec | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   ed | V: 1 D: 0 Tag:    1fe7fc5b7 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   ee | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc5b7 |0
+Index:   ef | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   f0 | V: 1 D: 0 Tag:          100 |0 V: 1 D: 0 Tag:    1fe801335 |0
+Index:   f1 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:          100 |0
+Index:   f2 | V: 1 D: 0 Tag:    1fe7fc4db |0 V: 0 D: 0 Tag: - |0
+Index:   f4 | V: 1 D: 0 Tag:    1fe7fc4ed |0 V: 1 D: 0 Tag:    1fe7fc4e8 |0
+Index:   f5 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc4ed |0
+Index:   f6 | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4db |0
+Index:   f7 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc5b9 |0
+Index:   f8 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 0 D: 0 Tag: - |0
+Index:   f9 | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 0 D: 0 Tag: - |0
+Index:   fa | V: 1 D: 0 Tag:    1fe7fc4e8 |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   fb | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4e7 |0
+Index:   fc | V: 1 D: 0 Tag:    1fe7fc4dc |0 V: 0 D: 0 Tag: - |0
+Index:   fd | V: 1 D: 0 Tag:    1fe7fc4d0 |0 V: 1 D: 0 Tag:    1fe7fc4dc |0
+Index:   fe | V: 0 D: 0 Tag: - |0 V: 1 D: 0 Tag:    1fe7fc4ce |0
