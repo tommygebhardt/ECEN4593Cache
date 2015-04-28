@@ -16,4 +16,4 @@ L2_hit_time,5
 L2_miss_time,7
 L2_transfer_time,5
 L2_bus_width,16
-MM_chunksize,8
+MM_chunksize,64
